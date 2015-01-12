@@ -1,0 +1,23 @@
+PROCEDURE      IMPORT.DRUGS:T  (156805,42364)  |Last amended Feb 07, 2012,11:46:04
+program
+. call DCCPROCF.SYSTEM.DEFINEVARS
+. string * 100 NAME1$ NAME2$ CODE$
+. open (IN$) dsn='C:\Documents and Settings\dmerle\Desktop\UDSMEDS.csv' read lrecl=300
+.  loop
+.   read (IN$,end=DONE) LINE$ (A300)
+.    LINE$ = sbst(LINE$,abs(srst(LINE$,',')) + 1,len(LINE$))
+.    ifthen (sbst(LINE$,1,1) = '"')
+.     LINE$ = sbst(LINE$,2,len(LINE$))
+.     NAME2$ = capital(lower(sbst(LINE$,1,abs(srst(LINE$,'"')) - 1)))
+.     CODE$ = upper(sbst(LINE$,abs(srst(LINE$,'"')) + 2,len(LINE$)))
+.    else
+.     NAME2$ = capital(lower(sbst(LINE$,1,abs(srst(LINE$,',')) - 1)))
+.     CODE$ = upper(sbst(LINE$,abs(srst(LINE$,',')) + 1,len(LINE$)))
+.    endif
+.   write ['    (' + sbst(CODE$,2,len(CODE$)) + ')'] ['"' + CODE$ + ' ' + NAME2$ + '"']
+.  end loop
+.  DONE:
+. close (IN$)
+end program
+
+END PROCEDURE

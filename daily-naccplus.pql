@@ -1,0 +1,167 @@
+PROCEDURE      DAILY.NACCPLUS:T  (157052,58908)  |Last amended Oct 11, 2012,16:21:48
+| File Name: NACCUDS.REPORTS.NACCPLUS
+| Path:      NACCUDS.sr4
+| Creator:   David Merle
+| Created:   01/01/2007
+| Retired:
+| Called by: COUNTING
+| Calls:
+| Reason:    Creates an SPSS file used by the Columbia ADRC researchers
+| Output:    <GDATA1>NACCUDS\Output\naccuds_all.sav
+| Modified:   7/2/2007 by Howard to add Milestone form
+|             12/31/2010 Modified by David to add Telephone packets
+|             3/8/2012 Modifided by David to incorporate DO REPEAT and to rename variables with their FORMID
+retrieval noautocase
+. integer * 1 NO YES TOTREQ
+. string * 3 INIT_RE
+. date EVALDATE ('MM/DD/YYYY')
+. set NO (0) YES (1)
+. integer * 1   Z1CHECK
+                A1DEMOG
+                A2INFORM
+                A3FAMHIS
+                A4MEDS
+                A5HEALTH
+                B1PHYS
+                B2HACHIN
+                B3UPDRS
+                B4CDR
+                B5NPI
+                B6GDS
+                B7FAQ
+                B8OVER
+                B9ONSET
+                C1NEURO
+                D1COG
+                E1IMAGE
+                Z1TELE
+                T1TELE
+. value labels  Z1CHECK
+                A1DEMOG
+                A2INFORM
+                A3FAMHIS
+                A4MEDS
+                A5HEALTH
+                B1PHYS
+                B2HACHIN
+                B3UPDRS
+                B4CDR
+                B5NPI
+                B6GDS
+                B7FAQ
+                B8OVER
+                B9ONSET
+                C1NEURO
+                D1COG
+                E1IMAGE
+                Z1TELE
+                T1TELE (0)'No' (1)'Yes'
+                INIT_RE ('AXA')'Asa Abeliovich'
+                        ('MWA')'Albers'
+                        ('ELA')'Ash'
+                        ('KLB')'Karen Bell'
+                        ('DPD')'Devangere Devanand'
+                        ('LSH')'Larry Honig'
+                        ('KSM')'Karen Marder'
+                        ('RPM')'Richard Mayeux'
+                        ('GHP')'Greg Pelton'
+                        ('NXS')'Nick Scarmeas'
+                        ('AAC')'Alberto Canaan'
+                        ('LXG')'Luisa Gomez'
+                        ('KEH')'Kate'
+                        ('SAS')'Small'
+variable labels Z1CHECK         'Forms Checklist-REQUIRED'
+                A1DEMOG         'Subject Demographics-REQUIRED'
+                A2INFORM        'Informant Demographics'
+                A3FAMHIS        'Subject Family History'
+                A4MEDS          'Subject Medications'
+                A5HEALTH        'Subject Health History-REQUIRED'
+                B1PHYS          'Evaluation Form-Physical'
+                B2HACHIN        'Evaluation Form-Hachinski Ischemic Scale'
+                B3UPDRS         'Evaluation Form-UPDRS'
+                B4CDR           'Global Staging-CDR-REQUIRED'
+                B5NPI           'Behavioral Assessment-NPI-Q'
+                B6GDS           'Behavioral Assessment-GDS'
+                B7FAQ           'Behavioral Assessment-FAQ'
+                B8OVER          'Evaluation-Overall Appraisal'
+                B9ONSET         'Clinical Judgement of Symptoms Onset-REQUIRED'
+                C1NEURO         'Neuropsychological Battery-REQUIRED'
+                D1COG           'Clinical Diagnosis-Cognitive Status-REQUIRED'
+                E1IMAGE         'Imaging/Labs-REQUIRED'
+                Z1TELE          'Telephone Forms Checklist'
+                T1TELE          'Telephone Inclusion Form'
+                INIT_RE         'Recoded Tester Initials, based on UDS B9 form, or B4,A5 or D1 if B9 missing'
+                TOTREQ          'Total # of 8 required NACC_UDS forms, including Z1'
+                EVALDATE        'Date of NACC UDS Evaluation'
+. process cases
+.  define procedure variables exclude NO YES
+                                      Z1INTERVAL Z1DWHO Z1DSTAMP Z1DCCWHO Z1DCCDATE Z1DCCTIME Z1DCCEDITS
+                                      A1INTERVAL A1DWHO A1DSTAMP A1DCCWHO A1DCCDATE A1DCCTIME A1DCCEDITS
+                                      A2INTERVAL A2DWHO A2DSTAMP A2DCCWHO A2DCCDATE A2DCCTIME A2DCCEDITS
+                                      A3INTERVAL A3DWHO A3DSTAMP A3DCCWHO A3DCCDATE A3DCCTIME A3DCCEDITS
+                                      A4INTERVAL A4DWHO A4DSTAMP A4DCCWHO A4DCCDATE A4DCCTIME A4DCCEDITS
+                                      A5INTERVAL A5DWHO A5DSTAMP A5DCCWHO A5DCCDATE A5DCCTIME A5DCCEDITS
+                                      B1INTERVAL B1DWHO B1DSTAMP B1DCCWHO B1DCCDATE B1DCCTIME B1DCCEDITS
+                                      B2INTERVAL B2DWHO B2DSTAMP B2DCCWHO B2DCCDATE B2DCCTIME B2DCCEDITS
+                                      B3INTERVAL B3DWHO B3DSTAMP B3DCCWHO B3DCCDATE B3DCCTIME B3DCCEDITS
+                                      B4INTERVAL B4DWHO B4DSTAMP B4DCCWHO B4DCCDATE B4DCCTIME B4DCCEDITS
+                                      B5INTERVAL B5DWHO B5DSTAMP B5DCCWHO B5DCCDATE B5DCCTIME B5DCCEDITS
+                                      B6INTERVAL B6DWHO B6DSTAMP B6DCCWHO B6DCCDATE B6DCCTIME B6DCCEDITS
+                                      B7INTERVAL B7DWHO B7DSTAMP B7DCCWHO B7DCCDATE B7DCCTIME B7DCCEDITS
+                                      B8INTERVAL B8DWHO B8DSTAMP B8DCCWHO B8DCCDATE B8DCCTIME B8DCCEDITS
+                                      B9INTERVAL B9DWHO B9DSTAMP B9DCCWHO B9DCCDATE B9DCCTIME B9DCCEDITS
+                                      C1INTERVAL C1DWHO C1DSTAMP C1DCCWHO C1DCCDATE C1DCCTIME C1DCCEDITS
+                                      D1INTERVAL D1DWHO D1DSTAMP D1DCCWHO D1DCCDATE D1DCCTIME D1DCCEDITS
+                                      E1INTERVAL E1DWHO E1DSTAMP E1DCCWHO E1DCCDATE E1DCCTIME E1DCCEDITS
+                                      T1INTERVAL T1DWHO T1DSTAMP T1DCCWHO T1DCCDATE T1DCCTIME T1DCCEDITS
+.  autoset
+.  get vars PTID
+.  process rec Z1CHECK
+.   Z1CHECK = YES
+.   get vars INTERVAL PACKET DCCDATE
+.   EVALDATE = VISITDATE
+.   get vars all prefix 'Z1'
+.   do repeat RECX = A1DEMOG A2INFORM A3FAMHIS A5HEALTH B1PHYS B2HACHIN B3UPDRS B4CDR B5NPI B6GDS B7FAQ B8OVER B9ONSET C1NEURO D1COG E1IMAGE,
+              VARX = A1 A2 A3 A5 B1 B2 B3 B4 B5 B6 B7 B8 B9 C1 D1 E1
+.    process rec RECX via (INTERVAL)
+.     get vars all prefix '!VARX!'
+.     RECX = YES
+.     ifthen (!VARX!INITIALS ='MA' or !VARX!INITIALS = 'MXA'                          ) !VARX!INITIALS = 'MWA'
+.     elseif (!VARX!INITIALS ='KB' or !VARX!INITIALS = 'KXB' or !VARX!INITIALS = 'KBL') !VARX!INITIALS = 'KLB'
+.     elseif (!VARX!INITIALS ='DD' or !VARX!INITIALS = 'DXD'                          ) !VARX!INITIALS = 'DPD'
+.     elseif (!VARX!INITIALS ='KM' or !VARX!INITIALS = 'KXM'                          ) !VARX!INITIALS = 'KSM'
+.     elseif (!VARX!INITIALS ='LH' or !VARX!INITIALS = 'LXH' or !VARX!INITIALS = 'LHS') !VARX!INITIALS = 'LSH'
+.     elseif (!VARX!INITIALS ='GP' or !VARX!INITIALS = 'GXP'                          ) !VARX!INITIALS = 'GHP'
+.     elseif (!VARX!INITIALS ='NS' or !VARX!INITIALS = 'NXS' or !VARX!INITIALS = 'MXS') !VARX!INITIALS = 'NXS'
+.     elseif (!VARX!INITIALS ='SS' or !VARX!INITIALS = 'SXS'                          ) !VARX!INITIALS = 'SAS'
+.     elseif (!VARX!INITIALS ='AC' or !VARX!INITIALS = 'AXC'                          ) !VARX!INITIALS = 'AAC'
+.     elseif (!VARX!INITIALS ='LG' or !VARX!INITIALS = 'LXG' or !VARX!INITIALS = 'LCG') !VARX!INITIALS = 'LXG'
+.     elseif (!VARX!INITIALS ='KH' or !VARX!INITIALS = 'KXH'                          ) !VARX!INITIALS = 'KEH'
+.     elseif (!VARX!INITIALS ='RM' or !VARX!INITIALS = 'RXM'                          ) !VARX!INITIALS = 'RPM'
+.     endif
+.    end rec
+.   end repeat
+.   INIT_RE = fst(B9INITIALS,B4INITIALS,A5INITIALS,D1INITIALS)
+.   TOTREQ = sum(Z1CHECK,A1DEMOG,A5HEALTH,B4CDR,B9ONSET,C1NEURO,D1COG,E1IMAGE)
+.   perform procs
+.  end rec | Z1CHECK
+|
+.  process rec Z1TELE
+.   Z1TELE = YES
+.   get vars INTERVAL
+.   EVALDATE = VISITDATE
+.   get vars all prefix 'Z1'
+.   do repeat RECX = T1TELE A1DEMOG A2INFORM A3FAMHIS A5HEALTH B4CDR B5NPI B7FAQ B9ONSET D1COG E1IMAGE,
+              VARX = T1 A1 A2 A3 A5 B4 B5 B7 B9 D1 E1
+.    process rec RECX via (INTERVAL)
+.     get vars all prefix '!VARX!'
+.     RECX = YES
+.    end rec
+.   end repeat
+.   perform procs
+.  end rec | Z1TELE
+. end case
+|
+. spss save file filename  = '<GDATA1>NACCUDS\Output\NACCUDS_ALL.sav'
+end retrieval
+END PROCEDURE

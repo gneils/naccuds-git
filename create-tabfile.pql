@@ -1,0 +1,25 @@
+PROCEDURE      CREATE.TABFILE:T  (157054,31376)  |Last amended Oct 13, 2012,08:42:56
+c
+c Create Tabfile
+c
+drop tabfile LOOKUP
+create tabfile LOOKUP filename='<GDATA1>NACCUDS\Database\Tabfile\Lookup.tbf'
+
+program
+. string * 10 CODE
+. string * 60 DRUG
+. exclude procedure variables RC
+. open data dsn='<GDATA1>NACCUDS\Database\Tabfile\Drugs.txt' read iostat=RC lrecl=100
+.  loop
+.   read (data,iostat=RC) CODE (A6) 8t DRUG (A60)
+.   ifnot (RC = 0) exit loop
+.   perform procs
+.  end loop
+. save table LOOKUP.DRUG replace
+end program
+
+create unique index CODES on LOOKUP.DRUG (CODE)
+
+disconnect tabfile LOOKUP
+
+END PROCEDURE

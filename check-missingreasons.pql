@@ -1,0 +1,11 @@
+PROCEDURE      CHECK.MISSINGREASONS:T  (157058,37637)  |Last amended Oct 17, 2012,10:27:17
+retrieval noautocase
+. integer * 1 NO YES
+. set NO (0) YES (1)
+. process cases
+.  process rec C1NEURO
+.   write PTID [misnum(MMSEORDA)][misnum(MMSEORLO)][misnum(PENTAGON)][misnum(MMSE)]
+.  end rec
+. end cases
+end retrieval
+END PROCEDURE

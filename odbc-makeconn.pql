@@ -1,0 +1,31 @@
+PROCEDURE      ODBC.MAKECONN:T  (155644,34619)  |Last amended Dec 03, 2008,09:36:59
+program
+. integer * 2 STAT
+. string * 500 SOURCE$ ODBC$ BUFF$
+. SOURCE$ = '\\192.168.53.246\Data1\NACCUDS\Output\Current.xls'
+. ODBC$ = 'MakeODBC.txt'
+. STAT = system(38)
+. if (STAT = 1) execute dbms 'CLEAR MASTER'
+. open  (ODBC$) write dsnvar = ODBC$ lrecl=255
+. write (ODBC$) 'REGEDIT4 '
+. write (ODBC$) '[HKEY_CURRENT_USER\Software\ODBC\ODBC.INI\CURRENTDB] '
+. write (ODBC$) '"Driver"="C:\\WINDOWS\\System32\\odbcjt32.dll" '
+. write (ODBC$) '"DBQ"="\\\\192.168.53.246\\data1\\NACCUDS\\Output\\Current.xls" '
+. write (ODBC$) '"DefaultDir"="\\\\192.168.53.246\\data1\\NACCUDS\\Output" '
+. write (ODBC$) '"DriverId"=dword:00000316 '
+. write (ODBC$) '"FIL"="excel 8.0;" '
+. write (ODBC$) '"ReadOnly"=hex:00 '
+. write (ODBC$) '"SafeTransactions"=dword:00000000 '
+. write (ODBC$) '"UID"="" '
+. write (ODBC$) '[HKEY_CURRENT_USER\Software\ODBC\ODBC.INI\CURRENTDB\Engines] '
+. write (ODBC$) '[HKEY_CURRENT_USER\Software\ODBC\ODBC.INI\CURRENTDB\Engines\Excel] '
+. write (ODBC$) '"ImplicitCommitSync"="" '
+. write (ODBC$) '"MaxScanRows"=dword:00000008 '
+. write (ODBC$) '"Threads"=dword:00000003 '
+. write (ODBC$) '"UserCommitSync"="Yes" '
+. write (ODBC$) '"FirstRowHasNames"=hex:01 '
+. close (ODBC$)
+. pql escape 'REGEDIT /S "' + curdir(0) + 'MakeODBC.txt"'
+. if (STAT = 1) execute dbms 'SET MASTER'
+end program
+END PROCEDURE

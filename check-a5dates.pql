@@ -1,0 +1,17 @@
+PROCEDURE      CHECK.A5DATES:T  (157228,37699)  |Last amended Apr 05, 2013,10:28:19
+retrieval noautocase
+. integer * 1 NO YES REC#
+. set NO (0) YES (1)
+. process cases
+.  process rec A5HEALTH
+.   REC# = recnum('A5HEALTH')
+.   ifthen (CBSTROKE = 1 or 2)
+.    write PTID INTERVAL 10t [vallab(CBSTROKE)] 30t 'Stroke ' [fst(STROK1YR,misnum(STROK1YR))] STROK2YR STROK3YR STROK4YR STROK5YR STROK6YR
+.   endif
+.   ifthen (CBTIA = 1 or 2)
+.    write PTID INTERVAL 10t [vallab(CBTIA)] 30t 'TIA ' [fst(TIA1YR,misnum(TIA1YR))] TIA2YR TIA3YR TIA4YR TIA5YR TIA6YR
+.   endif
+.  end rec
+. end cases
+end retrieval
+END PROCEDURE

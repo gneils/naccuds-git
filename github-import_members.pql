@@ -1,0 +1,42 @@
+PROCEDURE      GITHUB.IMPORT_MEMBERS:T  (157875,51398)  |Last amended Jan 12, 2015,14:16:38
+C IMPORTS ALL MEMBERS FROM A SUBFOLDER.
+C EACH FILE IS NAMED "SYSTEM-MEMBER.PQL" AND IS PREAD BACK IN.
+
+program crwarn
+string  * 200  IMPORT_FOLDER
+STRING  * 200  FILE_PATH
+STRING  * 200  FILE_NAME
+STRING  *  32  FILE_EXT
+string  * 200  IMPORT_MASK
+STRING  * 300  EACH_FILE_NAME
+integer *   2  FILE_COUNT         | Number of families in proc file
+integer *   2  RESVAR        | RESPONSE VARIABLE
+
+c try the procfile folder as a default.
+display YESNOBOX "This could overwrite your web procfile if you are not careful!" response RESVAR
+IF (RESVAR EQ 0) DISPLAY INFOBOX "GOOD CHOICE, EXITING"; EXIT PROGRAM
+
+
+execute subroutine SYSPROC.TOOLS.FILENAME (dsn('procfile')) RETURNING (FILE_PATH, FILE_NAME, FILE_EXT)
+IMPORT_FOLDER = FILE_PATH + FILE_NAME + '-git'
+
+display textbox "Import Folder is..." RESPONSE RESVAR, IMPORT_FOLDER
+
+IF (RESVAR <0 ) EXIT PROGRAM
+if (fileis(IMPORT_FOLDER) <> -1) write "No such directory exists." / IMPORT_FOLDER; exit program
+IMPORT_MASK = IMPORT_FOLDER + '\*.pql'
+
+write 'Import MASK: ' IMPORT_MASK
+
+FILE_COUNT = filecnt( IMPORT_MASK )
+for EACH_FILE = 1, FILE_COUNT
+. EACH_FILE_NAME = IMPORT_FOLDER +'\' + FILEN(IMPORT_MASK, EACH_FILE)
+. WRITE EACH_FILE_NAME
+C PUT IN CHECK TO MAKE SURE THEY ARE PWRITE FILES.  CHECK FIRST LINE FOR "PROCEDURE"
+. execute dbms "PREAD '" + EACH_FILE_NAME + "'"
+end for
+
+WRITE 'FINISHED Import Members'
+
+end program
+END PROCEDURE

@@ -1,0 +1,16 @@
+PROCEDURE      MOVE.SUBMISSION:T  (156857,7766)  |Last amended Mar 30, 2012,02:09:26
+retrieval update
+. process cases
+.  process rec A3FAM_V2
+.   ifthen (misnum(MOMONSET) = 1 and misnum(MOMDEM) = 0 )
+.    MOMDEM = 9
+.    set MOMONSET (missing)
+.   endif
+.   ifthen (misnum(DADONSET) = 1 and misnum(DADDEM) = 0 )
+.    DADDEM = 9
+.    set DADONSET (missing)
+.   endif
+.  end rec
+. end cases
+end retrieval
+END PROCEDURE

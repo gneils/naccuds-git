@@ -1,0 +1,18 @@
+PROCEDURE      CHECK.FORMSBYID:T  (157854,47266)  |Last amended Dec 22, 2014,13:07:46
+retrieval | update
+. case is 12644
+.  do repeat RECX = 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,21,25,27,30,31,32,33,34,35,36,37,38,39,40,41,42
+.   process rec RECX with (5)
+c.    get vars all
+.    write PTID INTERVAL [recname(RECX)]
+c delete rec
+.   end rec
+.  end repeat
+.  process rec A4DETAIL with (5)
+c.   get vars all
+.   write PTID INTERVAL DRUGID 'A4DETAIL'
+c delete rec
+.  end rec
+. end cases
+end retrieval
+END PROCEDURE

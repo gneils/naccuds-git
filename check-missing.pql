@@ -1,0 +1,8 @@
+PROCEDURE      CHECK.MISSING:T  (156858,76916)  |Last amended Mar 31, 2012,21:21:56
+program
+write [miss(2,'INMDS',0)]
+if (miss(2,'INMDS',1) = '') write 'sdfs'
+write [miss(2,'INMDS',2)]
+write [miss(2,'INMDS',3)]
+end program
+END PROCEDURE

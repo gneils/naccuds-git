@@ -1,0 +1,185 @@
+PROCEDURE      ODBC.CURRENT:T  (155644,35431)  |Last amended Dec 03, 2008,09:50:31
+retrieval update noautocase upstat
+. integer * 1 NO YES PROCEED
+. integer * 4 ID STATID_ CONID_ ERR_ ROW# CASE#
+. string * 32 CASE$ TREAT$ INIT$ SEX$ MDD$ WHO$
+. string * 200 SQL$ TEXT$
+. set NO IPT PROCEED (0) YES CGT (1)
+c. execute subprocedure CXINPUT
+c. ifthen (PROCEED = YES)
+.   connect CONID_ server   "ODBC"
+                   database "CURRENTDB"
+                   user     "administrator"
+                   password "sonya67"
+                   prefix   ""
+                   update
+                   error    ERR_
+.   ifthen (ERR_ < 1)
+.     display errbox ['Connection: ' + geterr(0)]
+.   endif
+.   statement STATID_ connect CONID_ error ERR_
+.   ifthen (ERR_ < 1)
+.     display errbox ['Statement: ' + geterr(0)]
+.   endif
+.   delete buffer "SQL Statement"
+.   create buffer "SQL Statement"
+.   SQL$ = "SELECT * FROM ""Sheet1$"""
+.   put line to buffer "SQL Statement" numbered 1 from SQL$
+.   prepare statement STATID_ connect CONID_ buffer "SQL Statement" error ERR_
+.   ifthen (ERR_ < 1)
+.     display errbox ['Prepare: ' + geterr(0)]
+.   endif
+.   execute statement STATID_ connect CONID_ error ERR_
+.   ifthen (ERR_ < 1)
+.     display errbox ['Execute: ' + geterr(0)]
+.   endif
+.   set ROW# (0)
+.   loop
+.     MORE = nextrow(CONID_,STATID_)
+.     if (MORE = NO) exit loop
+.     ROW# = ROW# + 1
+.     ID   = colvaln(CONID_,STATID_,ROW#,4)
+.   end loop
+c.   execute subprocedure CXEXCEL
+c.   ifthen (PROCEED = YES)
+c.     execute subprocedure MAKECURRENT
+c.   endif
+c. endif
+c. execute subprocedure SENDEMAIL
+. t = dglobal('MESSAGE')
+. disconnect CONID_
+. close (ODBC$)
+. window clear
+|
+. subprocedure CXEXCEL
+cif eq 1,2
+.   statement STATID_ connect CONID_ error ERR_
+.   ifthen (ERR_ < 1)
+.     display errbox ['Statement: ' + geterr(0)]
+.   endif
+.   delete buffer "SQL Statement"
+.   create buffer "SQL Statement"
+.   SQL$ = "SELECT * FROM ""Sheet1$"""
+.   put line to buffer "SQL Statement" numbered 1 from SQL$
+.   prepare statement STATID_ connect CONID_ buffer "SQL Statement" error ERR_
+.   ifthen (ERR_ < 1)
+.     display errbox ['Prepare: ' + geterr(0)]
+.   endif
+.   execute statement STATID_ connect CONID_ error ERR_
+.   ifthen (ERR_ < 1)
+.     display errbox ['Execute: ' + geterr(0)]
+.   endif
+.   set ROW# (0)
+.   loop
+.     MORE = nextrow(CONID_,STATID_)
+.     if (MORE = NO) exit loop
+.     ROW# = ROW# + 1
+.     ID   = colvaln(CONID_,STATID_,ROW#,2)
+.     COL3 = colvals(CONID_,STATID_,ROW#,3)
+.     COL5 = colvals(CONID_,STATID_,ROW#,5)
+.     COL6 = colvals(CONID_,STATID_,ROW#,6)
+.     COL7 = colvals(CONID_,STATID_,ROW#,7)
+.     COL8 = colvals(CONID_,STATID_,ROW#,8)
+.     COL9 = colvals(CONID_,STATID_,ROW#,9)
+.     ifthen (exists(ID) = NO and exists(COL3) = NO and exists(COL5) = NO and exists(COL6) = NO and exists(COL7) = NO and exists(COL8) = NO and exists(COL9) = NO)
+.       write 'This is your line: ' ROW#
+c.       old case is CASE#
+c.         old rec is Z1CHECK
+c.           TREAT$ = upper(colvals(CONID_,STATID_,ROW#,4))
+c.           TEXT$ = 'Subject: ' + format(CASE#) +
+c                    ', MDD Status: ' + trim(vallab(MDD#)) +
+c                    ', Initials: ' + trim(INIT$) +
+c                    ', Gender: ' + trim(vallab(SEX#)) +
+c                    ', Birthdate: ' + DOB$ +
+c                    ' has been assigned to the '
+c.           ifthen (TREAT$ = 'IPT')
+c.             RZTREAT = IPT
+c.             TEXT$ = TEXT$ + 'IPT treatment group'
+c.           elseif (TREAT$ = 'CGT')
+c.             RZTREAT = CGT
+c.             TEXT$ = TEXT$ + 'CGT treatment group'
+c.           endif
+c.         end rec
+c.       end case
+.       PROCEED = YES
+.       exit loop
+.     endif
+.   end loop
+.   delete statement STATID_ connect CONID_
+.   ifthen (ERR_ < 1)
+.     display errbox ['Delete: ' + geterr(0)]
+.   endif
+cif end
+. end subprocedure CXEXCEL
+|
+. subprocedure MAKECURRENT
+cif eq 1,2
+.   statement STATID_  connect CONID_ error ERR_
+.   ifthen (ERR_ < 1)
+.     display errbox ['Statement: ' + geterr(0)]
+.   endif
+.   delete buffer "SQL Statement"
+.   create buffer "SQL Statement"
+.   SQL$ = "UPDATE ""Sheet1$"" SET ""ID""=" + CASE$ + ",""MDD Status""='" + MDD$  +
+    "',""initials""='" + INIT$ + "',""gender""='" + SEX$  + "',""birthdate""='" + DOB$  +
+    "',""date assigned""='" + datec(today(0),'MM/DD/YYYY') + "',""time assigned""='" +
+    timec(now(0),'HH:MM') + "' WHERE ""ROW"" = " + format(ROW#) + ""
+c.   put line to buffer "SQL Statement" numbered 1 from "UPDATE ""Sheet1$"" SET"
+c.   put line to buffer "SQL Statement" numbered 2 from """ID""            = "  + CASE$ + ","
+c.   put line to buffer "SQL Statement" numbered 3 from """MDD Status""    = '" + MDD$  + "',"
+c.   put line to buffer "SQL Statement" numbered 4 from """initials""      = '" + INIT$ + "',"
+c.   put line to buffer "SQL Statement" numbered 5 from """gender""        = '" + SEX$  + "',"
+c.   put line to buffer "SQL Statement" numbered 6 from """birthdate""     = '" + DOB$  + "',"
+c.   put line to buffer "SQL Statement" numbered 7 from """date assigned"" = '" + datec(today(0),'MM/DD/YYYY') + "',"
+c.   put line to buffer "SQL Statement" numbered 8 from """time assigned"" = '" + timec(now(0),'HH:MM') + "'"
+c.   put line to buffer "SQL Statement" numbered 9 from "WHERE ""Row""     = " + format(ROW#)
+c.   prepare statement STATID_ connect CONID_ buffer "SQL Statement" error ERR_
+c.   ifthen (ERR_ < 1)
+c.     display errbox ['Prepare: ' + geterr(0)]
+c.   endif
+c.   execute statement STATID_ connect CONID_ error ERR_
+c.   ifthen (ERR_ < 1)
+c.     display errbox ['Execute: ' + geterr(0)]
+c.   endif
+c.   delete statement STATID_ connect CONID_
+c.   ifthen (ERR_ < 1)
+c.     display errbox ['Delete: ' + geterr(0)]
+c.   endif
+c.   display infobox TEXT$
+cif end
+. end subprocedure MAKECURRENT
+|
+. subprocedure SENDEMAIL
+cif eq 1,2
+c hfa1@columbia.edu;naihua.duan@columbia.edu;ks2394@columbia.edu;
+.   string * 800 EXEC$
+.   EXEC$  = '\\192.168.53.240\SIRXS\Email\GWSend.exe /From="dcadmin@pidata.cpmc.columbia.edu"
+             /ipa=156.111.179.180 /ipp=25
+             /U=DCadmin /Pa="rm1311"
+             /To=merleda@pidata.cpmc.columbia.edu;raf2130@columbia.edu;
+             /Message="' + TEXT$ + '"
+             /Subject="KS-Geri Randomization"'
+.   pql escape EXEC$
+cif end
+. end subprocedure SENDEMAIL
+|
+. subprocedure CXINPUT
+cif eq 1,2
+.   CASE# = <1>
+.   CASE$ = format(CASE#)
+.   MDD#  = <2>
+.   MDD$  = trim(vallab(MDD#))
+.   INIT$ = '<3>'
+.   SEX#  = <4>
+.   SEX$  = trim(vallab(SEX#))
+.   DOB$  = '<5>'
+.   ifthen (exists(CASE$) = YES and exists(MDD$) = YES and exists(INIT$) = YES and len(INIT$) = 4 and exists(SEX$) = YES and exists(DOB$) = YES)
+.     PROCEED = YES
+.   else
+.     TEXT$ = 'The database information is not complete. Randomization did not occur.'
+.   endif
+cif end
+. end subprocedure
+end retrieval
+remark '<MESSAGE>'
+END PROCEDURE

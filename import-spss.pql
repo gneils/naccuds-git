@@ -1,0 +1,563 @@
+PROCEDURE      IMPORT.SPSS:T  (156183,46585)  |Last amended May 26, 2010,12:56:25
+call DCCPROCF.SYSTEM.ALLRECS
+retrieval noautocase progress
+. integer * 1 NO YES PROCEED POS TYPE# VALID# GOTKEY GOTREC STRING# INTEGER# DECIMAL4# DECIMAL8#
+. integer * 2 REC#
+. integer * 4 COL# COLS# STATID_ CONID_
+. integer * 2 array KEYCOL (10)
+. string * 32 RECN$ CASE$ COLN$ SELECT$ PREV EXT$
+. string * 100 FILE$ EXEC$ SCHEMAF ERRORF CONNECTF FOLD$
+. string * 32 array AVARS ACOLS (3000)
+. set PROCEED NO (0) YES STRING# (1) INTEGER# (5) DECIMAL4# (6) DECIMAL8# (7)
+. value labels TYPE#  (1)'String'
+                      (2)'Timestamp string'
+                      (3)'Date'
+                      (4)'Time'
+                      (5)'Integer'
+                      (6)'R4'
+                      (7)'R8'
+                      (8)'Scaled Integer'
+               VALID# (0)'Valid value'
+                      (1)'Wrong data type/Not valid value'
+                      (2)'Violation of specified valid values or ranges'
+                      (3)'Missing value 0 (Undefined or system missing value)'
+                      (4)'Missing value 1'
+                      (5)'Missing value 2'
+                      (6)'Missing value 3'
+                      (7)'String value too long, truncated'
+|User selects file to import
+. display openbox 'Select data file to import',
+                  'All Files|*.*|',
+                  '*',
+                  1 response PROCEED,
+                  FILE$
+. if (PROCEED = NO) t = globals('CONTINUE','NO')
+|Assume that file name is the same as record type name
+. FILE$ = reverse(FILE$)
+. POS = abs(srst(FILE$,'.')) + 1
+. EXT$ = upper(reverse(sbst(FILE$,1,POS - 2)))
+. RECN$ = upper(reverse(sbst(FILE$,POS,abs(srst(FILE$,'\')) - POS)))
+. FOLD$ = sbst(FILE$,abs(srst(FILE$,'\')) + 1,len(FILE$))
+. FOLD$ = reverse(sbst(FOLD$,1,abs(srst(FOLD$,'\')) - 1))
+. t = globals('GODBC',FOLD$)
+. t = globals('GRECN',RECN$)
+. SCHEMAF = curdir(0) + RECN$ + '.sch'
+. FILE$ = reverse(FILE$)
+|Find out if there is a record type that matches
+. GOTREC = NO
+. do repeat RECN = 0,<GREC1>
+                     <GREC2>
+                     <GREC3>
+                     <GREC4>
+.   ifthen (RECN$ = trim(recname(RECN)))
+.     GOTREC = YES
+.     REC# = RECN
+.     jump HERE
+.   else
+.     REC# = RECN + 1
+.   endif
+. end repeat
+. HERE:
+. ifthen (GOTREC = YES)
+.   write '                    '
+.   write RECN$
+.   write '-------------------------------'
+c.   execute subprocedure MAKEODBC
+.   execute subprocedure CONNECT
+.   execute subprocedure CXCOLUMNS
+.   ifthen (vartype(varname(0,1)) = 0)
+.     t = globals('CONTINUE','STRING')
+.   else
+.     t = globals('CONTINUE','NUMERIC')
+.   endif
+. else
+.   write 'The record type ' RECN$ 'does not exist.'
+.   display yesnobox 'Do you want to create a new record type?' response PROCEED
+.   ifthen (PROCEED = YES)
+c.     execute subprocedure MAKEODBC
+.     execute subprocedure CONNECT
+.     execute subprocedure MAKESCHEMA
+.     write 'The schema has been created. Proceeding to import'
+c.     t = globals('CONTINUE','YES')
+.     ifthen (vartype(varname(0,1)) = 0)
+.       t = globals('CONTINUE','STRING')
+.     else
+.       t = globals('CONTINUE','NUMERIC')
+.     endif
+.   else
+.     t = globals('CONTINUE','NO')
+.     exit retrieval
+.   endif
+. endif
+. delete statement STATID_ connect CONID_
+. disconnect CONID_
+write 'Leaving ' [sglobal('CONTINUE')]
+|Define subprocedures
+|
+. subprocedure CONNECT
+.   write '4. NACCUDS Connecting to ODBC data source' FOLD$ RECN$
+.   connect CONID_ server   "ODBC"
+                   database FOLD$
+                   user     "DMERLE"
+                   password ""
+                   prefix   ""
+                   error    ERRID_
+.   ifthen (ERRID_ <= 0)
+.     display errbox ['Error connecting ' + geterr(0)]
+.   endif
+.   delete buffer "sql statement"
+.   create buffer "sql statement"
+.   SELECT$ = 'select * from "' + RECN$ + '"'
+.   put line to buffer "sql statement" numbered 1 from SELECT$
+.   statement STATID_  connect CONID_ error ERRID_
+.   ifthen (ERRID_ <= 0)
+.     display errbox ['Error making statement ' + geterr(0)]
+.   endif
+.   prepare statement STATID_ connect CONID_ buffer "sql statement" error ERRID_
+.   ifthen (ERRID_ <= 0)
+.     display errbox ['Error preparing statement ' + geterr(0)]
+.   endif
+.   execute statement STATID_ connect CONID_ error ERRID_
+.   ifthen (ERRID_ <= 0)
+.     display errbox ['Error executing statement ' + geterr(0)]
+.   endif
+. end subprocedure CONNECT
+|
+. subprocedure MAKESCHEMA
+|Find out which variables are supposed to be keys
+.   CASE$ = trim(varname(0,1))
+.   display textbox 'Enter the variable name of the key'  response PROCEED, KEY1$
+.   KEY1$ = upper(trimlr(KEY1$))
+.   GOTKEY = NO
+.   COLS# = colcount(CONID_,STATID_)
+.   for COL# = 1,COLS#
+.     COLN$ = upper(trim(colname(CONID_,STATID_,COL#)))
+.     ifthen (COLN$ = KEY1$)
+.       GOTKEY = YES
+.       exit for
+.     endif
+.   end for
+.   ifthen (GOTKEY = NO)
+.     write 'There is no such column name in the import file.'
+.     t = globals('CONTINUE','NO')
+.     exit retrieval
+.   endif
+.   open (SCHEMAF) dsnvar=SCHEMAF write lrecl=200
+.     write (SCHEMAF) 'RECORD SCHEMA ' REC# RECN$ '/LOCK'
+.     write (SCHEMAF) 'KEY FIELDS ' KEY1$ '(A)'
+.     write (SCHEMAF) 'DATA LIST'
+|Case
+.     for COL# = 1,COLS#
+.       COLN$ = upper(trim(colname(CONID_,STATID_,COL#)))
+.       TYPE# = coltype(CONID_,STATID_,COL#)
+.       ifthen (COLN$ = CASE$)
+.         ifthen (TYPE# = STRING#)
+.           write (SCHEMAF) '          ' [pad(CASE$,' ',14,14)] [' * ' + pad('(' + vformat(0,CASE$),' ',5,5) + ')']
+.         elseif (TYPE# = INTEGER#)
+.           write (SCHEMAF) '          ' [pad(CASE$,' ',14,14)] ' * (I4  )'
+.         elseif (TYPE# = DECIMAL4#)
+.           write (SCHEMAF) '          ' [pad(CASE$,' ',14,14)] ' * (F2  )'
+.         elseif (TYPE# = DECIMAL8#)
+.           write (SCHEMAF) '          ' [pad(CASE$,' ',14,14)] ' * (D2  )'
+.         endif
+.         exit for
+.       endif
+.     end for
+|Key
+.     for COL# = 1,COLS#
+.       COLN$ = upper(trim(colname(CONID_,STATID_,COL#)))
+.       TYPE# = coltype(CONID_,STATID_,COL#)
+.       ifthen (COLN$ = KEY1$)
+.         ifthen (TYPE# = STRING#)
+.           write (SCHEMAF) '          ' [pad(KEY1$,' ',14,14)] [' * ' + pad('(A' + format(collen(CONID_,STATID_,COL#)),' ',5,5) + ')']
+.         elseif (TYPE# = INTEGER#)
+.           write (SCHEMAF) '          ' [pad(KEY1$,' ',14,14)] ' * (I4  )'
+.         elseif (TYPE# = DECIMAL4#)
+.           write (SCHEMAF) '          ' [pad(KEY1$,' ',14,14)] ' * (F2  )'
+.         elseif (TYPE# = DECIMAL8#)
+.           write (SCHEMAF) '          ' [pad(KEY1$,' ',14,14)] ' * (D2  )'
+.         endif
+.         exit for
+.       endif
+.     end for
+|Variables
+.     for COL# = 1,COLS#
+.       COLN$ = upper(trim(colname(CONID_,STATID_,COL#)))
+.       TYPE# = coltype(CONID_,STATID_,COL#)
+.       ifthen (COLN$ <> CASE$ and KEY1$)
+.         ifthen (TYPE# = STRING#)
+.           write (SCHEMAF) '          ' [pad(COLN$,' ',14,14)] [' * ' + pad('(A' + format(collen(CONID_,STATID_,COL#)),' ',5,5) + ')']
+.         elseif (TYPE# = INTEGER#)
+.           write (SCHEMAF) '          ' [pad(COLN$,' ',14,14)] ' * (I4  )'
+.         elseif (TYPE# = DECIMAL4#)
+.           write (SCHEMAF) '          ' [pad(COLN$,' ',14,14)] ' * (F2  )'
+.         elseif (TYPE# = DECIMAL8#)
+.           write (SCHEMAF) '          ' [pad(COLN$,' ',14,14)] ' * (D2  )'
+.         endif
+.       endif
+.     end for
+.     write (SCHEMAF) 'END SCHEMA'
+.   close (SCHEMAF)
+.   execute dbms 'INCLUDE FILE "' + SCHEMAF + '"'
+c.   t = delfile(SCHEMAF)
+. end subprocedure MAKESCHEMA
+|
+. subprocedure CXCOLUMNS
+.   write '5. Checking data source file'
+.   t = globals('CONTINUE','YES')
+.   COLS# = colcount(CONID_,STATID_)
+.   for COL# = 1,COLS#
+.     ACOLS(COL#) = upper(trim(colname(CONID_,STATID_,COL#)))
+.   end for
+.   sort ACOLS
+.   write '   Checking for duplicate columns'
+.   for COL# = 1,COLS#
+.     ifthen (ACOLS(COL#) = PREV)
+.       write ['*There is a column with a duplicate name: ' + ACOLS(COL#)]
+.       t = globals('CONTINUE','NO')
+.     endif
+.     PREV = ACOLS(COL#)
+.   end for
+|Get list of variable names
+.   VARS# = nvarsc(REC#)
+.   for VAR# = 1,VARS#
+.     AVARS(VAR#) = upper(trim(varnamec(REC#,VAR#)))
+.   end for
+.   sort AVARS
+.   write '   Checking column names against variable names'
+.   for COL# = 1,COLS#
+.     MATCH = NO
+.     for VAR# = 1,VARS#
+.       ifthen (ACOLS(COL#) = AVARS(VAR#))
+.         MATCH = YES
+.         next for
+.       endif
+.     end for
+.     ifthen (MATCH = NO)
+.       write ['*Import column that does not match a database variable: ' + ACOLS(COL#)]
+.       t = globals('CONTINUE','YES')
+.     endif
+.   end for
+.   write '   Checking for variable names that don''t match columns' VARS# COLS#
+.   for VAR# = 1,VARS#
+.     MATCH = NO
+.     for COL# = 1,COLS#
+.       ifthen (AVARS(VAR#) = ACOLS(COL#))
+.         MATCH = YES
+.         next for
+.       endif
+.     end for
+.     ifthen (MATCH = NO)
+.       write ['*Database variable does not match an import column: ' + AVARS(VAR#)]
+.       t = globals('CONTINUE','YES')
+.     endif
+.   end for
+write '6. End of CXCOLUMNS'
+. end subprocedure CXCOLUMNS
+|
+end retrieval
+|
+cif eq '<CONTINUE>','STRING'
+retrieval noautocase update progress
+.   integer * 1 NO YES PREV1# KEY1# TEXT# NUMBER# DATE#
+.   integer * 4 REJECT# STATID_ CONID_ COL# COLS# REC#
+.   integer * 2 array KEYCOL (10)
+.   string * 32 CASE$ PREVC$ COLN$
+.   string * 100 SELECT$
+.   string * 32 array AKEYS (6)
+.   string * 32 array ACOLS (3000)
+.   set NO REJECT# ROW# (0) YES (1) TEXT# (2) NUMBER# DATE# (3) PREV ('')
+.   REC# = recnum('<GRECN>')
+c .   write 'Great success! Processing data file'
+.   execute subprocedure CONNECT
+.   execute subprocedure GETCOLS
+.   execute subprocedure GETKEYS
+.   loop
+.     MORE = nextrow(CONID_,STATID_)
+.     if (MORE = NO) exit loop
+.     ROW# = ROW# + 1
+c if (ROW# > 1) exit loop
+.     set CASE$ (missing)
+write 'String: Is this where things start to go wrong?'
+.     CASE$ = colvals(CONID_,STATID_,ROW#,KEYCOL(1))
+c write ROW# 'Case ' CASE$ KEYCOL(1)
+.     if (exists(CASE$) = NO) next loop
+.     case is CASE$
+.       set KEY1# (missing)
+.       KEY1# = colvaln(CONID_,STATID_,ROW#,KEYCOL(2))
+.       ifthen (exists(KEY1#) = NO)
+.         write CASE$ 'Row number ' ROW# ' rejected because key 2 is missing'
+.         REJECT# = REJECT# + 1
+.         next loop
+.       endif
+.       ifthen (CASE$ = PREVC$ and KEY1# = PREV1#)
+.         write CASE$ KEY1# 'Row number ' ROW# ' rejected because keys are duplicate'
+.         REJECT# = REJECT# + 1
+.         next loop
+.       endif
+.       PREVC$ = CASE$
+.       PREV1# = KEY1#
+c write 'Processing case ' CASE$ KEY1#
+.       record is <GRECN> (KEY1#)
+.         for COL# = 1,COLS#
+.           COLN$ = upper(trim(colname(CONID_,STATID_,COL#)))
+.           TYPE# = coltype(CONID_,STATID_,COL#)
+.           ifthen (TYPE# = DATE#)
+.             VALID# = varput(COLN$,datec(colvaln(CONID_,STATID_,ROW#,COL#),'MM/DD/YYYY'))
+.             ifthen (VALID# = 1 or VALID# = 2 or VALID# = 7)
+.               write [pad(vallab(TYPE#),' ',12,12)] VALID# '<GRECN> ' CASE$ KEY1# COLN$ 'This date value was rejected ' [format(colvaln(CONID_,STATID_,ROW#,COL#))]
+.             endif
+.           elseif (TYPE# <= TEXT#)
+.             VALID# = varput(COLN$,colvals(CONID_,STATID_,ROW#,COL#))
+.             ifthen (VALID# = 1 or 2 or 7)
+.               write '<GRECN> ' CASE$ KEY1# COLN$ 'This text value was rejected ' [colvals(CONID_,STATID_,ROW#,COL#)]
+.             else
+.               for CHAR# = 1,len(COLN$)
+.                 ifthen (ichar(sbst(COLN$,CHAR#,1)) = 0 or 10 or 13 or 127)
+.                   COLN$ = sbst(COLN$,1,CHAR# - 1) + ' ' + sbst(COLN$,CHAR# + 1,len(COLN$) - CHAR#)
+.                 endif
+.               end for
+.             endif
+.           elseif (TYPE# = 5 or 6 or 7 or 8)
+.             VALID# = varput(COLN$,format(colvaln(CONID_,STATID_,ROW#,COL#)))
+.             ifthen (VALID# = 1 or VALID# = 2 or VALID# = 7)
+.               write [pad(vallab(TYPE#),' ',12,12)] VALID# '<GRECN> ' CASE$ KEY1# COLN$ 'This numeric value was rejected ' [format(colvaln(CONID_,STATID_,ROW#,COL#))]
+.             endif
+.           else
+.             write 'This value is an unknown type'
+.           endif
+.         end for
+.       end record
+.     end case
+.   end loop
+.   t = dglobal('message')
+.   if (REJECT# > 0) t = globals('message','******** '+ format(REJECT#)+' records were rejected. See above for details')
+. delete statement STATID_ connect CONID_
+. disconnect CONID_
+|
+. execute dbms 'call DCCPROCF.BACKUPS.CXSUM (' + format(REC#) + ')'
+. write "Check sum " [nglobal('GCXSUM')]
+
+|Define subprocedures
+c.   write 'Connecting to ODBC data source'
+c.   connect CONID_ server   "ODBC"
+c                   database "Boricua"
+c                   user     "DMERLE"
+c                   password ""
+c                   prefix   ""
+c                   error    ERRID_
+c.   ifthen (ERRID_ <= 0)
+c.     display errbox ['Error connecting ' + geterr(0)]
+c.   endif
+c.   delete buffer "sql statement"
+c.   create buffer "sql statement"
+c.   SELECT$ = 'select * from "' + RECN$ + '"'
+
+|
+. subprocedure CONNECT
+.   connect CONID_ server   "ODBC"
+                   database "Boricua"
+                   user     "DMERLE"
+                   password ""
+                   prefix   ""
+                   error    ERRID_
+.   ifthen (ERRID_ <= 0)
+.     display errbox ['Error connecting ' + geterr(0)]
+.   endif
+.   delete buffer "sql statement"
+.   create buffer "sql statement"
+|For Excel, select * from the Excel sheet (append with '$')
+.   SELECT$ = 'select * from "<GRECN>"'
+.   put line to buffer "sql statement" numbered 1 from SELECT$
+.   statement STATID_  connect CONID_ error ERRID_
+.   ifthen (ERRID_ <= 0)
+.     display errbox ['Error making statement ' + geterr(0)]
+.   endif
+.   prepare statement STATID_ connect CONID_ buffer "sql statement" error ERRID_
+.   ifthen (ERRID_ <= 0)
+.     display errbox ['Error preparing statement ' + geterr(0)]
+.   endif
+.   execute statement STATID_ connect CONID_ error ERRID_
+.   ifthen (ERRID_ <= 0)
+.     display errbox ['Error executing statement ' + geterr(0)]
+.   endif
+.   write 'Connected to ODBC'
+. end subprocedure CONNECT
+|
+. subprocedure GETKEYS
+.   write 'Checking for key fields of rec number ' REC# ' in import columns.'
+.   KEYS# = nkeys(REC#) + 1
+.   for KEY# = 1,KEYS#
+.     AKEYS(KEY#) = trim(keyname(REC#,KEY#))
+.     for COL# = 1,COLS#
+.       ifthen (ACOLS(COL#) = AKEYS(KEY#))
+.         write '   Found key ' KEY# AKEYS(KEY#) 'in column ' COL#
+.         KEYCOL(KEY#) = COL#
+.         next for
+.       endif
+.     end for
+.   end for
+. end subprocedure GETKEYS
+|
+. subprocedure GETCOLS
+.   COLS# = colcount(CONID_,STATID_)
+.   for COL# = 1,COLS#
+.     ACOLS(COL#) = upper(trim(colname(CONID_,STATID_,COL#)))
+.   end for
+. end subprocedure GETCOLS
+|
+end retrieval
+cif end
+cif eq '<CONTINUE>','NUMERIC'
+retrieval noautocase update progress
+write '4. Do we get here?'
+.   integer * 1 NO YES PREV1# KEY1# TEXT# NUMBER# DATE#
+.   integer * 4 REJECT# STATID_ CONID_ COL# COLS# REC# CASE# PREVC#
+.   integer * 2 array KEYCOL (10)
+.   string * 32 COLN$
+.   string * 100 SELECT$
+.   string * 32 array AKEYS (6)
+.   string * 32 array ACOLS (3000)
+.   set NO REJECT# ROW# (0) YES (1) TEXT# (2) NUMBER# DATE# (3) PREV ('')
+.   REC# = recnum('<GRECN>')
+c .   write 'Great success! Processing data file'
+.   execute subprocedure CONNECT
+.   execute subprocedure GETCOLS
+.   execute subprocedure GETKEYS
+.   loop
+.     MORE = nextrow(CONID_,STATID_)
+.     if (MORE = NO) exit loop
+.     ROW# = ROW# + 1
+c if (ROW# > 1) exit loop
+.     set CASE# (missing)
+.     CASE# = colvaln(CONID_,STATID_,ROW#,KEYCOL(1))
+write 'Numeric: Is this where things start to go wrong?' CASE#
+c write ROW# 'Case ' CASE# KEYCOL(1)
+.     if (exists(CASE#) = NO) next loop
+.     case is CASE#
+.       set KEY1# (missing)
+.       KEY1# = colvaln(CONID_,STATID_,ROW#,KEYCOL(2))
+.       ifthen (exists(KEY1#) = NO)
+.         write CASE# 'Row number ' ROW# ' rejected because key 2 is missing'
+.         REJECT# = REJECT# + 1
+.         next loop
+.       endif
+.       ifthen (CASE# = PREVC# and KEY1# = PREV1#)
+.         write CASE# KEY1# 'Row number ' ROW# ' rejected because keys are duplicate'
+.         REJECT# = REJECT# + 1
+.         next loop
+.       endif
+.       PREVC# = CASE#
+.       PREV1# = KEY1#
+c write 'Processing case ' CASE# KEY1#
+.       record is <GRECN> (KEY1#)
+.         for COL# = 1,COLS#
+.           COLN$ = upper(trim(colname(CONID_,STATID_,COL#)))
+.           TYPE# = coltype(CONID_,STATID_,COL#)
+.           ifthen (TYPE# = DATE#)
+.             VALID# = varput(COLN$,datec(colvaln(CONID_,STATID_,ROW#,COL#),'MM/DD/YYYY'))
+.             ifthen (VALID# = 1 or VALID# = 2 or VALID# = 7)
+.               write [pad(vallab(TYPE#),' ',12,12)] VALID# '<GRECN> ' CASE# KEY1# COLN$ 'This date value was rejected ' [format(colvaln(CONID_,STATID_,ROW#,COL#))]
+.             endif
+.           elseif (TYPE# <= TEXT#)
+.             VALID# = varput(COLN$,colvals(CONID_,STATID_,ROW#,COL#))
+.             ifthen (VALID# = 1 or 2 or 7)
+.               write '<GRECN> ' CASE# KEY1# COLN$ 'This text value was rejected ' [colvals(CONID_,STATID_,ROW#,COL#)]
+.             else
+.               for CHAR# = 1,len(COLN$)
+.                 ifthen (ichar(sbst(COLN$,CHAR#,1)) = 0 or 10 or 13 or 127)
+.                   COLN$ = sbst(COLN$,1,CHAR# - 1) + ' ' + sbst(COLN$,CHAR# + 1,len(COLN$) - CHAR#)
+.                 endif
+.               end for
+.             endif
+.           elseif (TYPE# = 5 or 6 or 7 or 8)
+.             VALID# = varput(COLN$,format(colvaln(CONID_,STATID_,ROW#,COL#)))
+.             ifthen (VALID# = 1 or VALID# = 2 or VALID# = 7)
+.               write [pad(vallab(TYPE#),' ',12,12)] VALID# '<GRECN> ' CASE# KEY1# COLN$ 'This numeric value was rejected ' [format(colvaln(CONID_,STATID_,ROW#,COL#))]
+.             endif
+.           else
+.             write 'This value is an unknown type'
+.           endif
+.         end for
+.       end record
+.     end case
+.   end loop
+.   t = dglobal('message')
+.   if (REJECT# > 0) t = globals('message','******** '+ format(REJECT#)+' records were rejected. See above for details')
+. delete statement STATID_ connect CONID_
+. disconnect CONID_
+|
+. execute dbms 'call DCCPROCF.BACKUPS.CXSUM (' + format(REC#) + ')'
+. write "Check sum " [nglobal('GCXSUM')]
+
+|Define subprocedures
+c.   write 'Connecting to ODBC data source'
+c.   connect CONID_ server   "ODBC"
+c                   database "Boricua"
+c                   user     "DMERLE"
+c                   password ""
+c                   prefix   ""
+c                   error    ERRID_
+c.   ifthen (ERRID_ <= 0)
+c.     display errbox ['Error connecting ' + geterr(0)]
+c.   endif
+c.   delete buffer "sql statement"
+c.   create buffer "sql statement"
+c.   SELECT$ = 'select * from "' + RECN$ + '"'
+
+|
+. subprocedure CONNECT
+.   connect CONID_ server   "ODBC"
+                   database "<GODBC>"
+                   user     "DMERLE"
+                   password ""
+                   prefix   ""
+                   error    ERRID_
+.   ifthen (ERRID_ <= 0)
+.     display errbox ['Error connecting ' + geterr(0)]
+.   endif
+.   delete buffer "sql statement"
+.   create buffer "sql statement"
+|For Excel, select * from the Excel sheet (append with '$')
+.   SELECT$ = 'select * from "<GRECN>"'
+.   put line to buffer "sql statement" numbered 1 from SELECT$
+.   statement STATID_  connect CONID_ error ERRID_
+.   ifthen (ERRID_ <= 0)
+.     display errbox ['Error making statement ' + geterr(0)]
+.   endif
+.   prepare statement STATID_ connect CONID_ buffer "sql statement" error ERRID_
+.   ifthen (ERRID_ <= 0)
+.     display errbox ['Error preparing statement ' + geterr(0)]
+.   endif
+.   execute statement STATID_ connect CONID_ error ERRID_
+.   ifthen (ERRID_ <= 0)
+.     display errbox ['Error executing statement ' + geterr(0)]
+.   endif
+.   write 'Connected to ODBC'
+. end subprocedure CONNECT
+|
+. subprocedure GETKEYS
+.   write 'Checking for key fields of rec number ' REC# ' in import columns.'
+.   KEYS# = nkeys(REC#) + 1
+.   for KEY# = 1,KEYS#
+.     AKEYS(KEY#) = trim(keyname(REC#,KEY#))
+.     for COL# = 1,COLS#
+.       ifthen (ACOLS(COL#) = AKEYS(KEY#))
+.         write '   Found key ' KEY# AKEYS(KEY#) 'in column ' COL#
+.         KEYCOL(KEY#) = COL#
+.         next for
+.       endif
+.     end for
+.   end for
+. end subprocedure GETKEYS
+|
+. subprocedure GETCOLS
+.   COLS# = colcount(CONID_,STATID_)
+.   for COL# = 1,COLS#
+.     ACOLS(COL#) = upper(trim(colname(CONID_,STATID_,COL#)))
+.   end for
+. end subprocedure GETCOLS
+|
+end retrieval
+cif end
+END PROCEDURE

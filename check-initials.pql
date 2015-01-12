@@ -1,0 +1,48 @@
+PROCEDURE      CHECK.INITIALS:T  (156828,60837)  |Last amended Mar 01, 2012,16:53:57
+retrieval | update
+. integer * 4 array INIT_ (157)
+. set INIT_ * (0)
+. integer * 2 KNOWN#
+. value labels KNOWN#   (1)'AAC' 'Albeto Canaan'
+                        (2)'AMR' 'Arelys Rocha'
+                        (3)'ASL' 'Arlene Lawton'
+                        (4)'AXA' 'Asa Abeliovich'
+                        (5)'CXS' 'Catalina Saldana'
+                        (6)'DPD' 'Devangeree Devanand'
+                        (7)'EDH' 'Edward Huey'
+                        (8)'ELA' 'E Ash'
+                        (9)'GHP' 'Greg Pelton'
+                        (10)'JBM' 'Jesse Mez'
+                        (11)'JMB' 'Jackie Buchanan'
+                        (12)'JMN' 'James Noble'
+                        (13)'KEH' 'KATE'
+                        (14)'KLB' 'Karen Bell'
+                        (15)'KSM' 'Karen Marder'
+                        (16)'KXC' 'Katrina Cuasay'
+                        (17)'LSH' 'Lawrence Honig'
+                        (18)'LXG' 'Luisa Gomez'
+                        (19)'MCG' 'Madeleine Gordillo'
+                        (20)'MIY' 'Maria Yagual'
+                        (21)'MWA' 'Albers'
+                        (22)'NXS' 'Nikolaos Scarmeas'
+                        (23)'RPM' 'Richard Mayeux'
+                        (24)'SAS' 'Scott Small'
+                        (25)'SCJ' 'Sarah Janicki'
+                        (26)'SJC' 'Susan Comninel'
+                        (27)'SXB' 'Sonja Blum'
+. process cases
+.  do repeat RECX = <GREC1>
+.   process rec RECX
+.    ifthen (INITIALS = '+RB')                                        INIT_(1) = INIT_(1) + 1
+.    elseif (INITIALS = '0')                                          INIT_(2) = INIT_(2) + 1
+.    elseif (INITIALS = '1')                                          INIT_(3) = INIT_(3) + 1
+.    elseif (INITIALS = '2')                                          INIT_(4) = INIT_(4) + 1
+.    endif
+.   end rec
+.  end repeat
+. end cases
+. for KNOWN# = 1,157
+.  write KNOWN# [trim(vallab(KNOWN#))] 9t INIT_(KNOWN#)
+. end for
+end retrieval
+END PROCEDURE

@@ -1,0 +1,6 @@
+PROCEDURE      CHECK.COPYFILE:T  (156885,83073)  |Last amended Apr 27, 2012,23:04:33
+program
+t = cpyfile('E:\Data1\BIPACS\DCC Data Batch\BiPACS 1\BiPACS.1.Ph1.xlsx','E:\Data1\BIPACS\DCC Data Batch\Current.xlsx')
+write t
+end program
+END PROCEDURE

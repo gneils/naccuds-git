@@ -1,0 +1,21 @@
+PROCEDURE      CHECK.A3FAMHIS:T  (157246,40092)  |Last amended Apr 23, 2013,11:08:12
+retrieval noautocase
+. integer * 1 NO YES
+. set NO (0) YES (1)
+. process cases
+.  process rec A3FAMHIS
+.   ifthen (SIBSDEM = 0)
+.    ifthen (misnum(SIB1ONS) <> 0 or misnum(SIB1AGE) <> 0)
+.     write 'retrieval update'
+.     write '. case is ' PTID
+.     write '.  rec is A3FAMHIS with (' INTERVAL ')'
+.     write '.   TWINTYPE = 9'
+.     write '.  end rec'
+.     write '. end case'
+.     write 'end retrieval'
+.    endif
+.   endif
+.  end rec
+. end case
+end retrieval
+END PROCEDURE

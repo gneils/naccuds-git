@@ -1,0 +1,9 @@
+PROCEDURE      CHECK.DRUGS:T  (156861,40927)  |Last amended Apr 03, 2012,11:22:07
+retrieval
+. process cases
+.  process rec A4DETAIL
+.   if (DSTAMP = cdate('03/26/2012','MM/DD/YYYY')) write PTID INTERVAL DRUGID
+.  end rec
+. end cases
+end retrieval
+END PROCEDURE

@@ -1,0 +1,19 @@
+PROCEDURE      MOVE.VISITDATES:T  (156853,66827)  |Last amended Mar 26, 2012,18:33:47
+retrieval update
+. string * 32 MONTH$ DAY$ YEAR$
+. process cases
+.  do repeat RECX = <GREC1>
+.   process rec RECX
+.    ifthen (exists(VISITMO) = 1 and exists(VISITDAY) = 1 and exists(VISITYR) = 1)
+.     MONTH$ = format(VISITMO)
+.     DAY$ = format(VISITDAY)
+.     YEAR$ = format(VISITYR)
+.     if (len(MONTH$) = 1) MONTH$ = '0' + MONTH$
+.     if (len(DAY$) = 1) DAY$ = '0' + DAY$
+.     VISITDATE = MONTH$ + '/' +  DAY$ + '/' + YEAR$
+.    endif
+.   end rec
+.  end repeat
+. end cases
+end retrieval
+END PROCEDURE

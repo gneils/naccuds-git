@@ -1,0 +1,24 @@
+PROCEDURE      CHECK.VERSION1:T  (157343,51734)  |Last amended Jul 29, 2013,14:22:14
+program
+. window clear
+. string * 100 PATH$
+. PATH$ = dsn('prefix')
+. execute dbms ["attribute PREFIX  filename = '<GDATA1>NACCUDS\Database\'"]
+. execute dbms ["attribute ADRC    filename = '<GDATA1>ADRC\Database\ADRC.SR4'"]
+. execute dbms ["attribute NACCUDS filename = '<GDATA1>NACCUDS\DATABASE\NACCUDS.SR4'"]
+. t = upset('sir.fsize',  fst(upget('sir.fsize'),"8")  )
+end program
+retrieval update noautocase
+. integer * 1 NO YES
+. set NO (0) YES (1)
+. string * 32 CASE$ KEY1$ KEY2$ KEY3$ KEY4$ KEY5$ KEY6$
+. set CASE$ ('10427') KEY1$ ('5')
+c. database is NACCUDS
+c.  case is 10427
+c.  process rec B9ONSET
+.    execute subroutine ['NACCUDS.SCREENS.B9ONSET_V1'] (CASE$ KEY1$ KEY2$ KEY3$ KEY4$ KEY5$ KEY6$)
+c.  end rec
+c.  end cases
+c. end database is
+end retrieval
+END PROCEDURE

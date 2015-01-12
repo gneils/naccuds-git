@@ -1,0 +1,23 @@
+PROCEDURE      CHECK.INTERVALS:T  (157240,45221)  |Last amended Apr 17, 2013,12:33:41
+retrieval | update
+. integer * 4 HIGHEST#
+. set HIGHEST# (0)
+. case is 13122
+.  do repeat RECX = 23
+.   process rec RECX with (0)
+.     get vars all
+.     new rec is RECX with (3 DRUGID)
+.      put vars all
+.      write PTID INTERVAL [recname(RECX)]
+.     end rec
+.     delete rec
+c.    endif
+c.    ifthen (INTERVAL > HIGHEST#)
+c.     HIGHEST# = INTERVAL
+c.    endif
+.   end rec
+.  end repeat
+. end cases
+c. write 'Highest ' HIGHEST#
+end retrieval
+END PROCEDURE

@@ -1,0 +1,83 @@
+PROCEDURE      GITHUB.EXPORT_MEMBERS:T  (157875,55927)  |Last amended Jan 12, 2015,15:32:07
+C EXPORTS ALL MEMBERS TO A SUBFOLDER
+C EACH FILE IS NAMED "SYSTEM-MEMBER.PQL" AND IS PWRITTEN FOR EASY IMPORT BACK IN
+
+program crwarn
+integer *     2   STAT#         | David's stuff for connecting to all DBs
+string  *   200   GIT_FOLDER_NAME
+STRING  *   200   FILE_PATH
+STRING  *   200   FILE_NAME
+STRING  *    32   FILE_EXT
+string  *   200   OUTPUT_FOLDER
+string  *   200   MEMBER_SIR_NAME MEMBER_FILE_NAME
+integer *     2   FAM#C         | Number of families in proc file
+string  *    45   FAMILY_NAME   | Family Name
+integer *     4   MEM#C         | number of members in proc file
+string  *    45   MEMBER_NAME   | Member names
+string  *  2000   EACH_LINE    | The current line read in the text file
+integer *     2   RESVAR        | RESPONSE VARIABLE
+string  *   300   DBMS_STR
+
+
+c try the procfile folder as a default.
+execute subroutine SYSPROC.TOOLS.FILENAME (dsn('procfile')) RETURNING (FILE_PATH, FILE_NAME, FILE_EXT)
+GIT_FOLDER_NAME = FILE_NAME + '-git'
+
+OUTPUT_FOLDER = FILE_PATH + GIT_FOLDER_NAME + '\'
+
+display textbox "Where would you like to output the files?" RESPONSE RESVAR, OUTPUT_FOLDER
+IF (RESVAR <0 ) DISPLAY INFOBOX "NO SUCH DIRECTORY" ; EXIT PROGRAM
+
+
+ifthen (fileis(OUTPUT_FOLDER) <> -1) DISPLAY YESNOBOX "No such directory exists. Make one?" RESPONSE RESVAR
+. IF (RESVAR <>1 ) DISPLAY INFOBOX "PROGRAM TERMINATED."; EXIT PROGRAM
+. RESVAR = MAKEDIR(OUTPUT_FOLDER)
+. if (RESVAR EQ -1 ) DISPLAY INFOBOX "CAN NOT CREATE DIRECTORY.  PROGRAM TERMINATED."; EXIT PROGRAM
+endif
+
+write 'Output folder: ' OUTPUT_FOLDER
+
+FAM#C = system(57) |FAMILY COUNT
+for EACH_FAMILY = 1, FAM#C
+. FAMILY_NAME = pack( famname( EACH_FAMILY))
+. MEM#C = memcount( FAMILY_NAME)  | MEMBER COUNT
+. for EACH_MEMBER = 1, MEM#C
+.   MEMBER_NAME = pack( memname( FAMILY_NAME, EACH_MEMBER ))
+.   if ( sbst( reverse( MEMBER_NAME), 1, 1) <> 'T')  NEXT FOR
+.   MEMBER_SIR_NAME = FAMILY_NAME + '.' + MEMBER_NAME
+.   MEMBER_FILE_NAME = OUTPUT_FOLDER + FAMILY_NAME + '-' + substr( MEMBER_NAME, 1, len(MEMBER_NAME) -2) + '.pql'
+.   MEMBER_FILE_NAME = lower(MEMBER_FILE_NAME)
+.   write 5t 'Output: ' MEMBER_FILE_NAME
+.   execute dbms "PWRITE '" + MEMBER_FILE_NAME + "' , " + MEMBER_SIR_NAME + " /NOINFORM"
+. end for
+end for
+
+WRITE 'FINISHED: export members'
+
+
+C SPECIAL SECTION FOR README FILE
+OPEN tmp DSN = "WPF.GITHUB.README_MD" MEMBER  READ IOSTAT = IOSTAT__4
+IF (IOSTAT__4 <> 0) WRITE 'WPF.GITHUB.README_MD IS NOT AVAILABLE'; JUMP END_README
+FILE_NAME = OUTPUT_FOLDER + 'README.MD'
+WRITE FILE_NAME
+open (README) DSNVAR = FILE_NAME write lrecl = 600 iostat = IOSTAT__4
+. ifthen (IOSTAT__4 EQ 0)
+.   LOOP
+.     read(tmp, END = DONE) EACH_LINE (A200)
+.     EACH_LINE = trimr(EACH_LINE)
+.     write(README) EACH_LINE
+.   END LOOP
+.   DONE:
+. endif
+close (README)
+close (tmp)
+
+END_README:
+
+DBMS_STR = ' WRITE SCHEMA FILENAME = "' + OUTPUT_FOLDER + DBNAME(0) + '.sch" /' +
+           'PASSWORD / SECURITY / CIR / STANDARD / DBDEF / RECTYPES=ALL / NOTO/'
+
+EXECUTE DBMS DBMS_STR
+WRITE DBMS_STR
+end program
+END PROCEDURE

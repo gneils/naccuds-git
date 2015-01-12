@@ -1,0 +1,19 @@
+PROCEDURE      CHECK.A3FAM_V2:T  (157246,34423)  |Last amended Apr 23, 2013,09:33:43
+retrieval noautocase
+. integer * 1 NO YES
+. set NO (0) YES (1)
+. process cases
+.  process rec A3FAM_V2
+.   ifthen (misnum(DADONSET) <> 0)
+.    write 'retrieval update'
+.    write '. case is ' PTID
+.    write '.  rec is A3FAM_V2 with (' INTERVAL ')'
+.    write '.   DADONSET = 999'
+.    write '.  end rec'
+.    write '. end case'
+.    write 'end retrieval'
+.   endif
+.  end rec
+. end cases
+end retrieval
+END PROCEDURE

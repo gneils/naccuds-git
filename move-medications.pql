@@ -1,0 +1,26 @@
+PROCEDURE      MOVE.MEDICATIONS:T  (156848,31618)  |Last amended Mar 21, 2012,08:46:58
+retrieval | update
+. process cases
+.  process rec A4D_V2
+.   autoset
+.   get vars all
+.   LEN# = len(format(DRUGID))
+.   ifthen (LEN# = 1)
+.    DRUG$ = 'D0000' + format(DRUGID)
+.   elseif (LEN# = 2)
+.    DRUG$ = 'D000' + format(DRUGID)
+.   elseif (LEN# = 3)
+.    DRUG$ = 'D00' + format(DRUGID)
+.   elseif (LEN# = 4)
+.    DRUG$ = 'D0' + format(DRUGID)
+.   elseif (LEN# = 5)
+.    DRUG$ = 'D' + format(DRUGID)
+.   endif
+.   write PTID 7t INTERVAL 10t DRUGID 17t DRUG$
+.   rec is A4DETAIL with (INTERVAL DRUG$)
+.    put vars all
+.   end rec
+.  end rec
+. end cases
+end retrieval
+END PROCEDURE

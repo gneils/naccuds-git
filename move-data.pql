@@ -1,0 +1,23 @@
+PROCEDURE      MOVE.DATA:T  (156883,50340)  |Last amended Apr 25, 2012,13:59:00
+retrieval update
+. window clear
+. case is 12632
+.  do repeat RECX = 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,21,25,27,30,31,32,33,34,35,36,37,38,39,40,41,42
+.   process rec RECX with (1)
+.    get vars all
+.    rec is RECX with (2)
+.     put vars all
+.    end rec
+.    delete rec
+.   end rec
+.  end repeat
+.  process rec 23 with (1)
+.   get vars all
+.   rec is 23 with (2 DRUGID)
+.    put vars all
+.   end rec
+.   delete rec
+.  end rec
+. end cases
+end retrieval
+END PROCEDURE

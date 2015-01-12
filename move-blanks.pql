@@ -1,0 +1,41 @@
+PROCEDURE      MOVE.BLANKS:T  (156859,45844)  |Last amended Apr 01, 2012,12:44:04
+retrieval noautocase
+. window clear
+. integer * 4 TEMP#
+. string * 100 OUT$ TEMP$
+. missing values TEMP$ (blank blank blank)
+                 TEMP# (blank blank blank)
+. OUT$ = 'C:\Documents and Settings\Administrator.DCCNY\Desktop\Blanks.pql'
+. open (OUT$) dsnvar=OUT$ write lrecl=200
+. process cases
+.  do repeat RECX = 7,9,12,13,14,15,21
+.   process rec RECX
+.    VARS# = nvars(RECX)
+.    for VAR# = 1,VARS#
+.     VAR$ = trim(varname(RECX,VAR#))
+.     ifthen (miss(RECX,VAR$,1) = '')
+.      ifthen (vtype(RECX,VAR$) >= 5)
+.       TEMP# = nget(VAR$)
+.       MISS# = misnum(TEMP#)
+.      else
+.       TEMP$ = sget(VAR$)
+.       MISS# = misnum(TEMP$)
+.      endif
+.      ifthen (MISS# = 2 or MISS# = 3)
+.       MISS$ = trimlr(miss(RECX,VAR$,MISS#))
+.   write ['retrieval update']
+.   write ['. case is ' + format(PTID)]
+.   write ['.  process rec !RECX with (' + format(INTERVAL) + ')']
+.   write ['.   ' + VAR$ + ' = ' + MISS$]
+.   write ['.  end rec']
+.   write ['. end case']
+.   write ['end retrieval']
+.      endif
+.     endif
+.    end for
+.   end rec
+.  end repeat
+. end cases
+. close (OUT$)
+end retrieval
+END PROCEDURE

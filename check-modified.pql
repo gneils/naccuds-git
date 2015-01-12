@@ -1,0 +1,58 @@
+PROCEDURE      CHECK.MODIFIED:T  (156885,78920)  |Last amended Apr 27, 2012,21:55:20
+retrieval noautocase
+. window clear
+. date CXDATE MODDATE ('MM/DD/YYYY')
+. integer * 1 array MOD@ (30000,30)
+. CXDATE = today(0) - 30 | ...otherwise, from today
+. process cases | count=10
+.  do repeat RECX = <GREC1>
+.   process rec RECX
+.    MODDATE = max(DCCDATE,DSTAMP)
+.    ifthen (MODDATE > CXDATE)
+.     MOD@(PTID,INTERVAL + 1) = 1
+.    endif
+.   end rec
+.  end repeat
+. end cases
+. for x = 1,30000
+.  for y = 1,30
+.   if (MOD@(x,y) = 1) write 'PTID=' x 'INTERVAL=' [y - 1]
+.  end for
+. end for
+write 'Hello' MODDATE CXDATE
+
+cif eq 1,2
+c . CXDATE = '07/01/2004'
+. set IDS INT * (missing)
+|Find modification dates
+.    process rec RECX with (INT#)
+.     ifthen (exists(DCCDATE) = YES or exists(DSTAMP) = YES)
+.      MODDATE = max(DCCDATE,DSTAMP)
+.      ifthen (MODDATE > CXDATE)| write '0. ' PTID INT# MODDATE ' > ' CXDATE
+.       process rec Z1CHECK
+.        IDS(CNT#) = PTID
+.        INT(CNT#) = INTERVAL
+write '1. ' IDS(CNT#) MODDATE ' > ' CXDATE INT(CNT#)
+.        PAC(CNT#) = PACKET
+.        CNT# = CNT# + 1
+.        exit rec
+.       end rec
+.      endif
+.     endif
+.    end rec
+.   end for
+.  end repeat
+.  process rec Z1TELE
+.   ifthen (MODDATE > CXDATE)
+.    IDS(CNT#) = PTID
+.    INT(CNT#) = INTERVAL
+.    PAC(CNT#) = 'T'
+.    CNT# = CNT# + 1
+.    next rec
+.   endif
+.  end rec
+. end cases
+. redefine array 'IDS' (CNT#)
+cif end
+end retrieval
+END PROCEDURE

@@ -8,6 +8,7 @@ STRING * 32 CASE$ KEY$1 KEY$2 KEY$3 KEY$4 KEY$5 KEY$6
 INTEGER * 4 CASE# KEY#1
 CASE# = numbr(CASE$)
 KEY#1 = numbr(KEY$1)
+CALL GUIPROCF.SCREENS.INC_VARS
 CALL SCREEN "D1COG"
   AT 1,1
   ONCALL FIRST
@@ -19,18 +20,14 @@ CALL SCREEN "D1COG"
     NOBUTTON
     NOAUTO
     TITLE   (SET DIALOG TITLE "D1COG " + PAGENO + "/" + PAGES + "     " + CASE$)
-    WRITE   (C REQUIRED: VISITDATE;  ifthen (misnum(VISITDATE) eq 0); set failscr(-1); compute failmess=failmess+char(13)+'Required: Visit Date';endif;
-    C REQUIRED: INITIALS;  ifthen (misnum(INITIALS) eq 0 or len(INITIALS) eq 0); set failscr(-1); compute failmess=failmess+char(13)+'Required: Initials';endif;
-    if (exists(DSTAMP) = 0) DSTAMP = today(0);
-    if (exists(DWHO) = 0) compute DWHO = upper(SGLOBAL("USERA"));
-    compute DCCWHO = upper(SGLOBAL("USERA"));
-    compute DCCDATE = today(0);
-    compute DCCTIME = now(0);
-    ifthen (exists(DCCEDITS) = 0);
-    DCCEDITS = 0;
-    else;
-    compute DCCEDITS = DCCEDITS + 1;
-    endif;
+    INITIAL (CALL SCREENS.INC_PERMISSIONS;
+    	     VISITDATE = KEY$5;
+    )
+
+
+    WRITE   (CALL SCREENS.INC_REQUIRED_VISITDATE;
+            CALL SCREENS.INC_REQUIRED_INITIALS;
+            CALL GUIPROCF.SCREENS.INC_WRITE;
     )
 .   FDISPLAY       TEXT (
       recdoc(17,1)

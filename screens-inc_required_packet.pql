@@ -1,0 +1,7 @@
+PROCEDURE      SCREENS.INC_REQUIRED_PACKET:T  (157896,60123)  |Last amended Feb 02, 2015,16:42:03
+C REQUIRED: PACKET
+ifthen( misnum( PACKET ) eq 0 or len( PACKET ) eq 0 )
+. set failscr(-1)
+. compute failmess = failmess + char(13) + 'Required: Packet'
+endif
+END PROCEDURE

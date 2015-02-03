@@ -1,0 +1,7 @@
+PROCEDURE      SCREENS.INC_REQUIRED_INITIALS:T  (157896,60291)  |Last amended Feb 02, 2015,16:44:51
+C REQUIRED: INITIALS;
+ifthen ( misnum( INITIALS ) eq 0 or len( INITIALS ) eq 0)
+. set failscr(-1)
+. compute failmess = failmess + char(13) + 'Required: Initials'
+endif
+END PROCEDURE

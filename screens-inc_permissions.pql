@@ -1,0 +1,44 @@
+PROCEDURE      SCREENS.INC_PERMISSIONS:T  (157896,55713)  |Last amended Feb 02, 2015,15:28:33
+C USER PERMISSIONS ARE CONTROLLED FROM HERE.  DEFAULT IS READ ONLY.
+C SAMPLE PERMISSIONS.  Feel free to use in your database.
+c It will set the normal DCC Users to Write and everyone else to read by default
+
+IWRITE   = 0 | YES
+IREAD    = 0 | YES
+IDELETE  = 0 | YES
+MESSTEXT$ = 'Read Only'
+USER1 = upper(sglobal('USERA'))
+ifthen (USER1 eq 'GNEILS' or 'DMERLE' or 'HANDREWS' or 'MFENG' or 'BWILLIAMS' or 'MVENTURA')
+c DBAs
+. IWRITE   = 1 | YES
+. IREAD    = 1 | YES
+. IDELETE  = 1 | YES
+. MESSTEXT$ = ''
+elseif (USER1 eq 'YOUR USER NAME')
+c set custom permissions here
+. IWRITE   = 1 | YES
+. IREAD    = 1 | YES
+. IDELETE  = 1 | YES
+. MESSTEXT$ = ''
+endif
+
+c Either show or hide the save and delete button based on the values set above.
+c test the buttons to see if they are accessible (on screen or not)
+ifthen ( idstatus(8) eq 1 )
+. ifthen ( IDELETE EQ 1 )
+.   show item 8
+. else
+.   hide item 8  | HIDE THE DELETE
+. endif
+endif
+
+ifthen ( idstatus( 9 ) eq 1 )  |Save Button
+. ifthen ( IDELETE EQ 1 )
+.   show item 9  | Show Save
+. else
+.   hide item 9  | HIDE SAVE
+. endif
+endif
+
+
+END PROCEDURE

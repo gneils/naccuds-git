@@ -1,0 +1,7 @@
+PROCEDURE      SCREENS.INC_REQUIRED_VISITDATE:T  (157896,60302)  |Last amended Feb 02, 2015,16:45:02
+C REQUIRED: VISITDATE;
+ifthen ( misnum( VISITDATE ) eq 0 );
+. set failscr(-1);
+. compute failmess = failmess + char(13) + 'Required: Visit Date'
+endif;
+END PROCEDURE

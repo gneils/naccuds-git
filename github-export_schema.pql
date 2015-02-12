@@ -1,0 +1,72 @@
+PROCEDURE      GITHUB.EXPORT_SCHEMA:T  (157905,41534)  |Last amended Feb 11, 2015,11:32:14
+C EXPORTS ALL RECORDTYPE SCHEMAS TO A SUBFOLDER
+C EACH FILE IS NAMED "RECORDTYPE.SCH"
+
+program crwarn
+integer *     2   STAT#         | David's stuff for connecting to all DBs
+string  *   200   GIT_FOLDER_NAME
+STRING  *   200   FILE_PATH
+STRING  *   200   FILE_NAME
+STRING  *    32   FILE_EXT
+string  *   200   OUTPUT_FOLDER
+integer *     2   RESVAR        | RESPONSE VARIABLE
+string  *   300   DBMS_STR
+integer *     4   EACH_RECORD_NUMBER
+string  *   100   EACH_RECNAME
+integer *     1   PASSFAIL
+string  *   300   TEMP_DIR
+
+c try the procfile folder as a default.
+execute subroutine SYSPROC.TOOLS.FILENAME (dsn('procfile')) RETURNING (FILE_PATH, FILE_NAME, FILE_EXT)
+GIT_FOLDER_NAME = FILE_NAME + '-git'
+
+OUTPUT_FOLDER = FILE_PATH + GIT_FOLDER_NAME + '\schemas\'
+
+display textbox "Where would you like to output the files?" RESPONSE RESVAR, OUTPUT_FOLDER
+IF (RESVAR <0 ) DISPLAY INFOBOX "NO SUCH DIRECTORY" ; EXIT PROGRAM
+
+
+ifthen (fileis(OUTPUT_FOLDER) <> -1) DISPLAY YESNOBOX "No such directory exists. Make one?" RESPONSE RESVAR
+. IF (RESVAR <>1 ) DISPLAY INFOBOX "PROGRAM TERMINATED."; EXIT PROGRAM
+
+. execute SUBROUTINE SYSPROC.TOOLS.FILENAME ( OUTPUT_FOLDER ) RETURNING ( FILE_PATH, FILE_NAME, FILE_EXT )
+
+. for EACH_CHAR = 1, len(  FILE_PATH  )
+.   IF (  sbst(  FILE_PATH , EACH_CHAR, 2 ) = ':' ) NEXT FOR  | EXCEPTION FOR c:\
+.   IF (  FILEIS(  SBST(  FILE_PATH, 1, EACH_CHAR )  ) EQ -1 ) NEXT FOR | FOLDER ALREADY EXISTS
+.   IFTHEN (  sbst( FILE_PATH , EACH_CHAR, 1 ) EQ "\"  )
+.     TEMP_DIR = SBST( FILE_PATH, 1, EACH_CHAR )
+.     EXECUTE SUBPROCEDURE MAKE_DIR
+.   ENDIF
+. end for
+. if (RESVAR EQ -1 ) DISPLAY INFOBOX "CAN NOT CREATE DIRECTORY.  PROGRAM TERMINATED."; EXIT PROGRAM
+endif
+
+
+
+write 'Output folder: ' OUTPUT_FOLDER
+
+. for EACH_RECORD_NUMBER  = 1, nrecs(0)   |rec numbers
+.   compute EACH_RECNAME = trimlr(recname(EACH_RECORD_NUMBER))
+.   ifnot (len(EACH_RECNAME) gt 0) NEXT FOR
+.   DBMS_STR = 'WRITE SCHEMA FILENAME = "' + OUTPUT_FOLDER + EACH_RECNAME + '.sch" ' +
+           '/NOTO/NOINDEX/RECTYPES=' + EACH_RECNAME
+.   EXECUTE DBMS DBMS_STR
+OPEN (X) DSN="C:\Users\Greg\Documents\GitHub\naccuds-git\HERE.TXT" WRITE lrecl=300
+WRITE (X) DBMS_STR
+CLOSE X
+. end for
+
+
+SUBPROCEDURE MAKE_DIR  | RECIEVES TEMP_DIR
+. if ( fileis ( TEMP_DIR ) EQ -1 ) EXIT SUBPROCEDURE | FOLDER ALREADY EXISTS
+. PASSFAIL = makedir( TEMP_DIR )
+. ifthen ( PASSFAIL  EQ -1 )
+.   write 'FAILED TO MAKE NECESSARY DIRECTORY: ' TEMP_DIR
+.   if ( nglobal( 'STOP_ON_ERROR' ) eq 0 ) pql exit dbms
+. endif
+END SUBPROCEDURE
+
+
+end program
+END PROCEDURE

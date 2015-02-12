@@ -57,39 +57,69 @@ VAR RANGES      INTERVAL                         (0 100)
                 HOPELESS                         (0 1)
                 BETTER                           (0 1)
                 GDS                              (0 15)
-MISSING VALUES  GDS                              (88)
+MISSING VALUES  SATIS                            (9)
+                DROPACT                          (9)
+                EMPTY                            (9)
+                BORED                            (9)
+                SPIRITS                          (9)
+                AFRAID                           (9)
+                HAPPY                            (9)
+                HELPLESS                         (9)
+                STAYHOME                         (9)
+                MEMPROB                          (9)
+                WONDRFUL                         (9)
+                WRTHLESS                         (9)
+                ENERGY                           (9)
+                HOPELESS                         (9)
+                BETTER                           (9)
+                GDS                              (88)
 VALUE LABELS    NOGDS                            (0)'No-box not checked'
                                                  (1)'Yes-box checked'
                 SATIS                            (0)'Yes'
                                                  (1)'No'
+                                                 (9)'Did not answer'
                 DROPACT                          (0)'No'
                                                  (1)'Yes'
+                                                 (9)'Did not answer'
                 EMPTY                            (0)'No'
                                                  (1)'Yes'
+                                                 (9)'Did not answer'
                 BORED                            (0)'No'
                                                  (1)'Yes'
+                                                 (9)'Did not answer'
                 SPIRITS                          (0)'Yes'
                                                  (1)'No'
+                                                 (9)'Did not answer'
                 AFRAID                           (0)'No'
                                                  (1)'Yes'
+                                                 (9)'Did not answer'
                 HAPPY                            (0)'Yes'
                                                  (1)'No'
+                                                 (9)'Did not answer'
                 HELPLESS                         (0)'No'
                                                  (1)'Yes'
+                                                 (9)'Did not answer'
                 STAYHOME                         (0)'No'
                                                  (1)'Yes'
+                                                 (9)'Did not answer'
                 MEMPROB                          (0)'No'
                                                  (1)'Yes'
+                                                 (9)'Did not answer'
                 WONDRFUL                         (0)'Yes'
                                                  (1)'No'
+                                                 (9)'Did not answer'
                 WRTHLESS                         (0)'No'
                                                  (1)'Yes'
+                                                 (9)'Did not answer'
                 ENERGY                           (0)'Yes'
                                                  (1)'No'
+                                                 (9)'Did not answer'
                 HOPELESS                         (0)'No'
                                                  (1)'Yes'
+                                                 (9)'Did not answer'
                 BETTER                           (0)'No'
                                                  (1)'Yes'
+                                                 (9)'Did not answer'
                 GDS                              (88)'Did not complete'
 VAR LABEL       INTERVAL                         'Visit Number'
                 INITIALS                         'Initials'

@@ -1,7 +1,7 @@
 TASK NAME       Record Definition for B5NPI Record Number    11
 
-RECORD SCHEMA   11  B5NPI 'Behavioral Assessment/NPI-Q'
-DOCUMENT        Behavioral Assessment/NPI-Q
+RECORD SCHEMA   11  B5NPI 'Behavioral Assessment (NPI-Q)'
+DOCUMENT        Behavioral Assessment Neuropsychiatric Inventory Questionnaire (NPI-Q)
 KEY FIELDS      INTERVAL(A)
 MAX REC COUNT   100
 DATA LIST
@@ -74,69 +74,117 @@ VAR RANGES      INTERVAL                         (0 100)
                 NITESEV                          (1 3)
                 APP                              (0 1)
                 APPSEV                           (1 3)
+MISSING VALUES  DEL                              (9)
+                DELSEV                           (9)
+                HALL                             (9)
+                HALLSEV                          (9)
+                AGIT                             (9)
+                AGITSEV                          (9)
+                DEPD                             (9)
+                DEPDSEV                          (9)
+                ANX                              (9)
+                ANXSEV                           (9)
+                ELAT                             (9)
+                ELATSEV                          (9)
+                APA                              (9)
+                APASEV                           (9)
+                DISN                             (9)
+                DISNSEV                          (9)
+                IRR                              (9)
+                IRRSEV                           (9)
+                MOT                              (9)
+                MOTSEV                           (9)
+                NITE                             (9)
+                NITESEV                          (9)
+                APP                              (9)
+                APPSEV                           (9)
 VALUE LABELS    NPIQINF                          (1)'Spouse'
                                                  (2)'Child'
                                                  (3)'Other'
                 DEL                              (0)'No'
                                                  (1)'Yes'
+                                                 (9)'unknown'
                 DELSEV                           (1)'Mild'
                                                  (2)'Moderate'
                                                  (3)'Severe'
+                                                 (9)'unknown'
                 HALL                             (0)'No'
                                                  (1)'Yes'
+                                                 (9)'unknown'
                 HALLSEV                          (1)'Mild'
                                                  (2)'Moderate'
                                                  (3)'Severe'
+                                                 (9)'unknown'
                 AGIT                             (0)'No'
                                                  (1)'Yes'
+                                                 (9)'unknown'
                 AGITSEV                          (1)'Mild'
                                                  (2)'Moderate'
                                                  (3)'Severe'
+                                                 (9)'unknown'
                 DEPD                             (0)'No'
                                                  (1)'Yes'
+                                                 (9)'unknown'
                 DEPDSEV                          (1)'Mild'
                                                  (2)'Moderate'
                                                  (3)'Severe'
+                                                 (9)'unknown'
                 ANX                              (0)'No'
                                                  (1)'Yes'
+                                                 (9)'unknown'
                 ANXSEV                           (1)'Mild'
                                                  (2)'Moderate'
                                                  (3)'Severe'
+                                                 (9)'unknown'
                 ELAT                             (0)'No'
                                                  (1)'Yes'
+                                                 (9)'unknown'
                 ELATSEV                          (1)'Mild'
                                                  (2)'Moderate'
                                                  (3)'Severe'
+                                                 (9)'unknown'
                 APA                              (0)'No'
                                                  (1)'Yes'
+                                                 (9)'unknown'
                 APASEV                           (1)'Mild'
                                                  (2)'Moderate'
                                                  (3)'Severe'
+                                                 (9)'unknown'
                 DISN                             (0)'No'
                                                  (1)'Yes'
+                                                 (9)'unknown'
                 DISNSEV                          (1)'Mild'
                                                  (2)'Moderate'
                                                  (3)'Severe'
+                                                 (9)'unknown'
                 IRR                              (0)'No'
                                                  (1)'Yes'
+                                                 (9)'unknown'
                 IRRSEV                           (1)'Mild'
                                                  (2)'Moderate'
                                                  (3)'Severe'
+                                                 (9)'unknown'
                 MOT                              (0)'No'
                                                  (1)'Yes'
+                                                 (9)'unknown'
                 MOTSEV                           (1)'Mild'
                                                  (2)'Moderate'
                                                  (3)'Severe'
+                                                 (9)'unknown'
                 NITE                             (0)'No'
                                                  (1)'Yes'
+                                                 (9)'unknown'
                 NITESEV                          (1)'Mild'
                                                  (2)'Moderate'
                                                  (3)'Severe'
+                                                 (9)'unknown'
                 APP                              (0)'No'
                                                  (1)'Yes'
+                                                 (9)'unknown'
                 APPSEV                           (1)'Mild'
                                                  (2)'Moderate'
                                                  (3)'Severe'
+                                                 (9)'unknown'
 VAR LABEL       INTERVAL                         'Visit Number'
                 INITIALS                         'Initials'
                 NPIQINF                          '1. NPI informant'

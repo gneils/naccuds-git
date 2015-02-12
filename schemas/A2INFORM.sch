@@ -1,6 +1,6 @@
 TASK NAME       Record Definition for A2INFORM Record Number     3
 
-RECORD SCHEMA   3  A2INFORM 'Informant Demographics'
+RECORD SCHEMA   3  A2INFORM 'Co-participant Demographics'
 DOCUMENT        Informant Demographics
 KEY FIELDS      INTERVAL(A)
 MAX REC COUNT   100
@@ -25,6 +25,7 @@ DATA LIST
                 INEDUC                           *             (I1)
                 INRELTO                          *             (I1)
                 INRELTOX                         *             (A60)
+                INKNOWN                          *             (I1)
                 INLIVWTH                         *             (I1)
                 INVISITS                         *             (I1)
                 INCALLS                          *             (I1)
@@ -54,6 +55,7 @@ VAR RANGES      INTERVAL                         (0 100)
                 INRATER                          (1 88)
                 INEDUC                           (0 50)
                 INRELTO                          (1 7)
+                INKNOWN                          (0 120)
                 INLIVWTH                         (0 1)
                 INVISITS                         (1 6)
                 INCALLS                          (1 6)
@@ -68,6 +70,7 @@ MISSING VALUES  INBIRMO                          (99)
                 INRATER                          (88
                                                   99)
                 INEDUC                           (99)
+                INKNOWN                          (999)
 VALID VALUES    INHISPOR                         (1
                                                   2
                                                   3
@@ -142,6 +145,7 @@ VALUE LABELS    INSEX                            (1)'Male'
                                                  (5)'Friend/neighbor'
                                                  (6)'Paid caregiver/provider'
                                                  (7)'Other'
+                INKNOWN                          (999)'Unknown'
                 INLIVWTH                         (0)'No'
                                                  (1)'Yes'
                 INVISITS                         (1)'Daily'
@@ -176,8 +180,10 @@ VAR LABEL       INTERVAL                         'Visit Number'
                 INEDUC                           '7. Informant''s years of education'
                 INRELTO                          '8. What is the informant''s relation to subject'
                 INRELTOX                         'Relation, specify'
+                INKNOWN                          '8a. How long has the co-participant know the subject?'
                 INLIVWTH                         '9. Does the informant live with subject'
                 INVISITS                         '9a. If no, frequency of in-person visits'
                 INCALLS                          '9b. If no, frequency of telephone contact'
                 INRELY                           '10. Is there a question of reliability?'
+VAR DOC INKNOWN New for Version 3.
 END SCHEMA

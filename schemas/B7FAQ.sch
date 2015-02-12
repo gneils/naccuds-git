@@ -1,7 +1,7 @@
 TASK NAME       Record Definition for B7FAQ Record Number    13
 
 RECORD SCHEMA   13  B7FAQ 'Functional Assessment-FAQ'
-DOCUMENT        Functional Assessment-FAQ
+DOCUMENT Functional Assessment FUNCTIONAL ACTIVITIES QUESTIONNAIRE (FAQ)
 KEY FIELDS      INTERVAL(A)
 MAX REC COUNT   100
 DATA LIST
@@ -43,66 +43,86 @@ VAR RANGES      INTERVAL                         (0 100)
                 PAYATTN                          (0 3)
                 REMDATES                         (0 3)
                 TRAVEL                           (0 3)
-MISSING VALUES  BILLS                            (8)
-                TAXES                            (8)
-                SHOPPING                         (8)
-                GAMES                            (8)
-                STOVE                            (8)
-                MEALPREP                         (8)
-                EVENTS                           (8)
-                PAYATTN                          (8)
-                REMDATES                         (8)
-                TRAVEL                           (8)
+MISSING VALUES  BILLS                            (8
+                                                  9)
+                TAXES                            (8
+                                                  9)
+                SHOPPING                         (8
+                                                  9)
+                GAMES                            (8
+                                                  9)
+                STOVE                            (8
+                                                  9)
+                MEALPREP                         (8
+                                                  9)
+                EVENTS                           (8
+                                                  9)
+                PAYATTN                          (8
+                                                  9)
+                REMDATES                         (8
+                                                  9)
+                TRAVEL                           (8
+                                                  9)
 VALUE LABELS    BILLS                            (0)'Normal'
                                                  (1)'Has difficulty but does it'
                                                  (2)'Requires assistance'
                                                  (3)'Dependent'
                                                  (8)'Not applicable'
+                                                 (9)'Unknown'
                 TAXES                            (0)'Normal'
                                                  (1)'Has difficulty but does it'
                                                  (2)'Requires assistance'
                                                  (3)'Dependent'
                                                  (8)'Not applicable'
+                                                 (9)'Unknown'
                 SHOPPING                         (0)'Normal'
                                                  (1)'Has difficulty but does it'
                                                  (2)'Requires assistance'
                                                  (3)'Dependent'
                                                  (8)'Not applicable'
+                                                 (9)'Unknown'
                 GAMES                            (0)'Normal'
                                                  (1)'Has difficulty but does it'
                                                  (2)'Requires assistance'
                                                  (3)'Dependent'
                                                  (8)'Not applicable'
+                                                 (9)'Unknown'
                 STOVE                            (0)'Normal'
                                                  (1)'Has difficulty but does it'
                                                  (2)'Requires assistance'
                                                  (3)'Dependent'
                                                  (8)'Not applicable'
+                                                 (9)'Unknown'
                 MEALPREP                         (0)'Normal'
                                                  (1)'Has difficulty but does it'
                                                  (2)'Requires assistance'
                                                  (3)'Dependent'
                                                  (8)'Not applicable'
+                                                 (9)'Unknown'
                 EVENTS                           (0)'Normal'
                                                  (1)'Has difficulty but does it'
                                                  (2)'Requires assistance'
                                                  (3)'Dependent'
                                                  (8)'Not applicable'
+                                                 (9)'Unknown'
                 PAYATTN                          (0)'Normal'
                                                  (1)'Has difficulty but does it'
                                                  (2)'Requires assistance'
                                                  (3)'Dependent'
                                                  (8)'Not applicable'
+                                                 (9)'Unknown'
                 REMDATES                         (0)'Normal'
                                                  (1)'Has difficulty but does it'
                                                  (2)'Requires assistance'
                                                  (3)'Dependent'
                                                  (8)'Not applicable'
+                                                 (9)'Unknown'
                 TRAVEL                           (0)'Normal'
                                                  (1)'Has difficulty but does it'
                                                  (2)'Requires assistance'
                                                  (3)'Dependent'
                                                  (8)'Not applicable'
+                                                 (9)'Unknown'
 VAR LABEL       INTERVAL                         'Visit Number'
                 INITIALS                         'Initials'
                 BILLS                            '1. Paying bills'

@@ -1,1 +1,0 @@
-WRITE SCHEMA FILENAME = "C:\Users\Greg\Documents\GitHub\web-git\schemas\E3FIMDX.sch" /NOTO/NOINDEX/RECTYPES=E3FIMDX

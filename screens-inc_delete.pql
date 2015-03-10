@@ -1,0 +1,34 @@
+PROCEDURE      SCREENS.INC_DELETE:T  (157932,47528)  |Last amended Mar 10, 2015,13:12:08
+ifthen(IDELETE eq 0)
+. set failscr (-1)
+. set failmess ("Sorry, You cannot delete this record.")
+else
+. display YNCBOX "Delete this record?" response YNCVAR
+. ifthen (YNCVAR eq 1)
+.   STR$1= '('+ sglobal('usera') + ' '  + datec(today(0),'mm/dd/yy') + ') Form: ' + trimr(recname(RECNUMBER#))
+.   STR$1 = STR$1 + ' ' + trim(varnamec(0,1)) + ': ' + CASE$ + ' '
+.   STR$1 = STR$1  + ' Keys: '
+.   do repeat  ADDINFO = $KEY$$1$ , $KEY$$2$, $KEY$$3$,  $KEY$$4$,  $KEY$$5$,  $KEY$$6$
+.     if (exists(addinfo) = 1 ) STR$1 = STR$1 +  ' ' + ADDINFO
+.   end repeat
+.   RESVAR = 0
+.   loop
+.     display textbox "(REQUIRED) Reason for deletion?" response RESVAR MESSTEXT$
+.     if (resvar = -1) exit loop
+.     if (len(MESSTEXT$) GT 3) EXIT LOOP
+.   end loop
+.   ifthen (RESVAR EQ -1)
+.     set failscr (-1)
+.     set failmess ("It was NOT deleted.")
+.   else
+.     STR$1 = STR$1 + ' Reason: "' + MESSTEXT$ +'"'
+.     open (delfile) dsnvar =DELFILE$ append
+.       write (delfile) STR$1
+.     close (delfile)
+.   endif
+. else
+.   set failscr (-1)
+.   set failmess ("It was NOT deleted.")
+. endif
+endif
+END PROCEDURE

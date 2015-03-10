@@ -1,0 +1,3 @@
+PROCEDURE      SCREENS.INC_SUBJINFO:T  (157932,48811)  |Last amended Mar 10, 2015,13:33:31
+| write 'insub info'
+END PROCEDURE

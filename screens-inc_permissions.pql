@@ -1,4 +1,4 @@
-PROCEDURE      SCREENS.INC_PERMISSIONS:T  (157896,55713)  |Last amended Feb 02, 2015,15:28:33
+PROCEDURE      SCREENS.INC_PERMISSIONS:T  (157932,49066)  |Last amended Mar 10, 2015,13:37:46
 C USER PERMISSIONS ARE CONTROLLED FROM HERE.  DEFAULT IS READ ONLY.
 C SAMPLE PERMISSIONS.  Feel free to use in your database.
 c It will set the normal DCC Users to Write and everyone else to read by default
@@ -14,11 +14,11 @@ c DBAs
 . IREAD    = 1 | YES
 . IDELETE  = 1 | YES
 . MESSTEXT$ = ''
-elseif (USER1 eq 'YOUR USER NAME')
+elseif (USER1 eq 'LGOMEZ')
 c set custom permissions here
 . IWRITE   = 1 | YES
 . IREAD    = 1 | YES
-. IDELETE  = 1 | YES
+. IDELETE  = 0 | NO
 . MESSTEXT$ = ''
 endif
 

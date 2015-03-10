@@ -1,0 +1,17 @@
+PROCEDURE      SCREENS.INC_WRITE:T  (157932,47471)  |Last amended Mar 10, 2015,13:11:11
+ifthen( IWRITE EQ 0 )
+. failscr = -1
+. failmess = "Sorry, You cannot save this! " + char(13) + char(13) + "Please contact your DBA if you need to save this."
+else
+. DCCDATE = today(0)
+. DCCTIME = now(0)
+. DCCWHO = upper( SGLOBAL("USERA") )
+. if ( exists (DSTAMP) eq 0 ) DSTAMP = today(0)
+. ifthen ( exists (DCCEDITS) eq 0 )
+.   DCCEDITS = 0
+.   if ( exists (DWHO) eq 0 ) DWHO = upper( SGLOBAL("USERA") )  | only update if DCCEdits is system
+. else
+.   DCCEDITS = DCCEDITS + 1
+. endif
+endif
+END PROCEDURE

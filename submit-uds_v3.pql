@@ -1,4 +1,4 @@
-PROCEDURE      SUBMIT.UDS_V3:T  (157932,35526)  |Last amended Mar 10, 2015,09:52:06
+PROCEDURE      SUBMIT.UDS_V3:T  (157932,40729)  |Last amended Mar 10, 2015,11:18:49
 | Path:      \\192.168.53.249\Data1\NACCUDS\Database\NACCUDS.sr4
 | Creator:   David Merle
 | Created:   03/13/2007
@@ -10,7 +10,7 @@ PROCEDURE      SUBMIT.UDS_V3:T  (157932,35526)  |Last amended Mar 10, 2015,09:52
 | Modified:  2. 3/6/2015 by Greg Neils.   Converted it to SAS output.
 call DCCPROCF.SYSTEM.ALLRECS
 call DCCPROCF.BASE.MSTCLEAR
-retrieval VARMAP CRWARN misschar = / progress
+retrieval CRWARN misschar = / progress
 . integer *   4       CASE#
 . integer *   1       YES NO
 . INTEGER *   1       VER#
@@ -24,8 +24,8 @@ retrieval VARMAP CRWARN misschar = / progress
 . integer *   1       VISITMO
 . integer *   1       VISITDAY
 . integer *   2       VISITYR
-. string  * 200       REP
-. string  * 200       BIANCA
+. string  * 200       REP_FILE
+. string  * 200       BIANCA_FILE
 
 . integer *   1       ADCID    |AD CENTER ID
 . string  *   3       FORMID   | Form ID
@@ -35,25 +35,31 @@ retrieval VARMAP CRWARN misschar = / progress
 . set NO (0) YES (1)
 
 DEFINE PROCEDURE VARIABLES
- exclude DCCDATE DSTAMP CASE# YES NO CXDATE MODDATE MOD@
- INCLUDE FORMID
-         VISITMO
-         VISITDAY
-         VISITYR
+ EXCLUDE DCCDATE DSTAMP
+         CASE#
+         YES NO
+         CXDATE MODDATE
+         MOD@
+         PACKET$
+         INT#
+         EACH_INTERVAL
+         VER#
+         BIANCA_FILE
+         REP_FILE
 
 . CXDATE = today(0) - 60 | ...otherwise, from today
 
 
 
-. BIANCA = 'C:\Documents and Settings\bwilliams\Desktop\Data Submission'
-. BIANCA = 'C:\Users\Greg\Documents\GitHub'
-. ifthen (fileis(BIANCA) = -1)
-.   REP = BIANCA + '\' + datec(today(0),'YYYY_MM_DD') + '_UDS.txt'
+. BIANCA_FILE = 'C:\Documents and Settings\bwilliams\Desktop\Data Submission'
+. BIANCA_FILE = 'C:\Users\Greg\Documents\GitHub'
+. ifthen (fileis(BIANCA_FILE) = -1)
+.   REP_FILE = BIANCA_FILE + '\' + datec(today(0),'YYYY_MM_DD') + '_UDS.txt'
 . else
-.   REP = '<GDATA1>NACCUDS\Database\Data Submission\' + datec(today(0),'YYYY_MM_DD') + '_UDS.txt'
+.   REP_FILE = '<GDATA1>NACCUDS\Database\Data Submission\' + datec(today(0),'YYYY_MM_DD') + '_UDS.txt'
 . endif
 
-. open (REP) write dsnvar = REP lrecl=3043
+. open (REP) write dsnvar = REP_FILE lrecl=3043
 
 c   find any records modified from the laste submission date.
 .   process cases
@@ -118,6 +124,7 @@ c   find any records modified from the laste submission date.
            B8COMM
 |        THIS IS THE ONLY TRANSFORMATION WE HAVE TO DO!  LUCKY US!
 .        GET VARS   VISITNUM = INTERVAL
+PERFORM PROCS
 
 .	EXECUTE SUBPROCEDURE MAKE_DATE_FIELDS
 .     end rec
@@ -1989,6 +1996,9 @@ C 	VISITNUM = INTERVAL
 C 	INITIALS
 CIF END
 end subprocedure
+
+SPSS SAVE FILE FILENAME = 'DELETE_ME.TXT'
+
 end retrieval
 call DCCPROCF.BASE.MSTSET
 END PROCEDURE

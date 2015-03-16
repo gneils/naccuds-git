@@ -270,6 +270,241 @@ DATA LIST
                 DCCDATE                          *             (DATE'EMM/DD/YYYY')
                 DCCTIME                          *             (TIME'EHH:MM')
                 DCCEDITS                         *             (I2)
+                AFFFAMM                          *             (I1)
+                FADMUT                           *             (I1)
+                FADMUTX                          *             (A60)
+                FADMUSO                          *             (I1)
+                FADMUSOX                         *             (A60)
+                FFTDMUT                          *             (I1)
+                FFTDMUTX                         *             (A60)
+                FFTDMUSO                         *             (I1)
+                FFTDMUSX                         *             (A60)
+                FOTHMUT                          *             (I1)
+                FOTHMUTX                         *             (A60)
+                FOTHMUSO                         *             (I1)
+                FOTHMUSX                         *             (A60)
+                MOMMOB                           *             (I1)
+                MOMDAGE                          *             (I1)
+                MOMNEUR                          *             (I1)
+                MOMPRDX                          *             (I1)
+                MOMMOE                           *             (I1)
+                MOMAGEO                          *             (I1)
+                DADMOB                           *             (I1)
+                DADDAGE                          *             (I1)
+                DADNEUR                          *             (I1)
+                DADPRDX                          *             (I1)
+                DADMOE                           *             (I1)
+                DADAGEO                          *             (I1)
+                SIB1MOB                          *             (I1)
+                SIB1AGD                          *             (I1)
+                SIB1NEU                          *             (I1)
+                SIB1PDX                          *             (I1)
+                SIB1MOE                          *             (I1)
+                SIB1AGO                          *             (I1)
+                SIB2MOB                          *             (I1)
+                SIB2AGD                          *             (I1)
+                SIB2NEU                          *             (I1)
+                SIB2PDX                          *             (I1)
+                SIB2MOE                          *             (I1)
+                SIB2AGO                          *             (I1)
+                SIB3MOB                          *             (I1)
+                SIB3AGD                          *             (I1)
+                SIB3NEU                          *             (I1)
+                SIB3PDX                          *             (I1)
+                SIB3MOE                          *             (I1)
+                SIB3AGO                          *             (I1)
+                SIB4MOB                          *             (I1)
+                SIB4AGD                          *             (I1)
+                SIB4NEU                          *             (I1)
+                SIB4PDX                          *             (I1)
+                SIB4MOE                          *             (I1)
+                SIB4AGO                          *             (I1)
+                SIB5MOB                          *             (I1)
+                SIB5AGD                          *             (I1)
+                SIB5NEU                          *             (I1)
+                SIB5PDX                          *             (I1)
+                SIB5MOE                          *             (I1)
+                SIB5AGO                          *             (I1)
+                SIB6MOB                          *             (I1)
+                SIB6AGD                          *             (I1)
+                SIB6NEU                          *             (I1)
+                SIB6PDX                          *             (I1)
+                SIB6MOE                          *             (I1)
+                SIB6AGO                          *             (I1)
+                SIB7MOB                          *             (I1)
+                SIB7AGD                          *             (I1)
+                SIB7NEU                          *             (I1)
+                SIB7PDX                          *             (I1)
+                SIB7MOE                          *             (I1)
+                SIB7AGO                          *             (I1)
+                SIB8MOB                          *             (I1)
+                SIB8AGD                          *             (I1)
+                SIB8NEU                          *             (I1)
+                SIB8PDX                          *             (I1)
+                SIB8MOE                          *             (I1)
+                SIB8AGO                          *             (I1)
+                SIB9MOB                          *             (I1)
+                SIB9AGD                          *             (I1)
+                SIB9NEU                          *             (I1)
+                SIB9PDX                          *             (I1)
+                SIB9MOE                          *             (I1)
+                SIB9AGO                          *             (I1)
+                SIB10MOB                         *             (I1)
+                SIB10AGD                         *             (I1)
+                SIB10NEU                         *             (I1)
+                SIB10PDX                         *             (I1)
+                SIB10MOE                         *             (I1)
+                SIB10AGO                         *             (I1)
+                SIB11MOB                         *             (I1)
+                SIB11AGD                         *             (I1)
+                SIB11NEU                         *             (I1)
+                SIB11PDX                         *             (I1)
+                SIB11MOE                         *             (I1)
+                SIB11AGO                         *             (I1)
+                SIB12MOB                         *             (I1)
+                SIB12AGD                         *             (I1)
+                SIB12NEU                         *             (I1)
+                SIB12PDX                         *             (I1)
+                SIB12MOE                         *             (I1)
+                SIB12AGO                         *             (I1)
+                SIB13MOB                         *             (I1)
+                SIB13AGD                         *             (I1)
+                SIB13NEU                         *             (I1)
+                SIB13PDX                         *             (I1)
+                SIB13MOE                         *             (I1)
+                SIB13AGO                         *             (I1)
+                SIB14MOB                         *             (I1)
+                SIB14AGD                         *             (I1)
+                SIB14NEU                         *             (I1)
+                SIB14PDX                         *             (I1)
+                SIB14MOE                         *             (I1)
+                SIB14AGO                         *             (I1)
+                SIB15MOB                         *             (I1)
+                SIB15AGD                         *             (I1)
+                SIB15NEU                         *             (I1)
+                SIB15PDX                         *             (I1)
+                SIB15MOE                         *             (I1)
+                SIB15AGO                         *             (I1)
+                SIB16MOB                         *             (I1)
+                SIB16AGD                         *             (I1)
+                SIB16NEU                         *             (I1)
+                SIB16PDX                         *             (I1)
+                SIB16MOE                         *             (I1)
+                SIB16AGO                         *             (I1)
+                SIB17MOB                         *             (I1)
+                SIB17AGD                         *             (I1)
+                SIB17NEU                         *             (I1)
+                SIB17PDX                         *             (I1)
+                SIB17MOE                         *             (I1)
+                SIB17AGO                         *             (I1)
+                SIB18MOB                         *             (I1)
+                SIB18AGD                         *             (I1)
+                SIB18NEU                         *             (I1)
+                SIB18PDX                         *             (I1)
+                SIB18MOE                         *             (I1)
+                SIB18AGO                         *             (I1)
+                SIB19MOB                         *             (I1)
+                SIB19AGD                         *             (I1)
+                SIB19NEU                         *             (I1)
+                SIB19PDX                         *             (I1)
+                SIB19MOE                         *             (I1)
+                SIB19AGO                         *             (I1)
+                SIB20MOB                         *             (I1)
+                SIB20AGD                         *             (I1)
+                SIB20NEU                         *             (I1)
+                SIB20PDX                         *             (I1)
+                SIB20MOE                         *             (I1)
+                SIB20AGO                         *             (I1)
+                KID1MOB                          *             (I1)
+                KID1AGD                          *             (I1)
+                KID1NEU                          *             (I1)
+                KID1PDX                          *             (I1)
+                KID1MOE                          *             (I1)
+                KID1AGO                          *             (I1)
+                KID2MOB                          *             (I1)
+                KID2AGD                          *             (I1)
+                KID2NEU                          *             (I1)
+                KID2PDX                          *             (I1)
+                KID2MOE                          *             (I1)
+                KID2AGO                          *             (I1)
+                KID3MOB                          *             (I1)
+                KID3AGD                          *             (I1)
+                KID3NEU                          *             (I1)
+                KID3PDX                          *             (I1)
+                KID3MOE                          *             (I1)
+                KID3AGO                          *             (I1)
+                KID4MOB                          *             (I1)
+                KID4AGD                          *             (I1)
+                KID4NEU                          *             (I1)
+                KID4PDX                          *             (I1)
+                KID4MOE                          *             (I1)
+                KID4AGO                          *             (I1)
+                KID5MOB                          *             (I1)
+                KID5AGD                          *             (I1)
+                KID5NEU                          *             (I1)
+                KID5PDX                          *             (I1)
+                KID5MOE                          *             (I1)
+                KID5AGO                          *             (I1)
+                KID6MOB                          *             (I1)
+                KID6AGD                          *             (I1)
+                KID6NEU                          *             (I1)
+                KID6PDX                          *             (I1)
+                KID6MOE                          *             (I1)
+                KID6AGO                          *             (I1)
+                KID7MOB                          *             (I1)
+                KID7AGD                          *             (I1)
+                KID7NEU                          *             (I1)
+                KID7PDX                          *             (I1)
+                KID7MOE                          *             (I1)
+                KID7AGO                          *             (I1)
+                KID8MOB                          *             (I1)
+                KID8AGD                          *             (I1)
+                KID8NEU                          *             (I1)
+                KID8PDX                          *             (I1)
+                KID8MOE                          *             (I1)
+                KID8AGO                          *             (I1)
+                KID9MOB                          *             (I1)
+                KID9AGD                          *             (I1)
+                KID9NEU                          *             (I1)
+                KID9PDX                          *             (I1)
+                KID9MOE                          *             (I1)
+                KID9AGO                          *             (I1)
+                KID10MOB                         *             (I1)
+                KID10AGD                         *             (I1)
+                KID10NEU                         *             (I1)
+                KID10PDX                         *             (I1)
+                KID10MOE                         *             (I1)
+                KID10AGO                         *             (I1)
+                KID11MOB                         *             (I1)
+                KID11AGD                         *             (I1)
+                KID11NEU                         *             (I1)
+                KID11PDX                         *             (I1)
+                KID11MOE                         *             (I1)
+                KID11AGO                         *             (I1)
+                KID12MOB                         *             (I1)
+                KID12AGD                         *             (I1)
+                KID12NEU                         *             (I1)
+                KID12PDX                         *             (I1)
+                KID12MOE                         *             (I1)
+                KID12AGO                         *             (I1)
+                KID13MOB                         *             (I1)
+                KID13AGD                         *             (I1)
+                KID13NEU                         *             (I1)
+                KID13PDX                         *             (I1)
+                KID13MOE                         *             (I1)
+                KID13AGO                         *             (I1)
+                KID14MOB                         *             (I1)
+                KID14AGD                         *             (I1)
+                KID14NEU                         *             (I1)
+                KID14PDX                         *             (I1)
+                KID14MOE                         *             (I1)
+                KID14AGO                         *             (I1)
+                KID15MOB                         *             (I1)
+                KID15AGD                         *             (I1)
+                KID15NEU                         *             (I1)
+                KID15PDX                         *             (I1)
+                KID15MOE                         *             (I1)
+                KID15AGO                         *             (I1)
 STANDARD VARS   VISITDATE
                 DWHO
                 DSTAMP
@@ -533,6 +768,230 @@ VAR RANGES      INTERVAL                         (0 50)
                 REL15LIV                         (0 1)
                 REL15YOD                         (1800 2020)
                 REL15ONS                         (15 110)
+                AFFFAMM                          (0 1)
+                FADMUT                           (0 8)
+                FADMUSO                          (1 8)
+                FFTDMUT                          (0 8)
+                FFTDMUSO                         (1 8)
+                FOTHMUT                          (0 8)
+                FOTHMUSO                         (1 8)
+                MOMMOB                           (1 12)
+                MOMDAGE                          (15 110)
+                MOMNEUR                          (1 8)
+                MOMPRDX                          (40 490)
+                MOMMOE                           (1 7)
+                MOMAGEO                          (15 110)
+                DADMOB                           (1 12)
+                DADDAGE                          (15 110)
+                DADNEUR                          (1 8)
+                DADPRDX                          (40 490)
+                DADMOE                           (1 7)
+                DADAGEO                          (15 110)
+                SIB1MOB                          (1 12)
+                SIB1AGD                          (15 110)
+                SIB1NEU                          (1 8)
+                SIB1PDX                          (40 492)
+                SIB1MOE                          (1 7)
+                SIB1AGO                          (15 110)
+                SIB2MOB                          (1 12)
+                SIB2AGD                          (15 110)
+                SIB2NEU                          (1 8)
+                SIB2PDX                          (40 492)
+                SIB2MOE                          (1 7)
+                SIB2AGO                          (15 110)
+                SIB3MOB                          (1 12)
+                SIB3AGD                          (15 110)
+                SIB3NEU                          (1 8)
+                SIB3PDX                          (40 492)
+                SIB3MOE                          (1 7)
+                SIB3AGO                          (15 110)
+                SIB4MOB                          (1 12)
+                SIB4AGD                          (15 110)
+                SIB4NEU                          (1 8)
+                SIB4PDX                          (40 492)
+                SIB4MOE                          (1 7)
+                SIB4AGO                          (15 110)
+                SIB5MOB                          (1 12)
+                SIB5AGD                          (15 110)
+                SIB5NEU                          (1 8)
+                SIB5PDX                          (40 492)
+                SIB5MOE                          (1 7)
+                SIB5AGO                          (15 110)
+                SIB6MOB                          (1 12)
+                SIB6AGD                          (15 110)
+                SIB6NEU                          (1 8)
+                SIB6PDX                          (40 492)
+                SIB6MOE                          (1 7)
+                SIB6AGO                          (15 110)
+                SIB7MOB                          (1 12)
+                SIB7AGD                          (15 110)
+                SIB7NEU                          (1 8)
+                SIB7PDX                          (40 492)
+                SIB7MOE                          (1 7)
+                SIB7AGO                          (15 110)
+                SIB8MOB                          (1 12)
+                SIB8AGD                          (15 110)
+                SIB8NEU                          (1 8)
+                SIB8PDX                          (40 492)
+                SIB8MOE                          (1 7)
+                SIB8AGO                          (15 110)
+                SIB9MOB                          (1 12)
+                SIB9AGD                          (15 110)
+                SIB9NEU                          (1 8)
+                SIB9PDX                          (40 492)
+                SIB9MOE                          (1 7)
+                SIB9AGO                          (15 110)
+                SIB10MOB                         (1 12)
+                SIB10AGD                         (15 110)
+                SIB10NEU                         (1 8)
+                SIB10PDX                         (40 492)
+                SIB10MOE                         (1 7)
+                SIB10AGO                         (15 110)
+                SIB11MOB                         (1 12)
+                SIB11AGD                         (15 110)
+                SIB11NEU                         (1 8)
+                SIB11PDX                         (40 492)
+                SIB11MOE                         (1 7)
+                SIB11AGO                         (15 110)
+                SIB12MOB                         (1 12)
+                SIB12AGD                         (15 110)
+                SIB12NEU                         (1 8)
+                SIB12PDX                         (40 492)
+                SIB12MOE                         (1 7)
+                SIB12AGO                         (15 110)
+                SIB13MOB                         (1 12)
+                SIB13AGD                         (15 110)
+                SIB13NEU                         (1 8)
+                SIB13PDX                         (40 492)
+                SIB13MOE                         (1 7)
+                SIB13AGO                         (15 110)
+                SIB14MOB                         (1 12)
+                SIB14AGD                         (15 110)
+                SIB14NEU                         (1 8)
+                SIB14PDX                         (40 492)
+                SIB14MOE                         (1 7)
+                SIB14AGO                         (15 110)
+                SIB15MOB                         (1 12)
+                SIB15AGD                         (15 110)
+                SIB15NEU                         (1 8)
+                SIB15PDX                         (40 492)
+                SIB15MOE                         (1 7)
+                SIB15AGO                         (15 110)
+                SIB16MOB                         (1 12)
+                SIB16AGD                         (15 110)
+                SIB16NEU                         (1 8)
+                SIB16PDX                         (40 492)
+                SIB16MOE                         (1 7)
+                SIB17MOB                         (1 12)
+                SIB17AGD                         (15 110)
+                SIB17NEU                         (1 8)
+                SIB17PDX                         (40 492)
+                SIB17MOE                         (1 7)
+                SIB18MOB                         (1 12)
+                SIB18AGD                         (15 110)
+                SIB18NEU                         (1 8)
+                SIB18PDX                         (40 492)
+                SIB18MOE                         (1 7)
+                SIB19MOB                         (1 12)
+                SIB19AGD                         (15 110)
+                SIB19NEU                         (1 8)
+                SIB19PDX                         (40 492)
+                SIB19MOE                         (1 7)
+                SIB20MOB                         (1 12)
+                SIB20AGD                         (15 110)
+                SIB20NEU                         (1 8)
+                SIB20PDX                         (40 492)
+                SIB20MOE                         (1 7)
+                KID1MOB                          (1 12)
+                KID1AGD                          (15 110)
+                KID1NEU                          (1 8)
+                KID1PDX                          (40 490)
+                KID1MOE                          (1 7)
+                KID1AGO                          (15 110)
+                KID2MOB                          (1 12)
+                KID2AGD                          (15 110)
+                KID2NEU                          (1 8)
+                KID2PDX                          (40 490)
+                KID2MOE                          (1 7)
+                KID2AGO                          (15 110)
+                KID3MOB                          (1 12)
+                KID3AGD                          (15 110)
+                KID3NEU                          (1 8)
+                KID3PDX                          (40 490)
+                KID3MOE                          (1 7)
+                KID3AGO                          (15 110)
+                KID4MOB                          (1 12)
+                KID4AGD                          (15 110)
+                KID4NEU                          (1 8)
+                KID4PDX                          (40 490)
+                KID4MOE                          (1 7)
+                KID4AGO                          (15 110)
+                KID5MOB                          (1 12)
+                KID5AGD                          (15 110)
+                KID5NEU                          (1 8)
+                KID5PDX                          (40 490)
+                KID5MOE                          (1 7)
+                KID5AGO                          (15 110)
+                KID6MOB                          (1 12)
+                KID6AGD                          (15 110)
+                KID6NEU                          (1 8)
+                KID6PDX                          (40 490)
+                KID6MOE                          (1 7)
+                KID6AGO                          (15 110)
+                KID7MOB                          (1 12)
+                KID7AGD                          (15 110)
+                KID7NEU                          (1 8)
+                KID7PDX                          (40 490)
+                KID7MOE                          (1 7)
+                KID7AGO                          (15 110)
+                KID8MOB                          (1 12)
+                KID8AGD                          (15 110)
+                KID8NEU                          (1 8)
+                KID8PDX                          (40 490)
+                KID8MOE                          (1 7)
+                KID8AGO                          (15 110)
+                KID9MOB                          (1 12)
+                KID9AGD                          (15 110)
+                KID9NEU                          (1 8)
+                KID9PDX                          (40 490)
+                KID9MOE                          (1 7)
+                KID9AGO                          (15 110)
+                KID10MOB                         (1 12)
+                KID10AGD                         (15 110)
+                KID10NEU                         (1 8)
+                KID10PDX                         (40 490)
+                KID10MOE                         (1 7)
+                KID10AGO                         (15 110)
+                KID11MOB                         (1 12)
+                KID11AGD                         (15 110)
+                KID11NEU                         (1 8)
+                KID11PDX                         (40 490)
+                KID11MOE                         (1 7)
+                KID11AGO                         (15 110)
+                KID12MOB                         (1 12)
+                KID12AGD                         (15 110)
+                KID12NEU                         (1 8)
+                KID12PDX                         (40 490)
+                KID12MOE                         (1 7)
+                KID12AGO                         (15 110)
+                KID13MOB                         (1 12)
+                KID13AGD                         (15 110)
+                KID13NEU                         (1 8)
+                KID13PDX                         (40 490)
+                KID13MOE                         (1 7)
+                KID13AGO                         (15 110)
+                KID14MOB                         (1 12)
+                KID14AGD                         (15 110)
+                KID14NEU                         (1 8)
+                KID14PDX                         (40 490)
+                KID14MOE                         (1 7)
+                KID14AGO                         (15 110)
+                KID15MOB                         (1 12)
+                KID15AGD                         (15 110)
+                KID15NEU                         (1 8)
+                KID15PDX                         (40 490)
+                KID15MOE                         (1 7)
+                KID15AGO                         (15 110)
 MISSING VALUES  MOMYOB                           (9999)
                 MOMLIV                           (9)
                 MOMYOD                           (9999)
@@ -782,6 +1241,230 @@ MISSING VALUES  MOMYOB                           (9999)
                 REL15LIV                         (9)
                 REL15YOD                         (9999)
                 REL15ONS                         (999)
+                AFFFAMM                          (9)
+                FADMUT                           (9)
+                FADMUSO                          (9)
+                FFTDMUT                          (9)
+                FFTDMUSO                         (9)
+                FOTHMUT                          (9)
+                FOTHMUSO                         (9)
+                MOMMOB                           (99)
+                MOMDAGE                          (888
+                                                  999)
+                MOMNEUR                          (9)
+                MOMPRDX                          (999)
+                MOMAGEO                          (999)
+                DADMOB                           (99)
+                DADDAGE                          (888
+                                                  999)
+                DADNEUR                          (9)
+                DADPRDX                          (999)
+                DADAGEO                          (999)
+                SIB1MOB                          (99)
+                SIB1AGD                          (888
+                                                  999)
+                SIB1NEU                          (9)
+                SIB1PDX                          (999)
+                SIB1AGO                          (999)
+                SIB2MOB                          (99)
+                SIB2AGD                          (888
+                                                  999)
+                SIB2NEU                          (9)
+                SIB2PDX                          (999)
+                SIB2AGO                          (999)
+                SIB3MOB                          (99)
+                SIB3AGD                          (888
+                                                  999)
+                SIB3NEU                          (9)
+                SIB3PDX                          (999)
+                SIB3AGO                          (999)
+                SIB4MOB                          (99)
+                SIB4AGD                          (888
+                                                  999)
+                SIB4NEU                          (9)
+                SIB4PDX                          (999)
+                SIB4AGO                          (999)
+                SIB5MOB                          (99)
+                SIB5AGD                          (888
+                                                  999)
+                SIB5NEU                          (9)
+                SIB5PDX                          (999)
+                SIB5AGO                          (999)
+                SIB6MOB                          (99)
+                SIB6AGD                          (888
+                                                  999)
+                SIB6NEU                          (9)
+                SIB6PDX                          (999)
+                SIB6AGO                          (999)
+                SIB7MOB                          (99)
+                SIB7AGD                          (888
+                                                  999)
+                SIB7NEU                          (9)
+                SIB7PDX                          (999)
+                SIB7AGO                          (999)
+                SIB8MOB                          (99)
+                SIB8AGD                          (888
+                                                  999)
+                SIB8NEU                          (9)
+                SIB8PDX                          (999)
+                SIB8AGO                          (999)
+                SIB9MOB                          (99)
+                SIB9AGD                          (888
+                                                  999)
+                SIB9NEU                          (9)
+                SIB9PDX                          (999)
+                SIB9AGO                          (999)
+                SIB10MOB                         (99)
+                SIB10AGD                         (888
+                                                  999)
+                SIB10NEU                         (9)
+                SIB10PDX                         (999)
+                SIB10AGO                         (999)
+                SIB11MOB                         (99)
+                SIB11AGD                         (888
+                                                  999)
+                SIB11NEU                         (9)
+                SIB11PDX                         (999)
+                SIB11AGO                         (999)
+                SIB12MOB                         (99)
+                SIB12AGD                         (888
+                                                  999)
+                SIB12NEU                         (9)
+                SIB12PDX                         (999)
+                SIB12AGO                         (999)
+                SIB13MOB                         (99)
+                SIB13AGD                         (888
+                                                  999)
+                SIB13NEU                         (9)
+                SIB13PDX                         (999)
+                SIB13AGO                         (999)
+                SIB14MOB                         (99)
+                SIB14AGD                         (888
+                                                  999)
+                SIB14NEU                         (9)
+                SIB14PDX                         (999)
+                SIB14AGO                         (999)
+                SIB15MOB                         (99)
+                SIB15AGD                         (888
+                                                  999)
+                SIB15NEU                         (9)
+                SIB15PDX                         (999)
+                SIB15AGO                         (999)
+                SIB16MOB                         (99)
+                SIB16AGD                         (888
+                                                  999)
+                SIB16NEU                         (9)
+                SIB16PDX                         (999)
+                SIB17MOB                         (99)
+                SIB17AGD                         (888
+                                                  999)
+                SIB17NEU                         (9)
+                SIB17PDX                         (999)
+                SIB18MOB                         (99)
+                SIB18AGD                         (888
+                                                  999)
+                SIB18NEU                         (9)
+                SIB18PDX                         (999)
+                SIB19MOB                         (99)
+                SIB19AGD                         (888
+                                                  999)
+                SIB19NEU                         (9)
+                SIB19PDX                         (999)
+                SIB20MOB                         (99)
+                SIB20AGD                         (888
+                                                  999)
+                SIB20NEU                         (9)
+                SIB20PDX                         (999)
+                KID1MOB                          (99)
+                KID1AGD                          (888
+                                                  999)
+                KID1NEU                          (9)
+                KID1PDX                          (999)
+                KID1AGO                          (999)
+                KID2MOB                          (99)
+                KID2AGD                          (888
+                                                  999)
+                KID2NEU                          (9)
+                KID2PDX                          (999)
+                KID2AGO                          (999)
+                KID3MOB                          (99)
+                KID3AGD                          (888
+                                                  999)
+                KID3NEU                          (9)
+                KID3PDX                          (999)
+                KID3AGO                          (999)
+                KID4MOB                          (99)
+                KID4AGD                          (888
+                                                  999)
+                KID4NEU                          (9)
+                KID4PDX                          (999)
+                KID4AGO                          (999)
+                KID5MOB                          (99)
+                KID5AGD                          (888
+                                                  999)
+                KID5NEU                          (9)
+                KID5PDX                          (999)
+                KID5AGO                          (999)
+                KID6MOB                          (99)
+                KID6AGD                          (888
+                                                  999)
+                KID6NEU                          (9)
+                KID6PDX                          (999)
+                KID6AGO                          (999)
+                KID7MOB                          (99)
+                KID7AGD                          (888
+                                                  999)
+                KID7NEU                          (9)
+                KID7PDX                          (999)
+                KID7AGO                          (999)
+                KID8MOB                          (99)
+                KID8AGD                          (888
+                                                  999)
+                KID8NEU                          (9)
+                KID8PDX                          (999)
+                KID8AGO                          (999)
+                KID9MOB                          (99)
+                KID9AGD                          (888
+                                                  999)
+                KID9NEU                          (9)
+                KID9PDX                          (999)
+                KID9AGO                          (999)
+                KID10MOB                         (99)
+                KID10AGD                         (888
+                                                  999)
+                KID10NEU                         (9)
+                KID10PDX                         (999)
+                KID10AGO                         (999)
+                KID11MOB                         (99)
+                KID11AGD                         (888
+                                                  999)
+                KID11NEU                         (9)
+                KID11PDX                         (999)
+                KID11AGO                         (999)
+                KID12MOB                         (99)
+                KID12AGD                         (888
+                                                  999)
+                KID12NEU                         (9)
+                KID12PDX                         (999)
+                KID12AGO                         (999)
+                KID13MOB                         (99)
+                KID13AGD                         (888
+                                                  999)
+                KID13NEU                         (9)
+                KID13PDX                         (999)
+                KID13AGO                         (999)
+                KID14MOB                         (99)
+                KID14AGD                         (888
+                                                  999)
+                KID14NEU                         (9)
+                KID14PDX                         (999)
+                KID14AGO                         (999)
+                KID15MOB                         (99)
+                KID15AGD                         (888
+                                                  999)
+                KID15NEU                         (9)
+                KID15PDX                         (999)
+                KID15AGO                         (999)
 VALUE LABELS    A3CHG                            (0)'Box is NOT checked'
                                                  (1)'Box is checked'
                 PARCHG                           (0)'Box is NOT checked'
@@ -1074,6 +1757,621 @@ VALUE LABELS    A3CHG                            (0)'Box is NOT checked'
                 REL15LIV                         (0)'No'
                                                  (1)'Yes'
                                                  (9)'Unknown'
+                AFFFAMM                          (0)'No'
+                                                 (1)'Yes'
+                                                 (9)'Unknown'
+                FADMUT                           (0)'No'
+                                                 (1)'Yes, APP'
+                                                 (2)'Yes, PS-1 (PSEN-1)'
+                                                 (3)'Yes, PS-2 (PSEN-2)'
+                                                 (8)'Yes, Other (specify)'
+                                                 (9)'Unknown whether mutation exists'
+                FADMUSO                          (1)'Family report (no test documentation available)'
+                                                 (2)'Commercial test documentation'
+                                                 (3)'Research lab test documentation'
+                                                 (8)'Other (specify)'
+                                                 (9)'Unknown'
+                FFTDMUT                          (0)'No'
+                                                 (1)'Yes, APP'
+                                                 (2)'Yes, PS-1 (PSEN-1)'
+                                                 (3)'Yes, PS-2 (PSEN-2)'
+                                                 (8)'Yes, Other (specify)'
+                                                 (9)'Unknown whether mutation exists'
+                FFTDMUSO                         (1)'Family report (no test documentation available)'
+                                                 (2)'Commercial test documentation'
+                                                 (3)'Research lab test documentation'
+                                                 (8)'Other (specify)'
+                                                 (9)'Unknown'
+                FOTHMUT                          (0)'No'
+                                                 (1)'Yes, APP'
+                                                 (2)'Yes, PS-1 (PSEN-1)'
+                                                 (3)'Yes, PS-2 (PSEN-2)'
+                                                 (8)'Yes, Other (specify)'
+                                                 (9)'Unknown whether mutation exists'
+                FOTHMUSO                         (1)'Family report (no test documentation available)'
+                                                 (2)'Commercial test documentation'
+                                                 (3)'Research lab test documentation'
+                                                 (8)'Other (specify)'
+                                                 (9)'Unknown'
+                MOMMOB                           (99)'Unknown'
+                MOMDAGE                          (888)'N/A'
+                                                 (999)'Unknown'
+                MOMNEUR                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                MOMPRDX                          (999)'Specific diagnosis unknown'
+                MOMAGEO                          (999)'Unknown'
+                DADMOB                           (99)'Unknown'
+                DADDAGE                          (888)'N/A'
+                                                 (999)'Unknown'
+                DADNEUR                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                DADPRDX                          (999)'Specific diagnosis unknown'
+                DADAGEO                          (999)'Unknown'
+                SIB1MOB                          (99)'Unknown'
+                SIB1AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                SIB1NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB1PDX                          (999)'Specific diagnosis unknown'
+                SIB1MOE                          (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB1AGO                          (999)'Unknown'
+                SIB2MOB                          (99)'Unknown'
+                SIB2AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                SIB2NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB2PDX                          (999)'Specific diagnosis unknown'
+                SIB2MOE                          (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB2AGO                          (999)'Unknown'
+                SIB3MOB                          (99)'Unknown'
+                SIB3AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                SIB3NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB3PDX                          (999)'Specific diagnosis unknown'
+                SIB3MOE                          (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB3AGO                          (999)'Unknown'
+                SIB4MOB                          (99)'Unknown'
+                SIB4AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                SIB4NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB4PDX                          (999)'Specific diagnosis unknown'
+                SIB4MOE                          (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB4AGO                          (999)'Unknown'
+                SIB5MOB                          (99)'Unknown'
+                SIB5AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                SIB5NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB5PDX                          (999)'Specific diagnosis unknown'
+                SIB5MOE                          (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB5AGO                          (999)'Unknown'
+                SIB6MOB                          (99)'Unknown'
+                SIB6AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                SIB6NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB6PDX                          (999)'Specific diagnosis unknown'
+                SIB6MOE                          (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB6AGO                          (999)'Unknown'
+                SIB7MOB                          (99)'Unknown'
+                SIB7AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                SIB7NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB7PDX                          (999)'Specific diagnosis unknown'
+                SIB7MOE                          (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB7AGO                          (999)'Unknown'
+                SIB8MOB                          (99)'Unknown'
+                SIB8AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                SIB8NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB8PDX                          (999)'Specific diagnosis unknown'
+                SIB8MOE                          (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB8AGO                          (999)'Unknown'
+                SIB9MOB                          (99)'Unknown'
+                SIB9AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                SIB9NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB9PDX                          (999)'Specific diagnosis unknown'
+                SIB9MOE                          (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB9AGO                          (999)'Unknown'
+                SIB10MOB                         (99)'Unknown'
+                SIB10AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                SIB10NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB10PDX                         (999)'Specific diagnosis unknown'
+                SIB10MOE                         (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB10AGO                         (999)'Unknown'
+                SIB11MOB                         (99)'Unknown'
+                SIB11AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                SIB11NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB11PDX                         (999)'Specific diagnosis unknown'
+                SIB11MOE                         (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB11AGO                         (999)'Unknown'
+                SIB12MOB                         (99)'Unknown'
+                SIB12AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                SIB12NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB12PDX                         (999)'Specific diagnosis unknown'
+                SIB12MOE                         (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB12AGO                         (999)'Unknown'
+                SIB13MOB                         (99)'Unknown'
+                SIB13AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                SIB13NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB13PDX                         (999)'Specific diagnosis unknown'
+                SIB13MOE                         (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB13AGO                         (999)'Unknown'
+                SIB14MOB                         (99)'Unknown'
+                SIB14AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                SIB14NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB14PDX                         (999)'Specific diagnosis unknown'
+                SIB14MOE                         (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB14AGO                         (999)'Unknown'
+                SIB15MOB                         (99)'Unknown'
+                SIB15AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                SIB15NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB15PDX                         (999)'Specific diagnosis unknown'
+                SIB15MOE                         (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB15AGO                         (999)'Unknown'
+                SIB16MOB                         (99)'Unknown'
+                SIB16AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                SIB16NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB16PDX                         (999)'Specific diagnosis unknown'
+                SIB16MOE                         (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB17MOB                         (99)'Unknown'
+                SIB17AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                SIB17NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB17PDX                         (999)'Specific diagnosis unknown'
+                SIB17MOE                         (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB18MOB                         (99)'Unknown'
+                SIB18AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                SIB18NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB18PDX                         (999)'Specific diagnosis unknown'
+                SIB18MOE                         (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB19MOB                         (99)'Unknown'
+                SIB19AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                SIB19NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB19PDX                         (999)'Specific diagnosis unknown'
+                SIB19MOE                         (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                SIB20MOB                         (99)'Unknown'
+                SIB20AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                SIB20NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                SIB20PDX                         (999)'Specific diagnosis unknown'
+                SIB20MOE                         (1)'Autopsy'
+                                                 (2)'Examination'
+                                                 (3)'Medical record review from formal dementia evaluation'
+                                                 (4)'Review of gen. med.rec. AND co-part. and/or subject telephone interview'
+                                                 (5)'Review of gen. medical records only'
+                                                 (6)'Subject and/or co-participant telephone interview'
+                                                 (7)'Family report'
+                KID1MOB                          (99)'Unknown'
+                KID1AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                KID1NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID1PDX                          (999)'Specific diagnosis unknown'
+                KID1AGO                          (999)'Unknown'
+                KID2MOB                          (99)'Unknown'
+                KID2AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                KID2NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID2PDX                          (999)'Specific diagnosis unknown'
+                KID2AGO                          (999)'Unknown'
+                KID3MOB                          (99)'Unknown'
+                KID3AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                KID3NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID3PDX                          (999)'Specific diagnosis unknown'
+                KID3AGO                          (999)'Unknown'
+                KID4MOB                          (99)'Unknown'
+                KID4AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                KID4NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID4PDX                          (999)'Specific diagnosis unknown'
+                KID4AGO                          (999)'Unknown'
+                KID5MOB                          (99)'Unknown'
+                KID5AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                KID5NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID5PDX                          (999)'Specific diagnosis unknown'
+                KID5AGO                          (999)'Unknown'
+                KID6MOB                          (99)'Unknown'
+                KID6AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                KID6NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID6PDX                          (999)'Specific diagnosis unknown'
+                KID6AGO                          (999)'Unknown'
+                KID7MOB                          (99)'Unknown'
+                KID7AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                KID7NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID7PDX                          (999)'Specific diagnosis unknown'
+                KID7AGO                          (999)'Unknown'
+                KID8MOB                          (99)'Unknown'
+                KID8AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                KID8NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID8PDX                          (999)'Specific diagnosis unknown'
+                KID8AGO                          (999)'Unknown'
+                KID9MOB                          (99)'Unknown'
+                KID9AGD                          (888)'N/A'
+                                                 (999)'Unknown'
+                KID9NEU                          (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID9PDX                          (999)'Specific diagnosis unknown'
+                KID9AGO                          (999)'Unknown'
+                KID10MOB                         (99)'Unknown'
+                KID10AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                KID10NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID10PDX                         (999)'Specific diagnosis unknown'
+                KID10AGO                         (999)'Unknown'
+                KID11MOB                         (99)'Unknown'
+                KID11AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                KID11NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID11PDX                         (999)'Specific diagnosis unknown'
+                KID11AGO                         (999)'Unknown'
+                KID12MOB                         (99)'Unknown'
+                KID12AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                KID12NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID12PDX                         (999)'Specific diagnosis unknown'
+                KID12AGO                         (999)'Unknown'
+                KID13MOB                         (99)'Unknown'
+                KID13AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                KID13NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID13PDX                         (999)'Specific diagnosis unknown'
+                KID13AGO                         (999)'Unknown'
+                KID14MOB                         (99)'Unknown'
+                KID14AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                KID14NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID14PDX                         (999)'Specific diagnosis unknown'
+                KID14AGO                         (999)'Unknown'
+                KID15MOB                         (99)'Unknown'
+                KID15AGD                         (888)'N/A'
+                                                 (999)'Unknown'
+                KID15NEU                         (1)'Cognitive impairment/behavior change'
+                                                 (2)'Parkinsonism'
+                                                 (3)'ALS'
+                                                 (4)'Other neurologic condition such as multiple sclerosis or stroke'
+                                                 (5)'Psychiatric condition such as schizophrenia, bipolar disorder, or alcoholism'
+                                                 (8)'N/A, no neurological problem or psychiatric condition'
+                                                 (9)'Unknown'
+                KID15PDX                         (999)'Specific diagnosis unknown'
+                KID15AGO                         (999)'Unknown'
 VAR LABEL       INTERVAL                         'Visit Number'
                 INITIALS                         'Initials'
                 A3CHG                            'Changes since last visit'
@@ -1331,4 +2629,239 @@ VAR LABEL       INTERVAL                         'Visit Number'
                 REL15LIV                         'Relative 15 still living?'
                 REL15YOD                         'Relative 15 year of death'
                 REL15ONS                         'Relative 15 age of onset'
+                AFFFAMM                          '1. Affected family members'
+                FADMUT                           '2a. Evidence for an AD mutation'
+                FADMUTX                          '2a1. Evidence for an AD mutation - other specify'
+                FADMUSO                          '2b. Source of evidence for AD mutation'
+                FADMUSOX                         '2b1. Source of evidence of AD mutation - other specify'
+                FFTDMUT                          '3a. Evidence for an FTLD mutation'
+                FFTDMUTX                         '3a1. Evidence for an FTLD mutation - other specify'
+                FFTDMUSO                         '3b. Source of evidence for FTLD mutation'
+                FFTDMUSX                         '3b1. Source of evidence for FTLD mutation - other specify'
+                FOTHMUT                          '4a. Evidence for a mutation other than AD/FTLD'
+                FOTHMUTX                         '4a1. Other mutation specify'
+                FOTHMUSO                         '4b. Source of evidence for other mutation'
+                FOTHMUSX                         '4b1. Source of evidence for other mutation - other specify'
+                MOMMOB                           'Mother - birth month'
+                MOMDAGE                          'Mother - death age'
+                MOMNEUR                          'Mother - neurological problem'
+                MOMPRDX                          'Mother - primary Dx'
+                MOMMOE                           'Mother - method of evaluation'
+                MOMAGEO                          'Mother - age of onset'
+                DADMOB                           'Father - birth month'
+                DADDAGE                          'Father - death age'
+                DADNEUR                          'Father - neurological problem'
+                DADPRDX                          'Father - primary Dx'
+                DADMOE                           'Father - method of evaluation'
+                DADAGEO                          'Father - age of onset'
+                SIB1MOB                          'Sibling 1 - Birth month'
+                SIB1AGD                          'Sibling 1 - Age at death'
+                SIB1NEU                          'Sibling 1 - neurological problem'
+                SIB1PDX                          'Sibling 1 - primary Dx'
+                SIB1MOE                          'Sibling 1 - method of evaluation'
+                SIB1AGO                          'Sibling 1 - age of onset'
+                SIB2MOB                          'Sibling 2 - Birth month'
+                SIB2AGD                          'Sibling 2 - Age at death'
+                SIB2NEU                          'Sibling 2 - neurological problem'
+                SIB2PDX                          'Sibling 2 - primary Dx'
+                SIB2MOE                          'Sibling 2 - method of evaluation'
+                SIB2AGO                          'Sibling 2 - age of onset'
+                SIB3MOB                          'Sibling 3 - Birth month'
+                SIB3AGD                          'Sibling 3 - Age at death'
+                SIB3NEU                          'Sibling 3 - neurological problem'
+                SIB3PDX                          'Sibling 3 - primary Dx'
+                SIB3MOE                          'Sibling 3 - method of evaluation'
+                SIB3AGO                          'Sibling 3 - age of onset'
+                SIB4MOB                          'Sibling 4 - Birth month'
+                SIB4AGD                          'Sibling 4 - Age at death'
+                SIB4NEU                          'Sibling 4 - neurological problem'
+                SIB4PDX                          'Sibling 4 - primary Dx'
+                SIB4MOE                          'Sibling 4 - method of evaluation'
+                SIB4AGO                          'Sibling 4 - age of onset'
+                SIB5MOB                          'Sibling 5 - Birth month'
+                SIB5AGD                          'Sibling 5 - Age at death'
+                SIB5NEU                          'Sibling 5 - neurological problem'
+                SIB5PDX                          'Sibling 5 - primary Dx'
+                SIB5MOE                          'Sibling 5 - method of evaluation'
+                SIB5AGO                          'Sibling 5 - age of onset'
+                SIB6MOB                          'Sibling 6 - Birth month'
+                SIB6AGD                          'Sibling 6 - Age at death'
+                SIB6NEU                          'Sibling 6 - neurological problem'
+                SIB6PDX                          'Sibling 6 - primary Dx'
+                SIB6MOE                          'Sibling 6 - method of evaluation'
+                SIB6AGO                          'Sibling 6 - age of onset'
+                SIB7MOB                          'Sibling 7 - Birth month'
+                SIB7AGD                          'Sibling 7 - Age at death'
+                SIB7NEU                          'Sibling 7 - neurological problem'
+                SIB7PDX                          'Sibling 7 - primary Dx'
+                SIB7MOE                          'Sibling 7 - method of evaluation'
+                SIB7AGO                          'Sibling 7 - age of onset'
+                SIB8MOB                          'Sibling 8 - Birth month'
+                SIB8AGD                          'Sibling 8 - Age at death'
+                SIB8NEU                          'Sibling 8 - neurological problem'
+                SIB8PDX                          'Sibling 8 - primary Dx'
+                SIB8MOE                          'Sibling 8 - method of evaluation'
+                SIB8AGO                          'Sibling 8 - age of onset'
+                SIB9MOB                          'Sibling 9 - Birth month'
+                SIB9AGD                          'Sibling 9 - Age at death'
+                SIB9NEU                          'Sibling 9 - neurological problem'
+                SIB9PDX                          'Sibling 9 - primary Dx'
+                SIB9MOE                          'Sibling 9 - method of evaluation'
+                SIB9AGO                          'Sibling 9 - age of onset'
+                SIB10MOB                         'Sibling 10 - Birth month'
+                SIB10AGD                         'Sibling 10 - Age at death'
+                SIB10NEU                         'Sibling 10 - neurological problem'
+                SIB10PDX                         'Sibling 10 - primary Dx'
+                SIB10MOE                         'Sibling 10 - method of evaluation'
+                SIB10AGO                         'Sibling 10 - age of onset'
+                SIB11MOB                         'Sibling 11 - Birth month'
+                SIB11AGD                         'Sibling 11 - Age at death'
+                SIB11NEU                         'Sibling 11 - neurological problem'
+                SIB11PDX                         'Sibling 11 - primary Dx'
+                SIB11MOE                         'Sibling 11 - method of evaluation'
+                SIB11AGO                         'Sibling 11 - age of onset'
+                SIB12MOB                         'Sibling 12 - Birth month'
+                SIB12AGD                         'Sibling 12 - Age at death'
+                SIB12NEU                         'Sibling 12 - neurological problem'
+                SIB12PDX                         'Sibling 12 - primary Dx'
+                SIB12MOE                         'Sibling 12 - method of evaluation'
+                SIB12AGO                         'Sibling 12 - age of onset'
+                SIB13MOB                         'Sibling 13 - Birth month'
+                SIB13AGD                         'Sibling 13 - Age at death'
+                SIB13NEU                         'Sibling 13 - neurological problem'
+                SIB13PDX                         'Sibling 13 - primary Dx'
+                SIB13MOE                         'Sibling 13 - method of evaluation'
+                SIB13AGO                         'Sibling 13 - age of onset'
+                SIB14MOB                         'Sibling 14 - Birth month'
+                SIB14AGD                         'Sibling 14 - Age at death'
+                SIB14NEU                         'Sibling 14 - neurological problem'
+                SIB14PDX                         'Sibling 14 - primary Dx'
+                SIB14MOE                         'Sibling 14 - method of evaluation'
+                SIB14AGO                         'Sibling 14 - age of onset'
+                SIB15MOB                         'Sibling 15 - Birth month'
+                SIB15AGD                         'Sibling 15 - Age at death'
+                SIB15NEU                         'Sibling 15 - neurological problem'
+                SIB15PDX                         'Sibling 15 - primary Dx'
+                SIB15MOE                         'Sibling 15 - method of evaluation'
+                SIB15AGO                         'Sibling 15 - age of onset'
+                SIB16MOB                         'Sibling 16 - Birth month'
+                SIB16AGD                         'Sibling 16 - Age at death'
+                SIB16NEU                         'Sibling 16 - neurological problem'
+                SIB16PDX                         'Sibling 16 - primary Dx'
+                SIB16MOE                         'Sibling 16 - method of evaluation'
+                SIB16AGO                         'Sibling 16 - age of onset'
+                SIB17MOB                         'Sibling 17 - Birth month'
+                SIB17AGD                         'Sibling 17 - Age at death'
+                SIB17NEU                         'Sibling 17 - neurological problem'
+                SIB17PDX                         'Sibling 17 - primary Dx'
+                SIB17MOE                         'Sibling 17 - method of evaluation'
+                SIB17AGO                         'Sibling 17 - age of onset'
+                SIB18MOB                         'Sibling 18 - Birth month'
+                SIB18AGD                         'Sibling 18 - Age at death'
+                SIB18NEU                         'Sibling 18 - neurological problem'
+                SIB18PDX                         'Sibling 18 - primary Dx'
+                SIB18MOE                         'Sibling 18 - method of evaluation'
+                SIB18AGO                         'Sibling 18 - age of onset'
+                SIB19MOB                         'Sibling 19 - Birth month'
+                SIB19AGD                         'Sibling 19 - Age at death'
+                SIB19NEU                         'Sibling 19 - neurological problem'
+                SIB19PDX                         'Sibling 19 - primary Dx'
+                SIB19MOE                         'Sibling 19 - method of evaluation'
+                SIB19AGO                         'Sibling 19 - age of onset'
+                SIB20MOB                         'Sibling 20 - Birth month'
+                SIB20AGD                         'Sibling 20 - Age at death'
+                SIB20NEU                         'Sibling 20 - neurological problem'
+                SIB20PDX                         'Sibling 20 - primary Dx'
+                SIB20MOE                         'Sibling 20 - method of evaluation'
+                SIB20AGO                         'Sibling 20 - age of onset'
+                KID1MOB                          'Child 1 - Birth month'
+                KID1AGD                          'Child 1 - Age at death'
+                KID1NEU                          'Child 1 - neurological problem'
+                KID1PDX                          'Child 1 - primary Dx'
+                KID1MOE                          'Child 1 - method of evaluation'
+                KID1AGO                          'Child 1 - age of onset'
+                KID2MOB                          'Child 2 - Birth month'
+                KID2AGD                          'Child 2 - Age at death'
+                KID2NEU                          'Child 2 - neurological problem'
+                KID2PDX                          'Child 2 - primary Dx'
+                KID2MOE                          'Child 2 - method of evaluation'
+                KID2AGO                          'Child 2 - age of onset'
+                KID3MOB                          'Child 3 - Birth month'
+                KID3AGD                          'Child 3 - Age at death'
+                KID3NEU                          'Child 3 - neurological problem'
+                KID3PDX                          'Child 3 - primary Dx'
+                KID3MOE                          'Child 3 - method of evaluation'
+                KID3AGO                          'Child 3 - age of onset'
+                KID4MOB                          'Child 4 - Birth month'
+                KID4AGD                          'Child 4 - Age at death'
+                KID4NEU                          'Child 4 - neurological problem'
+                KID4PDX                          'Child 4 - primary Dx'
+                KID4MOE                          'Child 4 - method of evaluation'
+                KID4AGO                          'Child 4 - age of onset'
+                KID5MOB                          'Child 5 - Birth month'
+                KID5AGD                          'Child 5 - Age at death'
+                KID5NEU                          'Child 5 - neurological problem'
+                KID5PDX                          'Child 5 - primary Dx'
+                KID5MOE                          'Child 5 - method of evaluation'
+                KID5AGO                          'Child 5 - age of onset'
+                KID6MOB                          'Child 6 - Birth month'
+                KID6AGD                          'Child 6 - Age at death'
+                KID6NEU                          'Child 6 - neurological problem'
+                KID6PDX                          'Child 6 - primary Dx'
+                KID6MOE                          'Child 6 - method of evaluation'
+                KID6AGO                          'Child 6 - age of onset'
+                KID7MOB                          'Child 7 - Birth month'
+                KID7AGD                          'Child 7 - Age at death'
+                KID7NEU                          'Child 7 - neurological problem'
+                KID7PDX                          'Child 7 - primary Dx'
+                KID7MOE                          'Child 7 - method of evaluation'
+                KID7AGO                          'Child 7 - age of onset'
+                KID8MOB                          'Child 8 - Birth month'
+                KID8AGD                          'Child 8 - Age at death'
+                KID8NEU                          'Child 8 - neurological problem'
+                KID8PDX                          'Child 8 - primary Dx'
+                KID8MOE                          'Child 8 - method of evaluation'
+                KID8AGO                          'Child 8 - age of onset'
+                KID9MOB                          'Child 9 - Birth month'
+                KID9AGD                          'Child 9 - Age at death'
+                KID9NEU                          'Child 9 - neurological problem'
+                KID9PDX                          'Child 9 - primary Dx'
+                KID9MOE                          'Child 9 - method of evaluation'
+                KID9AGO                          'Child 9 - age of onset'
+                KID10MOB                         'Child 10 - Birth month'
+                KID10AGD                         'Child 10 - Age at death'
+                KID10NEU                         'Child 10 - neurological problem'
+                KID10PDX                         'Child 10 - primary Dx'
+                KID10MOE                         'Child 10 - method of evaluation'
+                KID10AGO                         'Child 10 - age of onset'
+                KID11MOB                         'Child 11 - Birth month'
+                KID11AGD                         'Child 11 - Age at death'
+                KID11NEU                         'Child 11 - neurological problem'
+                KID11PDX                         'Child 11 - primary Dx'
+                KID11MOE                         'Child 11 - method of evaluation'
+                KID11AGO                         'Child 11 - age of onset'
+                KID12MOB                         'Child 12 - Birth month'
+                KID12AGD                         'Child 12 - Age at death'
+                KID12NEU                         'Child 12 - neurological problem'
+                KID12PDX                         'Child 12 - primary Dx'
+                KID12MOE                         'Child 12 - method of evaluation'
+                KID12AGO                         'Child 12 - age of onset'
+                KID13MOB                         'Child 13 - Birth month'
+                KID13AGD                         'Child 13 - Age at death'
+                KID13NEU                         'Child 13 - neurological problem'
+                KID13PDX                         'Child 13 - primary Dx'
+                KID13MOE                         'Child 13 - method of evaluation'
+                KID13AGO                         'Child 13 - age of onset'
+                KID14MOB                         'Child 14 - Birth month'
+                KID14AGD                         'Child 14 - Age at death'
+                KID14NEU                         'Child 14 - neurological problem'
+                KID14PDX                         'Child 14 - primary Dx'
+                KID14MOE                         'Child 14 - method of evaluation'
+                KID14AGO                         'Child 14 - age of onset'
+                KID15MOB                         'Child 15 - Birth month'
+                KID15AGD                         'Child 15 - Age at death'
+                KID15NEU                         'Child 15 - neurological problem'
+                KID15PDX                         'Child 15 - primary Dx'
+                KID15MOE                         'Child 15 - method of evaluation'
+                KID15AGO                         'Child 15 - age of onset'
 END SCHEMA

@@ -1,3 +1,21 @@
-PROCEDURE      SCREENS.INC_SUBJINFO:T  (157932,48811)  |Last amended Mar 10, 2015,13:33:31
-| write 'insub info'
+PROCEDURE      SCREENS.INC_SUBJINFO:T  (157939,47744)  |Last amended Mar 17, 2015,13:15:44
+C Directions
+
+c Step 1. Program something that calculates  SUBJINFO$
+PACKET$ = KEY$5
+SUBJINFO$ = PACKET$
+IFTHEN ( PACKET$ EQ 'F' )
+. SUBJINFO$ = 'Follow Up Packet'
+elseif ( PACKET$ EQ 'T' )
+. SUBJINFO$ = 'Telephone Packet'
+elseif( PACKET$ EQ 'I' )
+. SUBJINFO$ = 'Initial Visit Packet'
+else
+. SUBJINFO$ = 'Packet'
+endif
+
+c Step 2. Add the below code to the PQL screen and
+c         place it where you want to display the info.
+C
+C I have placed the code in the necessary NACCUDS screens.
 END PROCEDURE

@@ -68,6 +68,41 @@ DATA LIST
                 DCCDATE                          *             (DATE'EMM/DD/YYYY')
                 DCCTIME                          *             (TIME'EHH:MM')
                 DCCEDITS                         *             (I2)
+                ALCOCCAS                         *             (I1)
+                ALCFREQ                          *             (I1)
+                HATTMULT                         *             (I1)
+                HATTYEAR                         *             (I2)
+                CVPACDEF                         *             (I1)
+                CVANGINA                         *             (I1)
+                CVHVALVE                         *             (I1)
+                STROKMUL                         *             (I1)
+                STROKYR                          *             (I2)
+                TIAMULT                          *             (I1)
+                TIAYEAR                          *             (I2)
+                TBI                              *             (I1)
+                TBIBRIEF                         *             (I1)
+                TBIEXTEN                         *             (I1)
+                TBIWOLOS                         *             (I1)
+                TBIYEAR                          *             (I2)
+                DIABTYPE                         *             (I1)
+                ARTHRIT                          *             (I1)
+                ARTHTYPE                         *             (I1)
+                ARTHTYPX                         *             (A60)
+                ARTHUPEX                         *             (I1)
+                ARTHLOEX                         *             (I1)
+                ARTHSPIN                         *             (I1)
+                ARTHUNK                          *             (I1)
+                APNEA                            *             (I1)
+                RBD                              *             (I1)
+                INSOMN                           *             (I1)
+                OTHSLEEP                         *             (I1)
+                OTHSLEEX                         *             (A60)
+                PTSD                             *             (I1)
+                BIPOLAR                          *             (I1)
+                SCHIZ                            *             (I1)
+                ANXIETY                          *             (I1)
+                OCD                              *             (I1)
+                NPSYDEV                          *             (I1)
 STANDARD VARS   VISITDATE
                 DWHO
                 DSTAMP
@@ -124,6 +159,39 @@ VAR RANGES      INTERVAL                         (0 100)
                 QUITSMOK                         (0 120)
                 ABUSOTHR                         (0 2)
                 PSYCDIS                          (0 2)
+                ALCOCCAS                         (0 1)
+                ALCFREQ                          (0 4)
+                HATTMULT                         (0 1)
+                HATTYEAR                         (1900 2060)
+                CVPACDEF                         (0 2)
+                CVANGINA                         (0 2)
+                CVHVALVE                         (0 2)
+                STROKMUL                         (0 1)
+                STROKYR                          (1900 2060)
+                TIAMULT                          (0 1)
+                TIAYEAR                          (1900 2060)
+                TBI                              (0 2)
+                TBIBRIEF                         (0 2)
+                TBIEXTEN                         (0 2)
+                TBIWOLOS                         (0 2)
+                TBIYEAR                          (1900 2060)
+                DIABTYPE                         (1 3)
+                ARTHRIT                          (0 2)
+                ARTHTYPE                         (1 3)
+                ARTHUPEX                         (0 1)
+                ARTHLOEX                         (0 1)
+                ARTHSPIN                         (0 1)
+                ARTHUNK                          (0 1)
+                APNEA                            (0 2)
+                RBD                              (0 2)
+                INSOMN                           (0 2)
+                OTHSLEEP                         (0 2)
+                PTSD                             (0 2)
+                BIPOLAR                          (0 2)
+                SCHIZ                            (0 2)
+                ANXIETY                          (0 2)
+                OCD                              (0 2)
+                NPSYDEV                          (0 2)
 MISSING VALUES  CVHATT                           (9)
                 CVAFIB                           (9)
                 CVANGIO                          (9)
@@ -175,6 +243,35 @@ MISSING VALUES  CVHATT                           (9)
                                                   999)
                 ABUSOTHR                         (9)
                 PSYCDIS                          (9)
+                ALCOCCAS                         (9)
+                ALCFREQ                          (9)
+                HATTMULT                         (9)
+                HATTYEAR                         (9999)
+                CVPACDEF                         (9)
+                CVANGINA                         (9)
+                CVHVALVE                         (9)
+                STROKMUL                         (9)
+                STROKYR                          (9999)
+                TIAMULT                          (9)
+                TIAYEAR                          (9999)
+                TBI                              (9)
+                TBIBRIEF                         (9)
+                TBIEXTEN                         (9)
+                TBIWOLOS                         (9)
+                TBIYEAR                          (9999)
+                DIABTYPE                         (9)
+                ARTHRIT                          (9)
+                ARTHTYPE                         (9)
+                APNEA                            (9)
+                RBD                              (9)
+                INSOMN                           (9)
+                OTHSLEEP                         (9)
+                PTSD                             (9)
+                BIPOLAR                          (9)
+                SCHIZ                            (9)
+                ANXIETY                          (9)
+                OCD                              (9)
+                NPSYDEV                          (9)
 VALUE LABELS    CVHATT                           (0)'Absent'
                                                  (1)'Recent/Active'
                                                  (2)'Remote/Inactive'
@@ -318,6 +415,116 @@ VALUE LABELS    CVHATT                           (0)'Absent'
                                                  (1)'Recent/Active'
                                                  (2)'Remote/Inactive'
                                                  (9)'Unknown'
+                ALCOCCAS                         (0)'No'
+                                                 (1)'Yes'
+                                                 (9)'Unknown'
+                ALCFREQ                          (0)'Less than once a month'
+                                                 (1)'About once a month'
+                                                 (2)'About once a week'
+                                                 (3)'A few times a week'
+                                                 (4)'Daily or almost daily'
+                                                 (9)'Unknown'
+                HATTMULT                         (0)'No'
+                                                 (1)'Yes'
+                                                 (9)'Unknown'
+                HATTYEAR                         (9999)'Unknown'
+                CVPACDEF                         (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
+                CVANGINA                         (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
+                CVHVALVE                         (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
+                STROKMUL                         (0)'No'
+                                                 (1)'Yes'
+                                                 (9)'Unknown'
+                STROKYR                          (9999)'Unknown'
+                TIAMULT                          (0)'No'
+                                                 (1)'Yes'
+                                                 (9)'Unknown'
+                TIAYEAR                          (9999)'Unknown'
+                TBI                              (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
+                TBIBRIEF                         (0)'No'
+                                                 (1)'Single'
+                                                 (2)'Repeated/multiple'
+                                                 (9)'Unknown'
+                TBIEXTEN                         (0)'No'
+                                                 (1)'Single'
+                                                 (2)'Repeated/multiple'
+                                                 (9)'Unknown'
+                TBIWOLOS                         (0)'No'
+                                                 (1)'Single'
+                                                 (2)'Repeated/multiple'
+                                                 (9)'Unknown'
+                TBIYEAR                          (9999)'Unknown'
+                DIABTYPE                         (1)'Type 1'
+                                                 (2)'Type 2'
+                                                 (3)'Other type'
+                                                 (9)'Unknown'
+                ARTHRIT                          (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
+                ARTHTYPE                         (1)'Rheumatoid'
+                                                 (2)'Osteoarthritis'
+                                                 (3)'Other'
+                                                 (9)'Unknown'
+                ARTHUPEX                         (0)'Blank'
+                                                 (1)'Upper Extremity'
+                ARTHLOEX                         (0)'Blank'
+                                                 (1)'Lower Extremity'
+                ARTHSPIN                         (0)'Blank'
+                                                 (1)'Spine'
+                ARTHUNK                          (0)'Blank'
+                                                 (1)'Unknown'
+                APNEA                            (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
+                RBD                              (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
+                INSOMN                           (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
+                OTHSLEEP                         (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
+                PTSD                             (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
+                BIPOLAR                          (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
+                SCHIZ                            (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
+                ANXIETY                          (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
+                OCD                              (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
+                NPSYDEV                          (0)'Absent'
+                                                 (1)'Recent/Active'
+                                                 (2)'Remote/Inactive'
+                                                 (9)'Unknown'
 VAR LABEL       INTERVAL                         'Visit Number'
                 INITIALS                         'Initials'
                 CVHATT                           'a. Heart attack cardiac arrest'
@@ -373,4 +580,39 @@ VAR LABEL       INTERVAL                         'Visit Number'
                 ABUSX                            'Specify'
                 PSYCDIS                          '7d. Psychiatric disorder'
                 PSYCDISX                         'Specify'
+                ALCOCCAS                         '1f. Any alcohol in last 3 months.'
+                ALCFREQ                          '1g. Frequency of alcohol last 3 months.'
+                HATTMULT                         '2a1. More than 1 heart attack.'
+                HATTYEAR                         '2a2. Year most recent heart attack.'
+                CVPACDEF                         '2e. Pacemaker and/or defibrillator'
+                CVANGINA                         '2g. Angina.'
+                CVHVALVE                         '2h. Heart valve replacement/repair.'
+                STROKMUL                         '3a1. More than 1 stroke.'
+                STROKYR                          '3a2. Year most recent stroke.'
+                TIAMULT                          '3b1. More than 1 TIA.'
+                TIAYEAR                          '3b2. Year most recent TIA.'
+                TBI                              '4d. TBI.'
+                TBIBRIEF                         '4d1. TBI with brief loss of conciosness.'
+                TBIEXTEN                         '4d2. TBI with extended loss of conciousness.'
+                TBIWOLOS                         '4d3. TBI without loss of conciousness.'
+                TBIYEAR                          '4d4. Year of most recent TBI.'
+                DIABTYPE                         '5a1. Diabetes type.'
+                ARTHRIT                          '5f. Arthritis.'
+                ARTHTYPE                         '5f1. Type of arthritis.'
+                ARTHTYPX                         '5f1a. Other arthritis type specify.'
+                ARTHUPEX                         '5f2a. Arthritis region - upper extremity.'
+                ARTHLOEX                         '5f2b. Arthritis region - lower extremity.'
+                ARTHSPIN                         '5f2c. Arthritis region -spine.'
+                ARTHUNK                          '5f2d. Arthritis region - unknown.'
+                APNEA                            '5i. Sleep apnea.'
+                RBD                              '5j. REM sleep behavior disorder.'
+                INSOMN                           '5k. Hyposomnia.'
+                OTHSLEEP                         '5l. Other sleep disorder.'
+                OTHSLEEX                         '5l1. Other sleep disorder specify.'
+                PTSD                             '7a. PTSD.'
+                BIPOLAR                          '7b. Bipolar disorder.'
+                SCHIZ                            '7c. Schizophrenia.'
+                ANXIETY                          '7e. Anxiety.'
+                OCD                              '7f. OCD.'
+                NPSYDEV                          '7g. Developmental neuropsychiatric disorder.'
 END SCHEMA

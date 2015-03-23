@@ -505,6 +505,10 @@ DATA LIST
                 KID15PDX                         *             (I1)
                 KID15MOE                         *             (I1)
                 KID15AGO                         *             (I1)
+                NWINFMUT                         *             (I1)
+                NWINFPAR                         *             (I1)
+                NWINFSIB                         *             (I1)
+                NWINFKID                         *             (I1)
 STANDARD VARS   VISITDATE
                 DWHO
                 DSTAMP
@@ -992,6 +996,10 @@ VAR RANGES      INTERVAL                         (0 50)
                 KID15PDX                         (40 490)
                 KID15MOE                         (1 7)
                 KID15AGO                         (15 110)
+                NWINFMUT                         (0 1)
+                NWINFPAR                         (0 1)
+                NWINFSIB                         (0 1)
+                NWINFKID                         (0 1)
 MISSING VALUES  MOMYOB                           (9999)
                 MOMLIV                           (9)
                 MOMYOD                           (9999)
@@ -1465,6 +1473,10 @@ MISSING VALUES  MOMYOB                           (9999)
                 KID15NEU                         (9)
                 KID15PDX                         (999)
                 KID15AGO                         (999)
+                NWINFMUT                         (9)
+                NWINFPAR                         (9)
+                NWINFSIB                         (9)
+                NWINFKID                         (9)
 VALUE LABELS    A3CHG                            (0)'Box is NOT checked'
                                                  (1)'Box is checked'
                 PARCHG                           (0)'Box is NOT checked'
@@ -2372,6 +2384,18 @@ VALUE LABELS    A3CHG                            (0)'Box is NOT checked'
                                                  (9)'Unknown'
                 KID15PDX                         (999)'Specific diagnosis unknown'
                 KID15AGO                         (999)'Unknown'
+                NWINFMUT                         (0)'No'
+                                                 (1)'Yes'
+                                                 (9)'Unknown'
+                NWINFPAR                         (0)'No'
+                                                 (1)'Yes'
+                                                 (9)'Unknown'
+                NWINFSIB                         (0)'No'
+                                                 (1)'Yes'
+                                                 (9)'Unknown'
+                NWINFKID                         (0)'No'
+                                                 (1)'Yes'
+                                                 (9)'Unknown'
 VAR LABEL       INTERVAL                         'Visit Number'
                 INITIALS                         'Initials'
                 A3CHG                            'Changes since last visit'
@@ -2864,4 +2888,8 @@ VAR LABEL       INTERVAL                         'Visit Number'
                 KID15PDX                         'Child 15 - primary Dx'
                 KID15MOE                         'Child 15 - method of evaluation'
                 KID15AGO                         'Child 15 - age of onset'
+                NWINFMUT                         'New information available concerning genetic mutations?'
+                NWINFPAR                         'New information available on parents status?'
+                NWINFSIB                         'New information on affected siblings?'
+                NWINFKID                         'New information on biological children?'
 END SCHEMA

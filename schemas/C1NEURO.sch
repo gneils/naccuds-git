@@ -9,9 +9,13 @@ DATA LIST
                 INTERVAL                         *             (I1)
                 VISITDATE                        *             (DATE'EMM/DD/YYYY')
                 INITIALS                         *             (A3)
+                MMSECOMP                         *             (I1)
+                MMSEREAS                         *             (I1)
                 MMSELOC                          *             (I1)
                 MMSELAN                          *             (I1)
                 MMSELANX                         *             (A60)
+                MMSEVIS                          *             (I1)
+                MMSEHEAR                         *             (I1)
                 MMSEORDA                         *             (I1)
                 MMSEORLO                         *             (I1)
                 PENTAGON                         *             (I1)
@@ -24,6 +28,7 @@ DATA LIST
                 LOGIYR                           *             (I2)
                 LOGIPREV                         *             (I1)
                 LOGIMEM                          *             (I1)
+                UDSBENTC                         *             (I1)
                 DIGIF                            *             (I1)
                 DIGIFLEN                         *             (I1)
                 DIGIB                            *             (I1)
@@ -39,7 +44,18 @@ DATA LIST
                 WAIS                             *             (I1)
                 MEMUNITS                         *             (I1)
                 MEMTIME                          *             (I1)
+                UDSBENTD                         *             (I1)
+                UDSBENRS                         *             (I1)
                 BOSTON                           *             (I1)
+                UDSVERFC                         *             (I1)
+                UDSVERFN                         *             (I1)
+                UDSVERNF                         *             (I1)
+                UDSVERLC                         *             (I1)
+                UDSVERLR                         *             (I1)
+                UDSVERLN                         *             (I1)
+                UDSVERTN                         *             (I1)
+                UDSVERTE                         *             (I1)
+                UDSVERTI                         *             (I1)
                 COGSTAT                          *             (I1)
                 DWHO                             *             (A20)
                 DSTAMP                           *             (DATE'EMM/DD/YYYY')
@@ -55,8 +71,11 @@ STANDARD VARS   VISITDATE
                 DCCTIME
                 DCCEDITS
 VAR RANGES      INTERVAL                         (0 100)
+                MMSECOMP MMSEVIS (0 1)
+                MMSEREAS                         (0 1)
                 MMSELOC                          (1 3)
                 MMSELAN                          (1 3)
+                MMSEHEAR                         (95 98)
                 MMSEORDA                         (0 5)
                 MMSEORLO                         (0 5)
                 PENTAGON                         (0 1)
@@ -68,6 +87,7 @@ VAR RANGES      INTERVAL                         (0 100)
                 LOGIYR                           (1990 2020)
                 LOGIPREV                         (0 25)
                 LOGIMEM                          (0 25)
+                UDSBENTC                         (0 17)
                 DIGIF                            (0 12)
                 DIGIFLEN                         (0 8)
                 DIGIB                            (0 12)
@@ -83,9 +103,26 @@ VAR RANGES      INTERVAL                         (0 100)
                 WAIS                             (0 93)
                 MEMUNITS                         (0 25)
                 MEMTIME                          (0 85)
+                UDSBENRS                         (0 1)
                 BOSTON                           (0 30)
+                UDSVERFC                         (0 40)
+                UDSVERFN                         (0 15)
+                UDSVERNF                         (0 15)
+                UDSVERLC                         (0 40)
+                UDSVERLR                         (0 15)
+                UDSVERLN                         (0 15)
+                UDSVERTN                         (0 80)
+                UDSVERTE                         (0 30)
+                UDSVERTI                         (0 30)
                 COGSTAT                          (0 4)
-MISSING VALUES  MMSEORDA                         (96
+                UDSBENTD ( 0 17 )
+MISSING VALUES  MMSEREAS                         UDSBENTD (96
+                                                  97
+                                                  98)
+                MMSEHEAR                         (96
+                                                  97
+                                                  98)
+                MMSEORDA                         (96
                                                   97
                                                   98)
                 MMSEORLO                         (96
@@ -102,6 +139,9 @@ MISSING VALUES  MMSEORDA                         (96
                 LOGIYR                           (8888)
                 LOGIPREV                         (88)
                 LOGIMEM                          (96
+                                                  97
+                                                  98)
+                UDSBENTC                         (96
                                                   97
                                                   98)
                 DIGIF                            (96
@@ -143,12 +183,26 @@ MISSING VALUES  MMSEORDA                         (96
                 BOSTON                           (96
                                                   97
                                                   98)
-VALUE LABELS    MMSELOC                          (1)'In ADC/clinic'
+                UDSVERFC                         (96
+                                                  97
+                                                  98)
+                UDSVERLC                         (96
+                                                  97
+                                                  98)
+VALUE LABELS    MMSEREAS (96)'Cognitive/behavior problem'
+                                                 (97)'Other problem'
+                                                 (98)'Verbal refusal'
+                MMSECOMP   MMSEVIS                      (0)'No'
+                                                 (1)'Yes'
+                MMSELOC                          (1)'In ADC/clinic'
                                                  (2)'In home'
                                                  (3)'In person-other'
                 MMSELAN                          (1)'English'
                                                  (2)'Spanish'
                                                  (3)'Other'
+                MMSEHEAR                         (96)'Cognitive/behavior problem'
+                                                 (97)'Other problem'
+                                                 (98)'Verbal refusal'
                 MMSEORDA                         (96)'Cognitive/behavior problem'
                                                  (97)'Other problem'
                                                  (98)'Verbal refusal'
@@ -158,7 +212,7 @@ VALUE LABELS    MMSELOC                          (1)'In ADC/clinic'
                 PENTAGON                         (96)'Cognitive/behavior problem'
                                                  (97)'Other problem'
                                                  (98)'Verbal refusal'
-                MMSE                             (96)'Cognitive/behavior problem'
+                MMSE     UDSBENTD                        (96)'Cognitive/behavior problem'
                                                  (97)'Other problem'
                                                  (98)'Verbal refusal'
                 NPSYCLOC                         (1)'In ADC/clinic'
@@ -169,6 +223,9 @@ VALUE LABELS    MMSELOC                          (1)'In ADC/clinic'
                                                  (3)'Other'
                 LOGIPREV                         (88)'N/A'
                 LOGIMEM                          (96)'Cognitive/behavior problem'
+                                                 (97)'Other problem'
+                                                 (98)'Verbal refusal'
+                UDSBENTC                         (96)'Cognitive/behavior problem'
                                                  (97)'Other problem'
                                                  (98)'Verbal refusal'
                 DIGIF                            (96)'Cognitive/behavior problem'
@@ -203,7 +260,15 @@ VALUE LABELS    MMSELOC                          (1)'In ADC/clinic'
                                                  (98)'Verbal refusal'
                 MEMTIME                          (88)'N/A'
                                                  (99)'Unknown'
+                UDSBENRS                         (0)'No'
+                                                 (1)'Yes'
                 BOSTON                           (96)'Cognitive/behavior problem'
+                                                 (97)'Other problem'
+                                                 (98)'Verbal refusal'
+                UDSVERFC                         (96)'Cognitive/behavior problem'
+                                                 (97)'Other problem'
+                                                 (98)'Verbal refusal'
+                UDSVERLC                         (96)'Cognitive/behavior problem'
                                                  (97)'Other problem'
                                                  (98)'Verbal refusal'
                 COGSTAT                          (0)'Clinician unable to render opinion'
@@ -213,9 +278,13 @@ VALUE LABELS    MMSELOC                          (1)'In ADC/clinic'
                                                  (4)'3 or more test scores abnormal'
 VAR LABEL       INTERVAL                         'Visit Number'
                 INITIALS                         'Initials'
+                MMSECOMP                         'Was any part of the MMSE completed?'
+                MMSEREAS                         'MMSE not completed reason code'
+                MMSEVIS 'Subject was unable to complete sections due to visual impairment'
                 MMSELOC                          '1a. The administration of the MMSE'
                 MMSELAN                          '1a1. Language of MMSE administration'
                 MMSELANX                         'Specify'
+                MMSEHEAR                         'Reason code for not completing MMSE'
                 MMSEORDA                         '1b1. Time'
                 MMSEORLO                         '1b2. Place'
                 PENTAGON                         '1c. Pentagon score'
@@ -228,6 +297,7 @@ VAR LABEL       INTERVAL                         'Visit Number'
                 LOGIYR                           'Year'
                 LOGIPREV                         '3 1) Total score from the previous'
                 LOGIMEM                          '3b. Total number of story units recalled'
+                UDSBENTC                         'Total score for copy of Bension figure'
                 DIGIF                            '4a. Total number of correct trial'
                 DIGIFLEN                         '4b. Digit span forward length'
                 DIGIB                            '5a. Digit Span Backward'
@@ -243,6 +313,17 @@ VAR LABEL       INTERVAL                         'Visit Number'
                 WAIS                             '8a. Items correctly completed in 90 seconds'
                 MEMUNITS                         '9a. Total number of story units recalled'
                 MEMTIME                          '9b. Time elapsed since Logical Memory IA'
+                UDSBENRS                         'Recognized original stimulus from among four options'
                 BOSTON                           '10a. Boston Naming Test'
+                UDSVERFC                         'Number of correct F-words generated in 1 minute'
+                UDSVERFN                         'Number of F-words repeated in 1 minute'
+                UDSVERNF                         'Number of non-Fwords and rule violation errors in 1 minute'
+                UDSVERLC                         'Number of correct L-words generated in 1 minute'
+                UDSVERLR                         'Number of L-words repeated in 1 minute'
+                UDSVERLN                         'Number of non-Lwords and rule violation errors in 1 minute'
+                UDSVERTN                         'Total number of correct F-words and L-words'
+                UDSVERTE                         'Total number of F-word and L-word repetition errors'
+                UDSVERTI                         'Total number of non-F/L-words and rule violation errors'
                 COGSTAT                          '11a. Overall Appraisal'
+                UDSBENTD 'Total score for delayed drawing of Bension figure'
 END SCHEMA

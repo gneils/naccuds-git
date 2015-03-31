@@ -31,7 +31,7 @@ CALL SCREEN "C4FINHIB"
     )
     DELETE  (CALL GUIPROCF.SCREENS.INC_DELETE;)
 .   FDISPLAY       TEXT (
-      recdoc(38,0)
+      recdoc(RECNUMBER#,0)
       )
       AT 1,4 WIDTH 62
       FONT (BOLD )

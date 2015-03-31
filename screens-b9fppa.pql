@@ -31,7 +31,7 @@ CALL SCREEN "B9FPPA"
     )
     DELETE  (CALL GUIPROCF.SCREENS.INC_DELETE;)
 .   FDISPLAY       TEXT (
-      recdoc(34,0)
+      recdoc(RECNUMBER#,0)
       )
       AT 2,4 WIDTH 80
       FONT (BOLD )

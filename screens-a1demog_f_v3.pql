@@ -28,7 +28,7 @@ CALL SCREEN "A1DEMOG"
     	     CALL GUIPROCF.SCREENS.INC_WRITE;
     )
 .   FDISPLAY       TEXT (
-      recdoc(2,1)
+      recdoc( RECNUMBER#, 1 )
       )
       AT 6,28 WIDTH 44
       FONT (BOLD )

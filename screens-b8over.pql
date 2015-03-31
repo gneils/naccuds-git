@@ -31,7 +31,7 @@ CALL SCREEN "B8OVER"
     )
     DELETE  (CALL GUIPROCF.SCREENS.INC_DELETE;)
 .   FDISPLAY       TEXT (
-      recdoc(14,1)
+      recdoc(RECNUMBER#,1)
       )
       AT 6,7 WIDTH 44
       FONT (BOLD )

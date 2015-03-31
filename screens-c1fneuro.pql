@@ -31,7 +31,7 @@ CALL SCREEN "C1FNEURO"
     )
     DELETE  (CALL GUIPROCF.SCREENS.INC_DELETE;)
 .   FDISPLAY       TEXT (
-      recdoc(35,0)
+      recdoc(RECNUMBER#,0)
       )
       AT 2,4 WIDTH 80
       FONT (BOLD )

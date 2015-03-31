@@ -30,7 +30,7 @@ CALL SCREEN "A1DEMOG"
     )
     DELETE  (CALL GUIPROCF.SCREENS.INC_DELETE;)
 .   FDISPLAY       TEXT (
-      recdoc(2,1)
+      recdoc( RECNUMBER#, 1 )
       )
       AT 5,40 WIDTH 44
       FONT (BOLD )

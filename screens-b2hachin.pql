@@ -31,7 +31,7 @@ CALL SCREEN "B2HACHIN"
     )
     DELETE  (CALL GUIPROCF.SCREENS.INC_DELETE;)
 .   FDISPLAY       TEXT (
-      recdoc(8,1)
+      recdoc(RECNUMBER#,1)
       )
       AT 7,12 WIDTH 44
       FONT (BOLD )

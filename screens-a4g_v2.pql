@@ -31,7 +31,7 @@ CALL SCREEN "A4G_V2"
     )
     DELETE  (CALL GUIPROCF.SCREENS.INC_DELETE;)
 .   FDISPLAY       TEXT (
-      recdoc(25,0)
+      recdoc(RECNUMBER#,0)
       )
       AT 2,7 WIDTH 62
       FONT (BOLD )

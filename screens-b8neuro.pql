@@ -31,7 +31,7 @@ CALL SCREEN "B8NEURO"
     )
     DELETE  (CALL GUIPROCF.SCREENS.INC_DELETE;)
 .   FDISPLAY       TEXT (
-      recdoc(recnum('B8NEURO'),1)
+      recdoc(RECNUMBER#,1)
       )
       AT 6,7 WIDTH 44
       FONT (BOLD )

@@ -30,7 +30,7 @@ CALL SCREEN "A3FFAMHIS"
     )
     DELETE  (CALL GUIPROCF.SCREENS.INC_DELETE;)
 .   FDISPLAY       TEXT (
-      recdoc(32,0)
+      recdoc(RECNUMBER#,0)
       )
       AT 1,1 WIDTH 80
       FONT (BOLD )

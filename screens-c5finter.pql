@@ -32,7 +32,7 @@ CALL SCREEN "C5FINTER"
     )
     DELETE  (CALL GUIPROCF.SCREENS.INC_DELETE;)
 .   FDISPLAY       TEXT (
-      recdoc(39,0)
+      recdoc(RECNUMBER#,0)
       )
       AT 1,4 WIDTH 80
       FONT (BOLD )

@@ -31,7 +31,7 @@ CALL SCREEN "B1PHYS"
     )
     DELETE  (CALL GUIPROCF.SCREENS.INC_DELETE;)
 .   FDISPLAY       TEXT (
-      recdoc(7,1)
+      recdoc(RECNUMBER#,1)
       )
       AT 7,16 WIDTH 44
       FONT (BOLD )

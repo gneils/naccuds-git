@@ -43,7 +43,7 @@ CALL SCREEN "Z1CHECK"
     DELETE  (DISPLAY INFOBOX "!!!    DELETE  ALL  OTHER  FORMS  FIRST    !!!!";
     CALL GUIPROCF.SCREENS.INC_DELETE;)
 .   FDISPLAY       TEXT (
-      recdoc(1,1)
+      recdoc(RECNUMBER#,1)
       )
       AT 5,40 WIDTH 44
       FONT (BOLD )

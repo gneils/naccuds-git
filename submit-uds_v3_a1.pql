@@ -1,0 +1,173 @@
+PROCEDURE      SUBMIT.UDS_V3_A1:T  (157976,48118)  |Last amended Apr 23, 2015,13:21:58
+| Creator:   Greg Neils
+| Created:   4/21/2015
+| Reason:    Create a SAS file for NACCUDS submissions.  Then follow website directions.
+| Output:    \\192.168.53.249\Data1\NACCUDS\Database\Data Submission\DATA1.txt'
+c for NACCUDS submission
+ From the ADC homepage:
+ http://www.alz.washington.edu/WEB/adc-home.html#
+ 1. DATA CORES/DATA MANAGERS
+ 2. UDS and FTLD Submission
+ 3. Columbia University
+ 4. enter site
+ 5. UPLOAD and PRE-PROCESS FILES
+ 6. Upload UDS Data
+ 7. Choose file
+ 8. click Upload
+call DCCPROCF.SYSTEM.ALLRECS
+call DCCPROCF.BASE.MSTCLEAR
+program
+. string  * 200       BIANCA_FILE
+. string  * 300       SAS_FILE_PREFIX
+. BIANCA_FILE = 'C:\Documents and Settings\bwilliams\Desktop\Data Submission'
+. BIANCA_FILE = 'C:\Users\Greg\Documents\GitHub'
+. ifthen (fileis(BIANCA_FILE) = -1)
+.   SAS_FILE_PREFIX = BIANCA_FILE + '\'
+. else
+.   SAS_FILE_PREFIX = '<GDATA1>NACCUDS\Database\Data Submission\'
+. endif
+. t = globals('NACCUDS_SAS', SAS_FILE_PREFIX )
+end program
+PROGRAM
+WRITE 'FILES EXPORTED TO <NACCUDS_SAS>'
+END PROGRAM
+retrieval CRWARN misschar = / progress
+. integer *   1       YES NO
+. integer *   1 array FTLD# (30000)
+. integer *   1       FORMVER
+. integer *   1       ADCID    |AD CENTER ID
+. string  *   3       FORMID   | Form ID
+. integer *   1       VISITMO
+. integer *   1       VISITDAY
+. integer *   2       VISITYR
+. string  *   3       VISITNUM
+. SET ADCID (4)
+. set NO (0) YES (1)
+DEFINE PROCEDURE VARIABLES
+  EXCLUDE DCCDATE DSTAMP DWHO DCCWHO DCCEDITS DCCTIME
+          YES NO
+          INTERVAL
+. DO REPEAT REC_NAME = Z1CHECK
+			A1DEMOG
+			A2INFORM
+			A3FAMHIS /
+             UDS_NAME = Z1
+			A1
+			A2
+			A3
+
+. PROCESS CASES
+.   autoset
+|Always process the Z1CHECK form first to get the VISITDATE
+.   process rec REC_NAME
+.     autoset
+.     FORMID = 'UDS_NAME'
+.     process rec Z1CHECK
+.       get vars FORMVER PACKET PTID
+.     end rec
+.     get vars all
+.     execute subprocedure HEADER_DATA
+.     PERFORM PROCS
+.   end rec
+. end cases
+. END REPEAT
+
+. WRITE "The NACCUDS SAS have been made.  Upload them to the NACCUDS website."
+
+
+
+
+subprocedure HEADER_DATA
+. VISITMO  = numbr( dateC( VISITDATE, 'MM' ) )
+. VISITDAY = numbr( dateC( VISITDATE, 'DD' ) )
+. VISITYR  = numbr( dateC( VISITDATE, 'YYYY' ) )
+. VISITNUM = FORMAT( INTERVAL )
+C . write 'Visit: '  VISITNUM  ' Visit Date: ' VISITDATE ' M: ' VISITMO  'D: 'VISITDAY  ' Y: ' VISITYR  | debug
+end subprocedure
+
+SPSS SAVE FILE FILENAME = '<NACCUDS_SAS>NACCUDS_DATASET.sav'
+
+end retrieval
+call DCCPROCF.BASE.MSTSET
+
+
+
+cif eq 1,2
+
+. DO REPEAT REC_NAME = A4MEDS
+			A5HEALTH
+			B1PHYS
+			B2HACHIN
+			B3UPDRS
+			B4CDR
+			B5NPI
+			B6GDS
+			B7FAQ
+			B8OVER
+			B9ONSET
+			C1NEURO
+			D1COG
+			E1IMAGE
+			Z1TELE
+			T1TELE
+			A4DETAIL
+			A4G_V2
+			A3FAM_V2
+			Z1FCHECK
+			A3AFCONS
+			A3FFAMHIS
+			B3FUPDRS
+			B9FPPA
+			C1FNEURO
+			C2FSOCIAL
+			C3FBEHAV
+			C4FINHIB
+			C5FINTER
+			C6FMONIT
+			E2FIMAGE
+			E3FIMDX
+			D2MEDCON
+			B8NEURO
+			A3A_FCONS /
+             UDS_NAME = Z1
+			A1
+			A2
+			A3
+			A4
+			A5
+			B1
+			B2
+			B3
+			B4
+			B5
+			B6
+			B7
+			B8
+			B9
+			C1
+			D1
+			E1
+			Z1
+			T1
+			A4
+			A4
+			A3
+			Z1F
+			A3A
+			A3F
+			B3F
+			B9F
+			C1F
+			C2F
+			C3F
+			C4F
+			C5F
+			C6F
+			E2F
+			E3F
+			D2
+			B8
+			A3A
+
+cif end
+END PROCEDURE

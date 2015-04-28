@@ -1,87 +1,68 @@
-PROCEDURE      SUBMIT.UDS_V3:T  (157932,40729)  |Last amended Mar 10, 2015,11:18:49
-| Path:      \\192.168.53.249\Data1\NACCUDS\Database\NACCUDS.sr4
-| Creator:   David Merle
-| Created:   03/13/2007
-| Retired:
-| Called by: Manually
-| Reason:    Creates a list of followup packets for data submission to NACCUDS
+PROCEDURE      SUBMIT.UDS_V3:T  (157974,48429)  |Last amended Apr 21, 2015,13:27:09
+| Creator:   Greg Neils
+| Created:   4/21/2015
+| Reason:    Create a SAS file for NACCUDS submissions.  Then follow website directions.
+
 | Output:    \\192.168.53.249\Data1\NACCUDS\Database\Data Submission\DATA1.txt'
-| Modified:  1. David Merle 04/30/2007 Made it a member instead of an outside file
-| Modified:  2. 3/6/2015 by Greg Neils.   Converted it to SAS output.
+
+c for NACCUDS submission
+ From the ADC homepage:
+ http://www.alz.washington.edu/WEB/adc-home.html#
+ 1. DATA CORES/DATA MANAGERS
+ 2. UDS and FTLD Submission
+ 3. Columbia University
+ 4. enter site
+ 5. UPLOAD and PRE-PROCESS FILES
+ 6. Upload UDS Data
+ 7. Choose file
+ 8. click Upload
+
 call DCCPROCF.SYSTEM.ALLRECS
 call DCCPROCF.BASE.MSTCLEAR
+
+program
+. string  * 200       BIANCA_FILE
+. string  * 300       SAS_FILE_PREFIX
+. BIANCA_FILE = 'C:\Documents and Settings\bwilliams\Desktop\Data Submission'
+. BIANCA_FILE = 'C:\Users\Greg\Documents\GitHub'
+. ifthen (fileis(BIANCA_FILE) = -1)
+.   SAS_FILE_PREFIX = BIANCA_FILE + '\'
+. else
+.   SAS_FILE_PREFIX = '<GDATA1>NACCUDS\Database\Data Submission\'
+. endif
+. t = globals('NACCUDS_SAS', SAS_FILE_PREFIX )
+end program
+
+PROGRAM
+WRITE 'FILES EXPORTED TO <NACCUDS_SAS>'
+END PROGRAM
+
 retrieval CRWARN misschar = / progress
 . integer *   4       CASE#
 . integer *   1       YES NO
 . INTEGER *   1       VER#
-. date                CXDATE ('MM/DD/YYYY')
-. DATE                MODDATE ('MM/DD/YYYY')
-. integer *   1 array MOD@ (30000, 30)
 . integer *   1 array FTLD# (30000)
 . string  *   2       PACKET$
 . integer *   1       INT#
-. integer *   1       EACH_INTERVAL
-. integer *   1       VISITMO
-. integer *   1       VISITDAY
-. integer *   2       VISITYR
-. string  * 200       REP_FILE
-. string  * 200       BIANCA_FILE
 
 . integer *   1       ADCID    |AD CENTER ID
 . string  *   3       FORMID   | Form ID
+. integer *   1       VISITMO
+. integer *   1       VISITDAY
+. integer *   2       VISITYR
 
 . SET ADCID (4)
-. set MOD@ * (0)
 . set NO (0) YES (1)
 
 DEFINE PROCEDURE VARIABLES
  EXCLUDE DCCDATE DSTAMP
          CASE#
          YES NO
-         CXDATE MODDATE
-         MOD@
          PACKET$
          INT#
-         EACH_INTERVAL
          VER#
-         BIANCA_FILE
-         REP_FILE
 
-. CXDATE = today(0) - 60 | ...otherwise, from today
-
-
-
-. BIANCA_FILE = 'C:\Documents and Settings\bwilliams\Desktop\Data Submission'
-. BIANCA_FILE = 'C:\Users\Greg\Documents\GitHub'
-. ifthen (fileis(BIANCA_FILE) = -1)
-.   REP_FILE = BIANCA_FILE + '\' + datec(today(0),'YYYY_MM_DD') + '_UDS.txt'
-. else
-.   REP_FILE = '<GDATA1>NACCUDS\Database\Data Submission\' + datec(today(0),'YYYY_MM_DD') + '_UDS.txt'
-. endif
-
-. open (REP) write dsnvar = REP_FILE lrecl=3043
-
-c   find any records modified from the laste submission date.
-.   process cases
-.     process rec Z1FCHECK
-.       FTLD#(PTID) = INTERVAL
-.     end rec
-.     do repeat RECX = 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,21,23,25,27,30,31,32,33,34,35,36,37,38,39,40,41,42
-.       process rec RECX
-.         MODDATE = max( DCCDATE,DSTAMP)
-.         ifthen ( MODDATE > CXDATE)
-.           MOD@( PTID, INTERVAL + 1) = 1 |Add 1 to the interval number so you don't start off with 0 (because its an array element) Subtract 1 before using.
-.         endif
-.       end rec
-.     end repeat
-.   end cases
-
-|Check all potential IDs and all potential intervals
-.  for CASE# = 1,30000
-.    for EACH_INTERVAL = 1,30
-.      if( MOD@( CASE#, EACH_INTERVAL ) eq 0 ) next for
-.      INT# = EACH_INTERVAL - 1
-.      case is CASE#
+. PROCESS CASES COUNT =1
 .        autoset
 .        get vars PTID
 |Always process the Z1CHECK form first to get the VISITDATE
@@ -124,7 +105,7 @@ c   find any records modified from the laste submission date.
            B8COMM
 |        THIS IS THE ONLY TRANSFORMATION WE HAVE TO DO!  LUCKY US!
 .        GET VARS   VISITNUM = INTERVAL
-PERFORM PROCS
+.        PERFORM PROCS
 
 .	EXECUTE SUBPROCEDURE MAKE_DATE_FIELDS
 .     end rec
@@ -145,6 +126,7 @@ PERFORM PROCS
 	B7NOT
 	B7COMM
 .	EXECUTE SUBPROCEDURE MAKE_DATE_FIELDS
+.       PERFORM PROCS
 .     end rec
 .     process rec T1TELE  via (INT#)
 .	FORMID = 'T1'
@@ -1969,17 +1951,19 @@ PERFORM PROCS
         FTDOTHI
         FTDOTHIS
 .	EXECUTE SUBPROCEDURE MAKE_DATE_FIELDS
-.     end rec
-.    end cases
-.   end for
-.  end for
-. close (REP)
-. display infobox "Hey, Bianca...the NACCUDS data files are done!"
+.   end rec
+. end cases
+
+
+. WRITE "The NACCUDS SAS have been made.  Upload them to the NACCUDS website."
+
+
 SUBPROCEDURE MAKE_DATE_FIELDS
 . VISITMO  = cdate( VISITDATE, 'MM' )
 . VISITDAY = cdate( VISITDATE, 'DD' )
 . VISITYR  = cdate( VISITDATE, 'YYYY' )
 END SUBPROCEDURE
+
 
 subprocedure HEADER_DATA
 | THIS INFORMATIN SHOULD BE IN EACH ROW
@@ -1997,7 +1981,12 @@ C 	INITIALS
 CIF END
 end subprocedure
 
-SPSS SAVE FILE FILENAME = 'DELETE_ME.TXT'
+SPSS SAVE FILE FILENAME = '<NACCUDS_SAS>NACCUDS_DATASET.sav'
+
+
+C  LRECL = 3560
+C  NOLABELS
+
 
 end retrieval
 call DCCPROCF.BASE.MSTSET

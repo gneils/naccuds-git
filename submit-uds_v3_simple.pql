@@ -1,0 +1,255 @@
+PROCEDURE      SUBMIT.UDS_V3_SIMPLE:T  (157975,40581)  |Last amended Apr 22, 2015,11:16:21
+| Creator:   Greg Neils
+| Created:   4/21/2015
+| Reason:    Create a SAS file for NACCUDS submissions.  Then follow website directions.
+| Output:    \\192.168.53.249\Data1\NACCUDS\Database\Data Submission\DATA1.txt'
+c for NACCUDS submission
+ From the ADC homepage:
+ http://www.alz.washington.edu/WEB/adc-home.html#
+ 1. DATA CORES/DATA MANAGERS
+ 2. UDS and FTLD Submission
+ 3. Columbia University
+ 4. enter site
+ 5. UPLOAD and PRE-PROCESS FILES
+ 6. Upload UDS Data
+ 7. Choose file
+ 8. click Upload
+call DCCPROCF.SYSTEM.ALLRECS
+call DCCPROCF.BASE.MSTCLEAR
+program
+. string  * 200       BIANCA_FILE
+. string  * 300       SAS_FILE_PREFIX
+. BIANCA_FILE = 'C:\Documents and Settings\bwilliams\Desktop\Data Submission'
+. BIANCA_FILE = 'C:\Users\Greg\Documents\GitHub'
+. ifthen (fileis(BIANCA_FILE) = -1)
+.   SAS_FILE_PREFIX = BIANCA_FILE + '\'
+. else
+.   SAS_FILE_PREFIX = '<GDATA1>NACCUDS\Database\Data Submission\'
+. endif
+. t = globals('NACCUDS_SAS', SAS_FILE_PREFIX )
+end program
+PROGRAM
+WRITE 'FILES EXPORTED TO <NACCUDS_SAS>'
+END PROGRAM
+retrieval CRWARN misschar = / progress
+. integer *   4       CASE#
+. integer *   1       YES NO
+. INTEGER *   1       VER#
+. integer *   1 array FTLD# (30000)
+. integer *   1       FORMVER
+. integer *   1       INT#
+. integer *   1       ADCID    |AD CENTER ID
+. string  *   3       FORMID   | Form ID
+. integer *   1       VISITMO
+. integer *   1       VISITDAY
+. integer *   2       VISITYR
+. SET ADCID (4)
+. set NO (0) YES (1)
+DEFINE PROCEDURE VARIABLES
+  EXCLUDE DCCDATE DSTAMP DWHO DCCWHO DCCEDITS DCCTIME
+          CASE#
+          YES NO
+          PACKET$
+          INT#
+          VER#
+          INTERVAL
+. PROCESS CASES COUNT =1
+.   autoset
+.   get vars PTID
+|Always process the Z1CHECK form first to get the VISITDATE
+.   process rec Z1CHECK
+.     FORMID = 'Z1'
+.     get vars all
+|     THIS IS THE ONLY TRANSFORMATION WE HAVE TO DO!  LUCKY US!
+.     process rec Z1TELE  via (INTERVAL)
+.       FORMID = 'Z1'
+.       autoset
+.       get vars ALL
+.       PERFORM PROCS
+.     end rec
+.     process rec T1TELE  via (interval)
+.       FORMID = 'T1'
+.       get vars ALL
+.     end rec
+.     process rec A1DEMOG via (interval)
+.       autoset
+.       FORMID = 'A1'
+.       process rec Z1CHECK
+.         get vars FORMVER
+.         GET VARS VISITNUM = INTERVAL
+.       end rec
+.       get vars all
+.       execute subprocedure HEADER_DATA
+.     end rec
+.     process rec A2INFORM via (interval)
+.       FORMID = 'A2'
+.       get vars all
+.     end rec
+.     process rec A3FAMHIS via (interval)
+.       FORMID = 'A3'
+.       get vars ALL
+.     end rec
+.     process rec A3FAM_V2 via (interval)
+.       FORMID = 'A3'
+.       get vars all
+.     end rec
+.     process rec A4G_V2 via (interval)
+.       FORMID = 'A4G'
+.       GET VARS ALL
+.     end rec
+.     process rec A4DETAIL via (interval)
+.       FORMID = 'A4D'
+.       GET VARS ALL
+.     end rec
+.     process rec A4MEDS via (interval)
+.        FORMID = 'A4'
+.       GET VARS ALL
+.     end rec
+.     process rec A5HEALTH via (interval)
+.       FORMID = 'A5'
+.       GET VARS ALL
+.     end rec
+.     process rec B1PHYS via (interval)
+.       FORMID = 'B1'
+.       GET VARS ALL
+.     end rec
+.     process rec B2HACHIN via (interval)
+.       FORMID = 'B2'
+.       GET VARS ALL
+.     end rec
+.     process rec B3UPDRS via (interval)
+.       FORMID = 'B3'
+.       GET VARS ALL
+.     end rec
+.     process rec B4CDR via (interval)
+.       FORMID = 'B4'
+.       GET VARS ALL
+.     end rec
+.     process rec B5NPI via (interval)
+.       FORMID = 'B5'
+.       GET VARS ALL
+.     end rec
+.     process rec B6GDS via (interval)
+.       FORMID = 'B6'
+.       GET VARS ALL
+.     end rec
+.     process rec B7FAQ via (interval)
+.       FORMID = 'B7'
+.       GET VARS ALL
+.     end rec
+.     process rec B8OVER via (interval)
+.       FORMID = 'B8'
+.       GET VARS ALL
+.     end rec
+.     process rec B9ONSET via (interval)
+.       FORMID = 'B9'
+.       GET VARS ALL
+.     end rec
+.     process rec C1NEURO via (interval)
+.       FORMID = 'C1'
+.       GET VARS ALL
+.     end rec
+.     process rec D1COG via (interval)
+.       FORMID = 'D1'
+.       get vars all
+.     end rec
+.     process rec E1IMAGE via (interval)
+.       FORMID = 'E1'
+.       get vars all
+.     end rec
+|FTLD Always process the Z1FCHECK form first to get the VISITDATE
+.     process rec Z1FCHECK via (interval)
+.      ifthen (INTERVAL > FTLD#(PTID))
+|           PACKET$ = 'FF'
+.      else
+|           PACKET$ = 'IF'
+.      endif
+.       FORMID = 'Z1F'
+.       get vars all
+.     end rec
+.     process rec A3FFAMHIS via (interval)
+.       FORMID = 'A3F'
+.       GET VARS ALL
+.     end rec
+.     process rec A3AFCONS via (interval)
+.       FORMID = 'A3A'
+.       GET VARS ALL
+.     end rec
+.     process rec B3FUPDRS via (interval)
+.       FORMID = 'B3F'
+.       GET VARS ALL
+.     end rec
+.     process rec B9FPPA via (interval)
+.       FORMID = 'B9F'
+.       GET VARS ALL
+.     end rec
+.     process rec C1FNEURO via (interval)
+.       FORMID = 'C1F'
+.       GET VARS ALL
+.     end rec
+.     process rec C2FSOCIAL via (interval)
+.       FORMID = 'C2F'
+.       GET VARS ALL
+.     end rec
+.     process rec C3FBEHAV via (interval)
+.       FORMID = 'C3F'
+.       get vars all
+.     end rec
+.     process rec C4FINHIB via (interval)
+.       FORMID = 'C4F'
+.       get vars ALL
+.     end rec
+.     process rec C5FINTER via (interval)
+.       FORMID = 'C5F'
+.       get vars all
+.     end rec
+.     process rec C6FMONIT via (interval)
+.       FORMID = 'C6F'
+.       get vars all
+.     end rec
+.     process rec E2FIMAGE via (interval)
+.       FORMID = 'E2F'
+.       get vars all
+.     end rec
+.     process rec E3FIMDX via (interval)
+.       FORMID = 'E3F'
+.       get vars all
+.     end rec
+.   end rec
+. end cases
+
+. WRITE "The NACCUDS SAS have been made.  Upload them to the NACCUDS website."
+
+
+
+
+subprocedure HEADER_DATA
+. autoset
+. VISITMO  = numbr( dateC( VISITDATE, 'MM' ) )
+. VISITDAY = numbr( dateC( VISITDATE, 'DD' ) )
+. VISITYR  = numbr( dateC( VISITDATE, 'YYYY' ) )
+. VISITNUM = INTERVAL
+. write 'Visit: '  VISITNUM  'M: ' VISITMO  'D: 'VISITDAY  ' Y: ' VISITYR  | debug
+. PERFORM PROCS
+| THIS INFORMATIN SHOULD BE IN EACH ROW
+CIF EQ 1,2
+C         PACKET
+C         FORMID = 'A3F'
+C      FORMVER
+C      ADCID
+C      PTID
+C      VISITMO = Datec(VISITDATE,'MM')
+C      VISIT_DAY = datec(VISITDATE,'DD')
+C      VISITYR = datec(VISITDATE,'YYYY')
+
+C      INITIALS
+CIF END
+end subprocedure
+SPSS SAVE FILE FILENAME = '<NACCUDS_SAS>NACCUDS_DATASET.sav'
+
+C  LRECL = 3560
+C  NOLABELS
+
+end retrieval
+call DCCPROCF.BASE.MSTSET
+END PROCEDURE

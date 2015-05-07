@@ -1,4 +1,4 @@
-PROCEDURE      DAILY.NACCPLUS:T  (157052,58908)  |Last amended Oct 11, 2012,16:21:48
+PROCEDURE      DAILY.NACCPLUS:T  (157990,60838)  |Last amended May 07, 2015,16:53:58
 | File Name: NACCUDS.REPORTS.NACCPLUS
 | Path:      NACCUDS.sr4
 | Creator:   David Merle
@@ -34,7 +34,6 @@ retrieval noautocase
                 C1NEURO
                 D1COG
                 E1IMAGE
-                Z1TELE
                 T1TELE
 . value labels  Z1CHECK
                 A1DEMOG
@@ -54,7 +53,6 @@ retrieval noautocase
                 C1NEURO
                 D1COG
                 E1IMAGE
-                Z1TELE
                 T1TELE (0)'No' (1)'Yes'
                 INIT_RE ('AXA')'Asa Abeliovich'
                         ('MWA')'Albers'
@@ -88,7 +86,6 @@ variable labels Z1CHECK         'Forms Checklist-REQUIRED'
                 C1NEURO         'Neuropsychological Battery-REQUIRED'
                 D1COG           'Clinical Diagnosis-Cognitive Status-REQUIRED'
                 E1IMAGE         'Imaging/Labs-REQUIRED'
-                Z1TELE          'Telephone Forms Checklist'
                 T1TELE          'Telephone Inclusion Form'
                 INIT_RE         'Recoded Tester Initials, based on UDS B9 form, or B4,A5 or D1 if B9 missing'
                 TOTREQ          'Total # of 8 required NACC_UDS forms, including Z1'
@@ -121,8 +118,12 @@ variable labels Z1CHECK         'Forms Checklist-REQUIRED'
 .   get vars INTERVAL PACKET DCCDATE
 .   EVALDATE = VISITDATE
 .   get vars all prefix 'Z1'
-.   do repeat RECX = A1DEMOG A2INFORM A3FAMHIS A5HEALTH B1PHYS B2HACHIN B3UPDRS B4CDR B5NPI B6GDS B7FAQ B8OVER B9ONSET C1NEURO D1COG E1IMAGE,
-              VARX = A1 A2 A3 A5 B1 B2 B3 B4 B5 B6 B7 B8 B9 C1 D1 E1
+.   do repeat RECX = A1DEMOG   A2INFORM    A3FAMHIS   A5HEALTH
+                     B1PHYS    B2HACHIN    B3UPDRS    B4CDR      B5NPI     B6GDS     B7FAQ
+                     B8OVER    B9ONSET     C1NEURO    D1COG      E1IMAGE   T1TELE ,
+              VARX = A1        A2          A3         A5
+                     B1        B2          B3         B4         B5        B6        B7
+                     B8        B9          C1         D1         E1        T1
 .    process rec RECX via (INTERVAL)
 .     get vars all prefix '!VARX!'
 .     RECX = YES
@@ -145,22 +146,7 @@ variable labels Z1CHECK         'Forms Checklist-REQUIRED'
 .   TOTREQ = sum(Z1CHECK,A1DEMOG,A5HEALTH,B4CDR,B9ONSET,C1NEURO,D1COG,E1IMAGE)
 .   perform procs
 .  end rec | Z1CHECK
-|
-.  process rec Z1TELE
-.   Z1TELE = YES
-.   get vars INTERVAL
-.   EVALDATE = VISITDATE
-.   get vars all prefix 'Z1'
-.   do repeat RECX = T1TELE A1DEMOG A2INFORM A3FAMHIS A5HEALTH B4CDR B5NPI B7FAQ B9ONSET D1COG E1IMAGE,
-              VARX = T1 A1 A2 A3 A5 B4 B5 B7 B9 D1 E1
-.    process rec RECX via (INTERVAL)
-.     get vars all prefix '!VARX!'
-.     RECX = YES
-.    end rec
-.   end repeat
-.   perform procs
-.  end rec | Z1TELE
-. end case
+|. end case
 |
 . spss save file filename  = '<GDATA1>NACCUDS\Output\NACCUDS_ALL.sav'
 end retrieval

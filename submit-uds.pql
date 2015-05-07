@@ -1,4 +1,4 @@
-PROCEDURE      SUBMIT.UDS:T  (157771,33232)  |Last amended Sep 30, 2014,09:13:52
+PROCEDURE      SUBMIT.UDS:T  (157990,58169)  |Last amended May 07, 2015,16:09:29
 | File name: PROC.SUBMIT
 | Path:      \\192.168.53.249\Data1\NACCUDS\Database\NACCUDS.sr4
 | Creator:   David Merle
@@ -9,6 +9,7 @@ PROCEDURE      SUBMIT.UDS:T  (157771,33232)  |Last amended Sep 30, 2014,09:13:52
 | Reason:    Creates a list of followup packets for data submission to NACCUDS
 | Output:    \\192.168.53.249\Data1\NACCUDS\Database\Data Submission\DATA1.txt'
 | Modified:  1. David Merle 04/30/2007 Made it a member instead of an outside file
+| Modified:  Combined Z1TELE AND Z1CHECK RECORD TYPES.
 call DCCPROCF.SYSTEM.ALLRECS
 call DCCPROCF.BASE.MSTCLEAR
 retrieval noautocase misschar = /
@@ -56,6 +57,7 @@ c CXDATE = today(0)| cdate('10/15/2012','MM/DD/YYYY')
 .      get vars all
 .      PACKET$ = PACKET
 .      VER# = FORMVER
+.      ifthen (PACKET$ EQ 'I' OR 'F')
 .  write (REP) 1t  [PACKET$]                         (A2)
                4t  ['Z1']                            (A3)
                8t  [fst(VER#,missing(VER#))]    (I3)
@@ -96,11 +98,9 @@ c CXDATE = today(0)| cdate('10/15/2012','MM/DD/YYYY')
              639t [fst(B8SUB   ,missing(B8SUB   ))]  (I1)
              641t [fst(B8NOT   ,missing(B8NOT   ))]  (I2)
              644t       B8COMM                       (A60)
-.     end rec
-.     process rec Z1TELE  via (INT#)
-.      get vars all
-.      PACKET$ = PACKET
-.      VER# = 2
+.       else |telephone follow up!
+.         PACKET$ = PACKET
+.         VER# = 2
 .  write (REP)  1t ['T']                             (A2)
                 4t ['Z1']                            (A3)
                 8t [2]                               (I3)
@@ -123,6 +123,7 @@ c CXDATE = today(0)| cdate('10/15/2012','MM/DD/YYYY')
               243t [fst(B7SUB   ,missing(B7SUB   ))] (I1)
               245t [fst(B7NOT   ,missing(B7NOT   ))] (I2)
               248t      B7COMM                       (A60)
+.       endif
 .     end rec
 .     process rec T1TELE  via (INT#)
 .      get vars all

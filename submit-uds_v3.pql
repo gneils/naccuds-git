@@ -1,4 +1,4 @@
-PROCEDURE      SUBMIT.UDS_V3:T  (157990,61177)  |Last amended May 07, 2015,16:59:37
+PROCEDURE      SUBMIT.UDS_V3:T  (158003,43871)  |Last amended May 20, 2015,12:11:11
 | Creator:   Greg Neils
 | Created:   4/21/2015
 | Reason:    Create a SAS file for NACCUDS submissions.  Then follow website directions.
@@ -19,6 +19,7 @@ call DCCPROCF.BASE.MSTCLEAR
 program
 . string  * 200       BIANCA_FILE
 . string  * 300       SAS_FILE_PREFIX
+
 . BIANCA_FILE = 'C:\Documents and Settings\bwilliams\Desktop\Data Submission'
 . BIANCA_FILE = 'C:\Users\Greg\Documents\GitHub\NACCUDS Submission'
 . ifthen (fileis(BIANCA_FILE) = -1)
@@ -41,8 +42,11 @@ retrieval CRWARN misschar = / progress
 . integer *   1       VISITDAY
 . integer *   2       VISITYR
 . string  *   3       VISITNUM
+. string  *   2       PACKET           |NECESSARY EVIL.  UDS USES "FF" FOR FLTD FOLLOW UP.
+. INTEGER *   2       SUBMITTED_PACKETS
 . SET ADCID (4)
 . set NO (0) YES (1)
+. SET SUBMITTED_PACKETS (0)
 DEFINE PROCEDURE VARIABLES
   EXCLUDE DCCDATE DSTAMP DWHO DCCWHO DCCEDITS DCCTIME
           YES NO
@@ -56,8 +60,8 @@ DEFINE PROCEDURE VARIABLES
                         B1         B2          B3         B4          B5         B6          B7         B8         B8         B9
                         C1         D1          D2         E1          T1         Z1
                         A3A        A3F         B3F        B9F         C1F        C2F         C3F        C4F        C5F        C6F
-                        E2F        E3F         Z1
-
+                        E2F        E3F         Z1F
+. WRITE 'PROCESSING REC_NAME'
 . PROCESS CASES
 .   autoset
 |Always process the Z1CHECK form first to get the VISITDATE
@@ -74,15 +78,31 @@ DEFINE PROCEDURE VARIABLES
 .     process rec T1TELE via (interval)
 .       get vars PTID
 .     end rec
-.     IF( EXISTS( PACKET ) EQ 0 ) WRITE 'NO PACKET INFO' PTID; EXIT CASES
+c .     IFNOT ( FORMVER EQ 3 ) next REC  | LOOKING TO TEST VERSION THREE PACKETS ONLY.
+
+.     IF( EXISTS( PACKET ) EQ 0 ) WRITE 'NO PACKET INFO: ' PTID ' Interval: ' INTERVAL; next CASES
+.     | FTLD PACKET CONVERSION "F" = "FF"
+.     ifthen( 'REC_NAME' = 'A3AFCONS'  or  'A3FFAMHIS'  or
+                           'B3FUPDRS'  or  'B9FPPA'     or
+                           'C1FNEURO'  or  'C2FSOCIAL'  or
+                           'C3FBEHAV'  or  'C4FINHIB'   or
+                           'C5FINTER'  or  'C6FMONIT'   or
+                           'E2FIMAGE'  or  'E3FIMDX'    or  'Z1FCHECK' )
+.       execute subprocedure FF
+.     endif
+
 .     get vars all
 .     execute subprocedure HEADER_DATA
 .     PERFORM PROCS
+.     SUBMITTED_PACKETS = SUBMITTED_PACKETS + 1
 .   end rec
 . end cases
 . END REPEAT
 
-. WRITE "The NACCUDS SAS have been made.  Upload them to the NACCUDS website."
+. WRITE "The NACCUDS SAS have been made." /
+        SUBMITTED_PACKETS " Packets submitted " /
+        "- Run the small spss syntax to make them UDS compatible."
+        "- Upload them to the NACCUDS website."
 
 
 
@@ -95,6 +115,12 @@ subprocedure HEADER_DATA
 C . write 'Visit: '  VISITNUM  ' Visit Date: ' VISITDATE ' M: ' VISITMO  'D: 'VISITDAY  ' Y: ' VISITYR  | debug
 end subprocedure
 
+subprocedure FF
+c since this is not in the record type, it will change the value in the data buffer
+write 'got one'
+. PACKET = "FF"
+end subprocedure
+
 SPSS SAVE FILE FILENAME = '<NACCUDS_SAS>UDS.sav'
 
 end retrieval
@@ -104,13 +130,8 @@ call DCCPROCF.BASE.MSTSET
 
 cif eq 1,2
 
-. DO REPEAT REC_NAME =  A3AFCONS
-			A3FFAMHIS
-			Z1FCHECK
-			A3A_FCONS /
-             UDS_NAME = A3A
-			A3F
-			Z1F
+. DO REPEAT REC_NAME =  A3A_FCONS /
+             UDS_NAME = A3F
 
 cif end
 END PROCEDURE
